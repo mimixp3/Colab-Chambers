@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CoLab Archives — Season II</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --deep-purple: #2d1b4e;
+      --royal-purple: #6b4ba1;
+      --parchment: #f5f0e8;
+      --parchment-dark: #e8e0cc;
+      --copper: #d4842a;
+      --gold: #c9a84c;
+      --gold-light: #e8c96d;
+      --gold-dim: #7a6230;
+      --white: #faf8f4;
+      --ash: #888880;
+      --ember: #8b3a3a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--parchment);
+      font-family: 'EB Garamond', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       BACKGROUND VIDEOS/IMAGES
+       ══════════════════════════════════════════════════════ */
+    
+    /* FIREPLACE VIDEO - for landing page */
+    /* REPLACE 'hog.mp4' with your fireplace video file */
+    .fireplace-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -5;
+      opacity: 0.7;
+    }
+
+    /*bg*/
+    .hall-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('class.png') center/cover;
+      z-index: -5;
+      opacity: 0.6;
+      display: none;
+    }
+
+    .hall-bg.active {
+      display: block;
+    }
+
+    /*vignette overlay*/
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /*noise*/
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+    }
+
+    /*wrappaaaaa*/
+    
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 80px;
+    }
+
+    /*headerrr*/
+    .title-lockup {
+      text-align: center;
+      animation: fadeDown 1.2s ease both;
+      margin-bottom: 12px;
+    }
+
+    .title-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .main-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(40px, 8vw, 80px);
+      font-weight: 900;
+      letter-spacing: 8px;
+      background: linear-gradient(135deg, var(--copper) 0%, var(--royal-purple) 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
+      margin-bottom: 6px;
+    }
+
+    .season-badge {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    /*slot rev*/
+    
+    .letter-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 24px 0 8px;
+      animation: fadeUp 1.4s ease both;
+    }
+
+    .letter-slot {
+      width: clamp(48px, 9vw, 80px);
+      height: clamp(60px, 11vw, 96px);
+      border: 1px solid rgba(107,75,161,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.6s ease;
+    }
+
+    .letter-slot::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, transparent, rgba(107,75,161,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.6s;
+    }
+
+    .letter-slot:hover::before {
+      opacity: 1;
+    }
+
+    .letter-slot.locked .placeholder {
+      font-size: clamp(24px, 5vw, 40px);
+      color: rgba(107,75,161,0.4);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    .letter-slot.unlocked {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+      box-shadow: 0 0 30px rgba(201,168,76,0.4);
+      animation: reveal 1s ease;
+    }
+
+    @keyframes reveal {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .letter-slot.unlocked .letter {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(201,168,76,0.8);
+      animation: letterAppear 0.8s ease;
+    }
+
+    @keyframes letterAppear {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .letter-caption {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-top: 8px;
+      text-transform: uppercase;
+      animation: fadeIn 1.6s ease both;
+    }
+
+    /*welcomw bruvas*/
+    
+    .welcome-text {
+      max-width: 680px;
+      text-align: center;
+      margin: 32px auto;
+      animation: fadeUp 1.8s ease both;
+    }
+
+    .welcome-text p {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(23px, 2.5vw, 19px);
+      line-height: 1.8;
+      color: var(--ash);
+    }
+
+    .welcome-text em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /*team sect*/
+    .teams-section {
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+      position: relative;
+      animation: fadeUp 2s ease both;
+    }
+
+    .teams-title {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 5px;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .scroll-container {
+      position: relative;
+      overflow: hidden;
+      padding: 0 60px; /*arrow spaces i need to check*/
+    }
+
+    .scroll-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(107,75,161,0.3);
+      border: 1px solid rgba(107,75,161,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: all 0.3s;
+      font-size: 20px;
+      color: var(--gold);
+    }
+
+    .scroll-arrow:hover {
+      background: rgba(107,75,161,0.6);
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(201,168,76,0.4);
+    }
+
+    .scroll-arrow.left { left: 10px; }
+    .scroll-arrow.right { right: 10px; }
+
+    .teams-scroll {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 30px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      scrollbar-width: none; /*firefox*/
+    }
+
+    .teams-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .team-card {
+      min-width: 160px;
+      flex-shrink: 0;
+      border: 1px solid rgba(107,75,161,0.2);
+      background: rgba(0,0,0,0.5);
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, transparent, rgba(107,75,161,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .team-card:hover {
+      border-color: var(--royal-purple);
+      background: rgba(107,75,161,0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .team-card:hover::before {
+      opacity: 1;
+    }
+
+    .team-card.selected {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.3);
+    }
+
+    /* Team image placeholder */
+    /* REPLACE these with your actual team images */
+    .team-img-placeholder {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+      border: 2px solid rgba(107,75,161,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--ash);
+      background: rgba(0,0,0,0.4);
+      transition: all 0.4s;
+      overflow: hidden;
+    }
+
+    .team-card:hover .team-img-placeholder {
+      border-color: var(--royal-purple);
+    }
+
+    .team-card.selected .team-img-placeholder {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.4);
+    }
+
+    .team-img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      align-items: center;
+    }
+
+    .team-name {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 3px;
+      color: var(--parchment);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    /*enter button*/
+    .enter-section {
+      text-align: center;
+      margin: 40px 0;
+      animation: fadeUp 2.2s ease both;
+    }
+    .enter-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 4px;
+      padding: 16px 48px;
+      border: 2px solid var(--copper);
+      background: rgba(212,132,42,0.1);
+      color: var(--copper);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+    .enter-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,132,42,0.2), rgba(107,75,161,0.2));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .enter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 30px rgba(201,168,76,0.3);
+      transform: translateY(-2px);
+    }
+    .enter-btn:hover::before {
+      opacity: 1;
+    }
+    .enter-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      border-color: var(--ash);
+      color: var(--ash);
+    }
+
+    /*foot*/
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: rgba(107,75,161,0.4);
+      animation: fadeIn 2.5s ease both;
+    }
+
+    /*animated part*/
+    
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /*dashboard*/
+    .dashboard {
+      display: none;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .dashboard.active {
+      display: block;
+    }
+
+    /*sect title*/
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 24px;
+      letter-spacing: 4px;
+      color: var(--copper);
+      text-align: center;
+      margin-bottom: 32px;
+      text-shadow: 0 0 20px rgba(212,132,42,0.4);
+    }
+
+    /*levels*/
+    .challenges-section {
+      margin-bottom: 48px;
+    }
+    .challenge-list {
+      display: grid;
+      gap: 16px;
+    }
+    .challenge-item {
+      border: 1px solid rgba(107,75,161,0.2);
+      background: rgba(0,0,0,0.6);
+      padding: 24px;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .challenge-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--royal-purple), var(--copper));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .challenge-item:hover::before {
+      opacity: 1;
+    }
+    .challenge-item.unlocked {
+      border-color: rgba(107,75,161,0.4);
+      cursor: pointer;
+    }
+    .challenge-item.unlocked:hover {
+      background: rgba(107,75,161,0.05);
+      box-shadow: 0 0 20px rgba(107,75,161,0.2);
+    }
+    .challenge-item.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .challenge-number {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 20px;
+      color: var(--royal-purple);
+    }
+
+    .challenge-status {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border: 1px solid;
+      text-transform: uppercase;
+    }
+
+    .status-unlocked {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .status-locked {
+      color: var(--ash);
+      border-color: var(--ash);
+    }
+
+    .challenge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: var(--parchment);
+      margin-bottom: 8px;
+    }
+
+    .challenge-desc {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ash);
+    }
+
+    /* Leaderboard */
+    .leaderboard-section {
+      margin-top: 48px;
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+    }
+
+    .leaderboard-table thead th {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold-dim);
+      text-align: left;
+      padding: 12px 16px;
+      text-transform: uppercase;
+    }
+
+    .leaderboard-table tbody tr {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(107,75,161,0.1);
+      transition: all 0.3s;
+    }
+
+    .leaderboard-table tbody tr:hover {
+      background: rgba(107,75,161,0.05);
+      border-color: rgba(107,75,161,0.3);
+    }
+
+    .leaderboard-table tbody td {
+      padding: 16px;
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      color: var(--parchment);
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-dim);
+      background: transparent;
+    }
+
+    .dot.filled {
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(201,168,76,0.6);
+    }
+
+    /*pass*/
+    .passcode-section {
+      margin-top: 48px;
+      text-align: center;
+      padding: 32px;
+      border: 1px solid rgba(212,132,42,0.3);
+      background: rgba(0,0,0,0.7);
+    }
+
+    .passcode-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 20px;
+      letter-spacing: 4px;
+      color: var(--copper);
+      margin-bottom: 16px;
+    }
+
+    .passcode-input {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 32px;
+      letter-spacing: 12px;
+      padding: 16px;
+      background: rgba(0,0,0,0.7);
+      border: 2px solid rgba(107,75,161,0.3);
+      color: var(--gold);
+      text-align: center;
+      text-transform: uppercase;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 16px;
+      outline: none;
+    }
+
+    .passcode-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    }
+
+    .submit-passcode-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      padding: 12px 32px;
+      border: 2px solid var(--copper);
+      background: rgba(212,132,42,0.1);
+      color: var(--copper);
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+
+    .submit-passcode-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    }
+
+    /* Win screen */
+    #win-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 40px;
+      overflow: hidden;
+    }
+
+    #win-screen.show {
+      display: flex;
+    }
+
+    /*win*/
+    .win-spark-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.8;
+    }
+
+    .win-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(48px, 10vw, 96px);
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 0 40px rgba(201,168,76,0.8);
+      margin-bottom: 16px;
+      animation: pulse 2s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    .win-house {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .win-sub {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--ash);
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .win-sub em {
+      color: var(--gold);
+    }
+
+    /*audio*/
+    
+    .audio-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border: 2px solid rgba(107,75,161,0.4);
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 1000;
+      font-size: 20px;
+    }
+
+    .audio-toggle:hover {
+      border-color: var(--gold);
+      background: rgba(107,75,161,0.2);
+      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    }
+
+    .audio-toggle.muted {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+<!--bg-->
+<video class="fireplace-bg" id="fireplace-video" autoplay loop playsinline>
+  <source src="castle.mp4" type="video/mp4">
+</video>
+
+<!--sound
+<audio id="click-sound" preload="auto" volume="1.0"></audio> --> <!--come here-->
+<audio id="click-sound" preload="auto">
+  <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+</audio>
+  <source src="clicks.mp3">
+</audio>
+<button onclick="playSound('click-sound')">TEST SOUND</button> <!--come here remov line-->
+
+<audio id="hover-sound" preload="auto" volume="1.0"></audio> <!--come here remove volumes-->
+  <!-- <source src="hover.mp3" type="audio/mpeg"> -->
+  <source src="hover.mp3"> <!--come here-->
+</audio>
+
+<div class="hall-bg" id="hall-bg"></div>
+
+<!--bg audio ++++ toggle-->
+<audio id="ambient-sound" loop>
+  <source src="ambient-sound.mp3" type="audio/mpeg">
+</audio>
+
+<!--togg btn-->
+<div class="audio-toggle" id="audio-toggle" onclick="toggleAudio()">
+  <span id="audio-icon">🔊</span>
+</div>
+
+<!--landing-->
+<div class="wrapper" id="landing-page">
+
+  <!--title-->
+  <div class="title-lockup">
+    <div class="title-eyebrow">CoLab Archives</div>
+    <h1 class="main-title">THE CHAMBER</h1>
+    <div class="season-badge">The Circuit Awakens</div>
+  </div>
+
+  <!--letter slots -->
+  <div class="letter-row">
+    <div class="letter-slot locked" id="slot-0">
+      <span class="placeholder">✦</span>
+    </div>
+    <div class="letter-slot locked" id="slot-1">
+      <span class="placeholder">✦</span>
+    </div>
+    <div class="letter-slot locked" id="slot-2">
+      <span class="placeholder">✦</span>
+    </div>
+    <div class="letter-slot locked" id="slot-3">
+      <span class="placeholder">✦</span>
+    </div>
+    <div class="letter-slot locked" id="slot-4">
+      <span class="placeholder">✦</span>
+    </div>
+  </div>
+  <div class="letter-caption">Five Keys. One Ignition.</div>
+
+  <!--welcome text-->
+  <div class="welcome-text">
+    <p>
+      The archives have evolved. Knowledge now flows through circuits and pulses in signals.
+      Five keys guard the chamber where ancient wisdom meets modern technology.
+      Only those who master both the <em>digital</em> and the <em>tangible</em> can unlock what lies within.
+    </p>
+  </div>
+
+  <!--horiz scroll-->
+  <div class="teams-section">
+    <div class="teams-title">Choose Your Team</div>
+    
+    <div class="scroll-container">
+      <div class="scroll-arrow left" onclick="scrollTeams(-1)">‹</div>
+      <div class="scroll-arrow right" onclick="scrollTeams(1)">›</div>
+      
+      <div class="teams-scroll" id="teams-scroll">
+        
+        <!--team 1:aegis-->
+        <div class="team-card" onclick="selectTeam('Aegis', this)" onmouseenter="playSound('hover-sound')">
+  <div class="team-img-placeholder">
+    <img src="aegis.png" alt="aegissss">
+  </div>
+  <div class="team-name">Aegis</div>
+</div>
+
+        <!--team 2:elixir-->
+        <div class="team-card" onclick="selectTeam('Elixir', this)" onmouseenter="playSound('hover-sound')">
+  <div class="team-img-placeholder">
+    <img src="potion.png" alt="elixir">
+  </div>
+  <div class="team-name">Elixir</div>
+</div>
+
+        <!--team 3:hippogriff-->
+        <div class="team-card" onclick="selectTeam('Hippogriff', this)" onmouseenter="playSound('hover-sound')">
+  <div class="team-img-placeholder">
+    <img src="hippogriff.png" alt="Hippogriff">
+  </div>
+  <div class="team-name">Hippogriff</div>
+</div>
+
+
+        <!--team 4:compass-->
+        <div class="team-card" onclick="selectTeam('Compass', this)" onmouseenter="playSound('hover-sound')">
+
+  <div class="team-img-placeholder">
+    <img src="compass.png" alt="Compass">
+  </div>
+  <div class="team-name">Compass</div>
+</div>
+
+        <!--team 5:citrine-->
+        <div class="team-card" onclick="selectTeam('Citrine', this)" onmouseenter="playSound('hover-sound')">
+
+  <div class="team-img-placeholder">
+    <img src="team-citrine.png" alt="Citrine">
+  </div>
+  <div class="team-name">Citrine</div>
+</div>
+
+<!--team 6:aqua -->
+ <div class="team-card" onclick="selectTeam('Aqua', this)" onmouseenter="playSound('hover-sound')">
+  <div class="team-img-placeholder">
+    <img src="team-aqua.png" alt="Aqua">
+  </div>
+  <div class="team-name">Aqua</div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--enter button~-->
+  <div class="enter-section">
+    <button class="enter-btn" id="enter-btn" onclick="enterChamber()" disabled>
+      <span style="position:relative;z-index:1;">Enter the Archives</span>
+    </button>
+  </div>
+
+  <div class="footer">
+    CoLab Archives — Season II · May the Circuit Guide You
+  </div>
+
+</div>
+
+<!--gurl the board-->
+<div class="dashboard" id="dashboard">
+  
+  <div class="challenges-section">
+    <h2 class="section-title">The Five Keys</h2>
+    <div class="challenge-list" id="challenge-list"></div>
+  </div>
+
+  <div class="leaderboard-section">
+    <h2 class="section-title">The Standings</h2>
+    <table class="leaderboard-table">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Progress</th>
+          <th>Keys Unlocked</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-body"></tbody>
+    </table>
+  </div>
+
+  <div class="passcode-section">
+    <div class="passcode-title">Ignite the Chamber</div>
+    <p style="font-family:'EB Garamond',serif;font-style:italic;color:var(--ash);margin-bottom:20px;">
+      All five keys recovered? Speak the incantation.
+    </p>
+    <input
+      type="text"
+      class="passcode-input"
+      id="passcode-input"
+      placeholder="_ _ _ _ _"
+      maxlength="5"
+    />
+    <br/>
+    <button class="submit-passcode-btn" onclick="checkPasscode()">IGNITE</button>
+  </div>
+
+</div>
+
+<!--yay screen-->
+
+<div id="win-screen">
+  <video class="win-spark-video" autoplay muted loop playsinline>
+    <source src="spark-video.mp4" type="video/mp4">
+  </video>
+  
+  <div class="win-title" id="win-title">COMPLETE</div>
+  <div class="win-house" id="win-house-name">Team — has unlocked the chamber!</div>
+  <div class="win-sub">
+    The chamber awakens. Knowledge flows freely once more.<br/>
+    <em>Your name shall echo through the halls of CoLab forever.</em>
+  </div>
+</div>
+
+<script>
+  //challenge links
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzMynZrXaSHpsrPrTv4yEziAoXcn4m9hKoYOdsPWRq9vzLJGTsULHgBd0zjZUQhoa88zQ/exec";
+  const CHALLENGES = [
+    {
+      id: 1,
+      name: "Packet Transmission",
+      desc: "A signal was intercepted.. analyze the data.",
+      letter: "S", // REPLACE
+      link: "#challenge-1-link", // REPLACE
+      unlocked: true,
+    },
+    {
+      id: 2,
+      name: "The Layered Cipher",
+      desc: "Multiple encryptions guard this key.",
+      letter: "P", // REPLACE
+      link: "#challenge-2-link", // REPLACE
+      unlocked: false,
+    },
+    {
+      id: 3,
+      name: "The Circuit Assembly",
+      desc: "Code meets hardware, build to unlock this level",
+      letter: "A", // REPLACE
+      link: "#challenge-3-link", // REPLACE
+      unlocked: false,
+    },
+    {
+      id: 4,
+      name: "The Recursive Riddle",
+      desc: "Solve the logic, crack the vault.",
+      letter: "R", // REPLACE
+      link: "#challenge-4-link", // REPLACE
+      unlocked: false,
+    },
+    {
+      id: 5,
+      name: "The Convergence",
+      desc: "Final",
+      letter: "K", // REPLACE
+      link: "#challenge-5-link", // REPLACE
+      unlocked: false,
+    },
+  ];
+
+  const LEADERBOARD = [
+    { team: "Aegis", completed: 0 },
+    { team: "Elixir", completed: 0 },
+    { team: "Hippogriff", completed: 0 },
+    { team: "Compass", completed: 0 },
+    { team: "Citrine", completed: 0 },
+    { team: "Aqua", completed: 0 },
+  ];
+
+  const PASSCODE = "SPARK"; // REPLACE with your 5-letter answer
+  const LETTERS = ["S", "P", "A", "R", "K"]; // REPLACE
+
+  //state
+  let selectedTeam = null;
+  let completedChallenges = [];
+
+  /*function playSound(soundId) {
+    const audio = document.getElementById(soundId);
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log('Sound play failed:', e));
+    }
+  } */
+  //come here
+  function playSound(soundId) {
+    const audio = document.getElementById(soundId);
+    if (!audio) return;
+
+    audio.pause();
+    audio.currentTime = 0;
+
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // silently ignore autoplay block
+      });
+    }
+  }
+  //select team
+  function selectTeam(teamName, card) {
+    playSound('click-sound');
+    selectedTeam = teamName;
+    document.querySelectorAll('.team-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    document.getElementById('enter-btn').disabled = false;
+  }
+
+  function scrollTeams(direction) {
+    const scroll = document.getElementById('teams-scroll');
+    const scrollAmount = 200;
+    scroll.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+
+  function enterChamber() {
+    if (!selectedTeam) return;
+    
+    //hide landing sw/dash
+    document.getElementById('landing-page').style.display = 'none';
+    document.getElementById('dashboard').classList.add('active');
+    
+    //sw/bg
+    document.getElementById('fireplace-video').style.display = 'none';
+    document.getElementById('hall-bg').classList.add('active');
+    
+    buildChallenges();
+    buildLeaderboard();
+  }
+
+  //rev letter
+  function updateLetterSlots() {
+    LETTERS.forEach((letter, i) => {
+      const slot = document.getElementById(`slot-${i}`);
+      const challengeId = i + 1;
+      if (completedChallenges.includes(challengeId)) {
+        slot.classList.remove('locked');
+        slot.classList.add('unlocked');
+        slot.innerHTML = `<span class="letter">${letter}</span>`;
+      }
+    });
+  }
+
+  function markComplete(challengeId) {
+    if (!completedChallenges.includes(challengeId)) {
+      completedChallenges.push(challengeId);
+      updateLetterSlots();
+    }
+  }
+
+  //challenges
+  function buildChallenges() {
+    const list = document.getElementById('challenge-list');
+    list.innerHTML = '';
+    CHALLENGES.forEach(ch => {
+      const div = document.createElement('div');
+      div.className = `challenge-item ${ch.unlocked ? 'unlocked' : 'locked'}`;
+      if (ch.unlocked) {
+        div.onclick = () => window.open(ch.link, '_blank');
+      }
+      div.innerHTML = `
+        <div class="challenge-header">
+          <span class="challenge-number">${ch.id}</span>
+          <span class="challenge-status ${ch.unlocked ? 'status-unlocked' : 'status-locked'}">
+            ${ch.unlocked ? 'UNLOCKED' : 'LOCKED'}
+          </span>
+        </div>
+        <div class="challenge-name">${ch.name}</div>
+        <div class="challenge-desc">${ch.desc}</div>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  //leaderboard
+  function buildLeaderboard() {
+    const tbody = document.getElementById('leaderboard-body');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    
+    const sorted = [...LEADERBOARD].sort((a,b) => b.completed - a.completed);
+    sorted.forEach(t => {
+      const dots = Array(5).fill(0).map((_, i) => `
+        <div class="dot ${i < t.completed ? 'filled' : ''}"></div>
+      `).join('');
+      
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <span style="font-family:'Cinzel',serif;letter-spacing:2px;">Team ${t.team}</span>
+        </td>
+        <td><div class="progress-dots">${dots}</div></td>
+        <td style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px">
+          ${t.completed === 5 ? '<span style="color:var(--gold)">COMPLETE</span>' : `${t.completed} / 5`}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  //pass
+  function checkPasscode() {
+    const input = document.getElementById('passcode-input').value.toUpperCase();
+    if (input === PASSCODE) {
+      document.getElementById('win-title').textContent = input;
+      document.getElementById('win-house-name').textContent = `Team ${selectedTeam} has unlocked the chamber!`;
+      document.getElementById('win-screen').classList.add('show');
+    } else {
+      alert('❌ Incorrect incantation. The chamber remains sealed.');
+    }
+  }
+
+  //audio cont
+  const fireplaceVideo = document.getElementById('fireplace-video');
+  let videoMuted = false;
+
+  function toggleAudio() {
+    const icon = document.getElementById('audio-icon');
+    const toggle = document.getElementById('audio-toggle');
+    
+    if (videoMuted) {
+      fireplaceVideo.muted = false;
+      icon.textContent = '🔊';
+      toggle.classList.remove('muted');
+      videoMuted = false;
+    } else {
+      fireplaceVideo.muted = true;
+      icon.textContent = '🔇';
+      toggle.classList.add('muted');
+      videoMuted = true;
+    }
+  }
+
+  fireplaceVideo.play().catch(e => {
+    console.log('Autoplay with sound blocked, try and interact first');
+    fireplaceVideo.muted = true;
+    fireplaceVideo.play();
+    videoMuted = true;
+    document.getElementById('audio-icon').textContent = '🔇';
+    document.getElementById('audio-toggle').classList.add('muted');
+  });
+</script>
+
+</body>
+</html>
