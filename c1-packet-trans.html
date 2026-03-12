@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Packet Transmission — CoLab Archives</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --parchment: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-dim: #7a6230;
+      --ash: #888880;
+      --amber: #d4842a;
+      --amber-dim: #7a4a10;
+      --cyan: #00d4ff;
+      --cyan-dim: #007a99;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--parchment);
+      font-family: 'EB Garamond', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(212,132,42,0.012) 2px,
+        rgba(212,132,42,0.012) 4px
+      );
+      pointer-events: none; z-index: 100;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.92) 100%);
+      pointer-events: none; z-index: 1;
+    }
+
+    .wrapper {
+      position: relative; z-index: 2;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 60px 20px 80px;
+      max-width: 900px; margin: 0 auto;
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 48px; animation: fadeIn 0.8s ease both;
+    }
+
+    .back-link {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 3px;
+      color: var(--gold-dim); text-decoration: none;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    .challenge-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--gold); letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(201,168,76,0.4);
+    }
+
+    .header {
+      text-align: center; margin-bottom: 48px;
+      animation: fadeDown 1s ease both;
+    }
+
+    .challenge-number {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 5px;
+      color: var(--amber-dim); margin-bottom: 12px; display: block;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 5vw, 48px);
+      font-weight: 700; color: var(--parchment);
+      letter-spacing: 4px;
+      text-shadow: 0 0 30px rgba(212,132,42,0.2);
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 16px;
+      width: 100%; margin: 0 0 40px;
+      animation: fadeIn 1.2s ease both;
+    }
+
+    .divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    }
+
+    .divider-glyph {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--amber); font-size: 12px;
+    }
+
+    .parchment-card {
+      width: 100%;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(15,12,8,0.9);
+      padding: 32px 36px;
+      position: relative; margin-bottom: 32px;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .parchment-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .card-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--gold-dim); text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .card-eyebrow::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(201,168,76,0.15);
+    }
+
+    .card-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 17px; line-height: 1.95; color: var(--ash);
+    }
+
+    .card-text em { color: var(--gold); font-style: italic; }
+
+    .packet-viewer {
+      width: 100%;
+      border: 1px solid rgba(0,212,255,0.3);
+      background: rgba(0,20,30,0.95);
+      position: relative; margin-bottom: 32px;
+      animation: fadeUp 1.4s ease both;
+    }
+
+    .packet-viewer::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--cyan), transparent);
+    }
+
+    .viewer-header {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(0,212,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .viewer-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+
+    .viewer-filter {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: var(--cyan-dim);
+    }
+
+    .packet-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .packet-item {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(0,212,255,0.1);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .packet-item:hover {
+      background: rgba(0,212,255,0.05);
+    }
+
+    .packet-item.selected {
+      background: rgba(0,212,255,0.1);
+      border-left: 3px solid var(--cyan);
+    }
+
+    .packet-num {
+      color: var(--cyan-dim);
+      margin-right: 12px;
+    }
+
+    .packet-proto {
+      color: var(--cyan);
+      margin-right: 12px;
+    }
+
+    .packet-info {
+      color: var(--ash);
+    }
+
+    .packet-details {
+      width: 100%;
+      border: 1px solid rgba(212,132,42,0.25);
+      background: rgba(20,10,4,0.95);
+      padding: 24px;
+      margin-bottom: 32px;
+      animation: fadeUp 1.6s ease both;
+      display: none;
+    }
+
+    .packet-details.show {
+      display: block;
+    }
+
+    .detail-section {
+      margin-bottom: 16px;
+    }
+
+    .detail-title {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .detail-content {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--parchment);
+      background: rgba(0,0,0,0.5);
+      padding: 12px;
+      border: 1px solid rgba(212,132,42,0.1);
+      word-break: break-all;
+    }
+
+    .steps {
+      width: 100%;
+      display: flex; flex-direction: column; gap: 12px;
+      margin-bottom: 32px;
+      animation: fadeUp 1.8s ease both;
+    }
+
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 20px;
+      border: 1px solid rgba(201,168,76,0.08);
+      background: rgba(10,10,10,0.6);
+    }
+
+    .step-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--amber);
+      letter-spacing: 2px; flex-shrink: 0;
+    }
+
+    .step-content { flex: 1; }
+
+    .step-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12px; letter-spacing: 2px;
+      color: var(--gold); margin-bottom: 4px; text-transform: uppercase;
+    }
+
+    .step-desc {
+      font-family: 'EB Garamond', serif;
+      font-style: italic; font-size: 14px;
+      color: var(--ash); line-height: 1.6;
+    }
+
+    .step-desc code {
+      font-family: 'Share Tech Mono', monospace;
+      font-style: normal; font-size: 12px;
+      color: var(--amber);
+      background: rgba(212,132,42,0.06);
+      padding: 1px 6px;
+      border: 1px solid rgba(212,132,42,0.15);
+    }
+
+    .footer {
+      margin-top: 20px; text-align: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: #222; letter-spacing: 2px;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="wrapper">
+
+  <div class="top-bar">
+    <a href="#" class="back-link">← The Archives</a>
+    <span class="challenge-badge">SCROLL_01 // UNSEALED</span>
+  </div>
+
+  <div class="header">
+    <span class="challenge-number">// CHALLENGE_01 //</span>
+    <h1 class="title">THE PACKET TRANSMISSION</h1>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-glyph">[NET]</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="parchment-card">
+    <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
+    <p class="card-text">
+      A transmission was intercepted during routine network monitoring.
+      The packets contain an encrypted payload.
+      <em>Analyze the stream. Extract the data. Decode the message.</em>
+    </p>
+  </div>
+
+  <div class="packet-viewer">
+    <div class="viewer-header">
+      <span class="viewer-title">Network Packet Analyzer</span>
+      <span class="viewer-filter">Filter: HTTP</span>
+    </div>
+    <div class="packet-list" id="packet-list">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <div class="packet-details" id="packet-details">
+    <!-- Populated when packet selected -->
+  </div>
+
+  <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
+    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
+    <a href="https://forms.gle/wT1AwS8aMfRwzqWF8" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/wT1AwS8aMfRwzqWF8</a>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01 //</span>
+      <div class="step-content">
+        <div class="step-title">Find the Target Packet</div>
+        <div class="step-desc">
+          Click through packets to view details. Look for User-Agent: <code>CoLabArchives/2.0</code>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">02 //</span>
+      <div class="step-content">
+        <div class="step-title">Decode the Payload</div>
+        <div class="step-desc">
+          Extract the base64 string from the POST data. Decode it to reveal the letter.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">// COLAB_ARCHIVES - SCROLL_01 //</div>
+
+</div>
+
+<script>
+  // Firefly particles
+  (function() {
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const sparks = Array(40).fill(0).map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 1.5 + 0.3,
+      speed: Math.random() * 0.4 + 0.1,
+      opacity: Math.random() * 0.4 + 0.1,
+      drift: (Math.random() - 0.5) * 0.3
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      sparks.forEach(s => {
+        s.y -= s.speed;
+        s.x += s.drift;
+        s.opacity += (Math.random() - 0.5) * 0.02;
+        s.opacity = Math.max(0.05, Math.min(0.5, s.opacity));
+
+        if (s.y < -10) {
+          s.y = canvas.height + 10;
+          s.x = Math.random() * canvas.width;
+        }
+
+        ctx.globalAlpha = s.opacity;
+        ctx.fillStyle = '#c9a84c';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // Packet data
+  const packets = [
+    { num: 1, proto: 'TCP', info: '192.168.1.5 → 10.0.0.1 [SYN]', type: 'normal' },
+    { num: 2, proto: 'TCP', info: '10.0.0.1 → 192.168.1.5 [SYN, ACK]', type: 'normal' },
+    { num: 3, proto: 'HTTP', info: 'GET /index.html HTTP/1.1', type: 'normal', userAgent: 'Mozilla/5.0' },
+    { num: 4, proto: 'HTTP', info: 'POST /api/data HTTP/1.1', type: 'normal', userAgent: 'curl/7.68.0' },
+    { num: 5, proto: 'TCP', info: '192.168.1.10 → 10.0.0.5 [ACK]', type: 'normal' },
+    { num: 6, proto: 'HTTP', info: 'POST /upload HTTP/1.1', type: 'target', userAgent: 'CoLabArchives/2.0', payload: 'Uw==' },
+    { num: 7, proto: 'HTTP', info: 'GET /style.css HTTP/1.1', type: 'normal', userAgent: 'Mozilla/5.0' },
+    { num: 8, proto: 'TCP', info: '10.0.0.1 → 192.168.1.5 [FIN]', type: 'normal' },
+  ];
+
+  const packetList = document.getElementById('packet-list');
+  const packetDetails = document.getElementById('packet-details');
+
+  packets.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'packet-item';
+    div.innerHTML = `
+      <span class="packet-num">#${p.num}</span>
+      <span class="packet-proto">${p.proto}</span>
+      <span class="packet-info">${p.info}</span>
+    `;
+    div.onclick = () => showPacket(p, div);
+    packetList.appendChild(div);
+  });
+
+  function showPacket(packet, element) {
+    document.querySelectorAll('.packet-item').forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+
+    let html = '';
+
+    if (packet.type === 'target') {
+      html = `
+        <div class="detail-section">
+          <div class="detail-title">Packet #${packet.num} Details</div>
+          <div class="detail-content">
+Protocol: ${packet.proto}<br/>
+Method: POST<br/>
+Path: /upload<br/>
+User-Agent: ${packet.userAgent}
+          </div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">POST Data</div>
+          <div class="detail-content">
+payload=${packet.payload}
+          </div>
+        </div>
+      `;
+    } else {
+      html = `
+        <div class="detail-section">
+          <div class="detail-title">Packet #${packet.num} Details</div>
+          <div class="detail-content">
+Protocol: ${packet.proto}<br/>
+${packet.userAgent ? `User-Agent: ${packet.userAgent}` : ''}
+${packet.info}
+          </div>
+        </div>
+      `;
+    }
+
+    packetDetails.innerHTML = html;
+    packetDetails.classList.add('show');
+  }
+</script>
+
+</body>
+</html>
