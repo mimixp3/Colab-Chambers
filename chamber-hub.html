@@ -3,66 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CoLab Archives: Season II</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+  <title>CoLab Archives: The Chamber</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --black: #0a0a0a;
-      --deep-purple: #2d1b4e;
-      --royal-purple: #6b4ba1;
       --parchment: #f5f0e8;
-      --parchment-dark: #e8e0cc;
       --copper: #d4842a;
       --gold: #c9a84c;
-      --gold-light: #e8c96d;
       --gold-dim: #7a6230;
-      --white: #faf8f4;
       --ash: #888880;
-      --ember: #8b3a3a;
+      --royal-purple: #6b4ba1;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--black);
       color: var(--parchment);
       font-family: 'EB Garamond', serif;
       min-height: 100vh;
-      overflow-x: hidden;
-      cursor: default;
     }
 
-    /* ══════════════════════════════════════════════════════
-       BACKGROUND VIDEOS/IMAGES
-       ══════════════════════════════════════════════════════ */
-    
-    /* FIREPLACE VIDEO - for landing page */
-    /* REPLACE 'hog.mp4' with your fireplace video file */
+    /*bg*/
     .fireplace-bg {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: -5;
       opacity: 0.7;
     }
 
-    /*bg*/
     .hall-bg {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('class.png') center/cover;
+      inset: 0;
+      background: url('hall.jpg') center/cover;
       z-index: -5;
       opacity: 0.6;
       display: none;
     }
 
-    .hall-bg.active {
-      display: block;
-    }
+    .hall-bg.active { display: block; }
 
-    /*vignette overlay*/
     body::after {
       content: '';
       position: fixed;
@@ -72,105 +56,60 @@
       z-index: 1;
     }
 
-    /*noise*/
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 200px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.4;
-    }
+    /*wrapper*/
+    #main { position: relative; z-index: 2; }
 
-    /*wrappaaaaa*/
-    
-    .wrapper {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
+    /*landing page*/
+    #landing-page {
+      min-height: 175vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 60px 20px 80px;
+      padding: 60px 20px;
     }
 
-    /*headerrr*/
-    .title-lockup {
-      text-align: center;
-      animation: fadeDown 1.2s ease both;
-      margin-bottom: 12px;
-    }
-
-    .title-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      letter-spacing: 6px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .main-title {
+    .title {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(40px, 8vw, 80px);
-      font-weight: 900;
+      font-weight: bold;
       letter-spacing: 8px;
-      background: linear-gradient(135deg, var(--copper) 0%, var(--royal-purple) 50%, var(--gold) 100%);
+      background: linear-gradient(135deg, var(--copper), var(--royal-purple), var(--gold));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
-      margin-bottom: 6px;
+      text-align: center;
+      margin-bottom: 8px;
     }
 
-    .season-badge {
+    .subtitle {
       font-family: 'Cinzel', serif;
-      font-size: 11px;
+      font-size: 14.5px;
+      font-weight: bold;
       letter-spacing: 5px;
       color: var(--gold);
-      text-transform: uppercase;
-      font-weight: bold;
+      text-align: center;
+      margin-bottom: 25px;
     }
 
-    /*slot rev*/
-    
+    /*letter slot*/
     .letter-row {
       display: flex;
       justify-content: center;
       gap: 16px;
-      margin: 24px 0 8px;
-      animation: fadeUp 1.4s ease both;
+      margin: 17px 0;
     }
 
     .letter-slot {
-      width: clamp(48px, 9vw, 80px);
-      height: clamp(60px, 11vw, 96px);
-      border: 1px solid rgba(107,75,161,0.3);
+      width: clamp(55px, 13vw, 80px);
+      height: clamp(95px, 15vw, 100px);
+      border: 1px solid rgba(152, 119, 210, 0.703);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      overflow: hidden;
-      transition: all 0.6s ease;
+      transition: all 0.6s;
     }
 
-    .letter-slot::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      background: linear-gradient(135deg, transparent, rgba(107,75,161,0.1), transparent);
-      opacity: 0;
-      transition: opacity 0.6s;
-    }
-
-    .letter-slot:hover::before {
-      opacity: 1;
-    }
-
-    .letter-slot.locked .placeholder {
+    .letter-slot.locked .glyph {
       font-size: clamp(24px, 5vw, 40px);
       color: rgba(107,75,161,0.4);
       animation: pulse 2s ease-in-out infinite;
@@ -181,91 +120,66 @@
       50% { opacity: 0.8; }
     }
 
-    .letter-slot.unlocked {
+    .letter-slot.revealed {
       border-color: var(--gold);
       background: rgba(201,168,76,0.05);
       box-shadow: 0 0 30px rgba(201,168,76,0.4);
-      animation: reveal 1s ease;
     }
 
-    @keyframes reveal {
-      0% { transform: scale(0.8); opacity: 0; }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .letter-slot.unlocked .letter {
+    .letter-slot.revealed .glyph {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(32px, 6vw, 56px);
       font-weight: 900;
       color: var(--gold);
-      text-shadow: 0 0 20px rgba(201,168,76,0.8);
-      animation: letterAppear 0.8s ease;
-    }
-
-    @keyframes letterAppear {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
     }
 
     .letter-caption {
       text-align: center;
       font-family: 'Cinzel', serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       letter-spacing: 4px;
       color: var(--gold);
       margin-top: 8px;
-      text-transform: uppercase;
-      animation: fadeIn 1.6s ease both;
     }
 
-    /*welcomw bruvas*/
-    
-    .welcome-text {
-      max-width: 680px;
+    /*welcom*/
+    .welcome {
+      max-width: 860px;
       text-align: center;
-      margin: 32px auto;
-      animation: fadeUp 1.8s ease both;
-    }
-
-    .welcome-text p {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: clamp(23px, 2.5vw, 19px);
-      line-height: 1.8;
-      color: var(--ash);
-    }
-
-    .welcome-text em {
-      color: var(--gold);
+      margin: 15px auto;
       font-style: normal;
+      font-size: 25px;
+      line-height: 1.8;
+      color: var(--white);
     }
 
-    /*team sect*/
+    .welcome em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /*scroll*/
     .teams-section {
       width: 100%;
       max-width: 900px;
       margin: 40px auto;
-      position: relative;
-      animation: fadeUp 2s ease both;
     }
 
     .teams-title {
       font-family: 'Cinzel', serif;
       font-size: 14px;
-      font-weight: bold;
       letter-spacing: 5px;
+      font-weight: bold;
       color: var(--gold);
       text-align: center;
       margin-bottom: 24px;
-      text-transform: uppercase;
     }
 
     .scroll-container {
       position: relative;
       overflow: hidden;
-      padding: 0 60px; /*arrow spaces i need to check*/
+      padding: 0 60px;
     }
 
     .scroll-arrow {
@@ -274,14 +188,13 @@
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
-      background: rgba(107,75,161,0.3);
-      border: 1px solid rgba(107,75,161,0.5);
+      background: rgba(107, 73, 167, 0.3);
+      border: 1px solid rgba(116, 83, 173, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 5;
-      transition: all 0.3s;
       font-size: 20px;
       color: var(--gold);
     }
@@ -289,25 +202,21 @@
     .scroll-arrow:hover {
       background: rgba(107,75,161,0.6);
       border-color: var(--gold);
-      box-shadow: 0 0 15px rgba(201,168,76,0.4);
     }
 
     .scroll-arrow.left { left: 10px; }
     .scroll-arrow.right { right: 10px; }
 
     .teams-scroll {
-      display: flex !important;
-      flex-direction: row !important;
+      display: flex;
       gap: 30px;
       overflow-x: auto;
       scroll-behavior: smooth;
       padding: 20px 0;
-      scrollbar-width: none; /*firefox*/
+      scrollbar-width: none;
     }
 
-    .teams-scroll::-webkit-scrollbar {
-      display: none;
-    }
+    .teams-scroll::-webkit-scrollbar { display: none; }
 
     .team-card {
       min-width: 160px;
@@ -317,68 +226,38 @@
       padding: 24px 16px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.4s ease;
-      position: relative;
-    }
-
-    .team-card::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      background: linear-gradient(135deg, transparent, rgba(107,75,161,0.15), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
+      transition: all 0.3s;
     }
 
     .team-card:hover {
       border-color: var(--royal-purple);
       background: rgba(107,75,161,0.08);
       transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    }
-
-    .team-card:hover::before {
-      opacity: 1;
     }
 
     .team-card.selected {
       border-color: var(--gold);
       background: rgba(201,168,76,0.08);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.3);
+      box-shadow: 0 0 30px rgba(201,168,76,0.3);
     }
 
-    /* Team image placeholder */
-    /* REPLACE these with your actual team images */
-    .team-img-placeholder {
+    .team-img {
       width: 100px;
       height: 100px;
       margin: 0 auto 16px;
       border: 2px solid rgba(107,75,161,0.4);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: var(--ash);
-      background: rgba(0,0,0,0.4);
-      transition: all 0.4s;
       overflow: hidden;
     }
 
-    .team-card:hover .team-img-placeholder {
-      border-color: var(--royal-purple);
-    }
-
-    .team-card.selected .team-img-placeholder {
+    .team-card.selected .team-img {
       border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(201,168,76,0.4);
     }
 
-    .team-img-placeholder img {
+    .team-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      align-items: center;
     }
 
     .team-name {
@@ -387,152 +266,118 @@
       letter-spacing: 3px;
       color: var(--parchment);
       margin-bottom: 4px;
-      text-transform: uppercase;
     }
 
-    /*enter button*/
+    .team-trait {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--ash);
+    }
+
+    /*enter btn*/
     .enter-section {
       text-align: center;
-      margin: 40px 0;
-      animation: fadeUp 2.2s ease both;
+      margin: 2px 0;
     }
+
     .enter-btn {
       font-family: 'Cinzel', serif;
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: bold;
       letter-spacing: 4px;
       padding: 16px 48px;
       border: 2px solid var(--copper);
       background: rgba(212,132,42,0.1);
       color: var(--copper);
       cursor: pointer;
-      transition: all 0.4s ease;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
     }
-    .enter-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(212,132,42,0.2), rgba(107,75,161,0.2));
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
+
     .enter-btn:hover {
       border-color: var(--gold);
       color: var(--gold);
       box-shadow: 0 0 30px rgba(201,168,76,0.3);
-      transform: translateY(-2px);
     }
-    .enter-btn:hover::before {
-      opacity: 1;
-    }
+
     .enter-btn:disabled {
       opacity: 0.4;
       cursor: not-allowed;
-      border-color: var(--ash);
-      color: var(--ash);
-    }
-
-    /*foot*/
-    .footer {
-      text-align: center;
-      margin-top: 60px;
-      font-family: 'Cinzel', serif;
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: rgba(107,75,161,0.4);
-      animation: fadeIn 2.5s ease both;
-    }
-
-    /*animated part*/
-    
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     /*dashboard*/
-    .dashboard {
+    #dashboard {
       display: none;
       max-width: 1000px;
       margin: 0 auto;
       padding: 40px 20px;
     }
-    .dashboard.active {
-      display: block;
+
+    #dashboard.active { display: block; }
+
+    .panel {
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(0,0,0,0.7);
+      margin-bottom: 24px;
+      padding: 24px;
     }
 
-    /*sect title*/
-    .section-title {
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+
+    .welcome-banner {
+      text-align: center;
+      margin-bottom: 17px;
+    }
+
+    .welcome-house {
       font-family: 'Cinzel Decorative', serif;
       font-size: 24px;
       letter-spacing: 4px;
-      color: var(--copper);
-      text-align: center;
-      margin-bottom: 32px;
-      text-shadow: 0 0 20px rgba(212,132,42,0.4);
+      color: var(--gold);
+      margin-bottom: 8px;
     }
 
-    /*levels*/
-    .challenges-section {
-      margin-bottom: 48px;
+    .welcome-sub {
+      font-style: italic;
+      color: var(--ash);
     }
-    .challenge-list {
-      display: grid;
-      gap: 16px;
-    }
+
+    /*challenges*/
     .challenge-item {
       border: 1px solid rgba(107,75,161,0.2);
-      background: rgba(0,0,0,0.6);
-      padding: 24px;
-      transition: all 0.3s;
-      position: relative;
-    }
-    .challenge-item::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; bottom: 0;
-      width: 4px;
-      background: linear-gradient(to bottom, var(--royal-purple), var(--copper));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .challenge-item:hover::before {
-      opacity: 1;
-    }
-    .challenge-item.unlocked {
-      border-color: rgba(107,75,161,0.4);
+      background: rgba(0,0,0,0.5);
+      padding: 16px;
+      margin-bottom: 12px;
       cursor: pointer;
+      transition: all 0.3s;
     }
-    .challenge-item.unlocked:hover {
+
+    .challenge-item:hover {
       background: rgba(107,75,161,0.05);
-      box-shadow: 0 0 20px rgba(107,75,161,0.2);
     }
+
     .challenge-item.locked {
       opacity: 0.5;
       cursor: not-allowed;
     }
+
     .challenge-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .challenge-number {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 20px;
+      font-size: 18px;
       color: var(--royal-purple);
     }
 
@@ -542,7 +387,6 @@
       letter-spacing: 2px;
       padding: 4px 12px;
       border: 1px solid;
-      text-transform: uppercase;
     }
 
     .status-unlocked {
@@ -557,134 +401,107 @@
 
     .challenge-name {
       font-family: 'Cinzel', serif;
-      font-size: 18px;
-      letter-spacing: 2px;
+      font-size: 16px;
       color: var(--parchment);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .challenge-desc {
-      font-family: 'EB Garamond', serif;
       font-style: italic;
       font-size: 14px;
       color: var(--ash);
     }
 
-    /* Leaderboard */
-    .leaderboard-section {
-      margin-top: 48px;
-    }
-
+    /*leaderboard*/
     .leaderboard-table {
       width: 100%;
-      border-collapse: separate;
-      border-spacing: 0 8px;
+      border-collapse: collapse;
     }
 
-    .leaderboard-table thead th {
+    .leaderboard-table th {
       font-family: 'Cinzel', serif;
       font-size: 11px;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: var(--gold-dim);
       text-align: left;
-      padding: 12px 16px;
-      text-transform: uppercase;
+      padding: 12px;
+      border-bottom: 1px solid rgba(107,75,161,0.2);
     }
 
-    .leaderboard-table tbody tr {
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(107,75,161,0.1);
-      transition: all 0.3s;
-    }
-
-    .leaderboard-table tbody tr:hover {
-      background: rgba(107,75,161,0.05);
-      border-color: rgba(107,75,161,0.3);
-    }
-
-    .leaderboard-table tbody td {
-      padding: 16px;
-      font-family: 'EB Garamond', serif;
-      font-size: 15px;
+    .leaderboard-table td {
+      padding: 12px;
       color: var(--parchment);
+      border-bottom: 1px solid rgba(107,75,161,0.1);
     }
 
-    .progress-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 1px solid var(--gold-dim);
-      background: transparent;
-    }
-
-    .dot.filled {
-      background: var(--gold);
-      box-shadow: 0 0 8px rgba(201,168,76,0.6);
-    }
-
-    /*pass*/
+    /*passcode*/
     .passcode-section {
-      margin-top: 48px;
       text-align: center;
-      padding: 32px;
-      border: 1px solid rgba(212,132,42,0.3);
-      background: rgba(0,0,0,0.7);
     }
 
-    .passcode-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 20px;
-      letter-spacing: 4px;
-      color: var(--copper);
-      margin-bottom: 16px;
+    .passcode-lore {
+      font-style: italic;
+      color: var(--ash);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .passcode-lore em {
+      color: var(--gold);
+    }
+
+    .passcode-input-wrap {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 12px;
     }
 
     .passcode-input {
       font-family: 'Cinzel Decorative', serif;
       font-size: 32px;
       letter-spacing: 12px;
-      padding: 16px;
+      padding: 12px;
       background: rgba(0,0,0,0.7);
       border: 2px solid rgba(107,75,161,0.3);
       color: var(--gold);
       text-align: center;
-      text-transform: uppercase;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto 16px;
-      outline: none;
+      width: 300px;
     }
 
     .passcode-input:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+      outline: none;
     }
 
-    .submit-passcode-btn {
+    .cast-btn {
       font-family: 'Cinzel', serif;
-      font-size: 12px;
-      letter-spacing: 4px;
-      padding: 12px 32px;
+      font-size: 13px;
+      letter-spacing: 3px;
+      padding: 12px 24px;
       border: 2px solid var(--copper);
       background: rgba(212,132,42,0.1);
       color: var(--copper);
       cursor: pointer;
-      transition: all 0.3s;
-      text-transform: uppercase;
     }
 
-    .submit-passcode-btn:hover {
+    .cast-btn:hover {
       border-color: var(--gold);
       color: var(--gold);
-      box-shadow: 0 0 20px rgba(201,168,76,0.3);
     }
 
-    /* Win screen */
+    .passcode-error {
+      font-size: 14px;
+      color: #ad4a4a;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .passcode-error.show {
+      opacity: 1;
+    }
+
+    /* WIN SCREEN */
     #win-screen {
       display: none;
       position: fixed;
@@ -696,14 +513,10 @@
       flex-direction: column;
       text-align: center;
       padding: 40px;
-      overflow: hidden;
     }
 
-    #win-screen.show {
-      display: flex;
-    }
+    #win-screen.show { display: flex; }
 
-    /*win*/
     .win-spark-video {
       position: absolute;
       inset: 0;
@@ -717,12 +530,9 @@
     .win-title {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(48px, 10vw, 96px);
-      font-weight: 900;
       color: var(--gold);
       text-shadow: 0 0 40px rgba(201,168,76,0.8);
       margin-bottom: 16px;
-      animation: pulse 2s ease-in-out infinite;
-      position: relative;
       z-index: 1;
     }
 
@@ -732,18 +542,14 @@
       letter-spacing: 4px;
       color: var(--gold);
       margin-bottom: 32px;
-      position: relative;
       z-index: 1;
     }
 
     .win-sub {
-      font-family: 'EB Garamond', serif;
       font-style: italic;
       font-size: 18px;
-      line-height: 1.8;
       color: var(--ash);
       max-width: 600px;
-      position: relative;
       z-index: 1;
     }
 
@@ -751,234 +557,240 @@
       color: var(--gold);
     }
 
-    /*audio*/
-    
+    /* AUDIO TOGGLE */
     .audio-toggle {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      border: 2px solid rgba(107,75,161,0.4);
-      background: rgba(0,0,0,0.7);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      z-index: 1000;
-      font-size: 20px;
-    }
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  font-size: 24px;
+  color: var(--gold);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  z-index: 1000;
+  border: none;
+  background: none;
+  padding: 0;
+  width: auto;
+  height: auto;
+}
 
-    .audio-toggle:hover {
-      border-color: var(--gold);
-      background: rgba(107,75,161,0.2);
-      box-shadow: 0 0 20px rgba(201,168,76,0.3);
-    }
+.audio-toggle:hover {
+  opacity: 1;
+}
 
-    .audio-toggle.muted {
-      opacity: 0.5;
-    }
+.audio-toggle.muted {
+  opacity: 0.3;
+}
+
+.audio-toggle img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(73%) sepia(18%) saturate(1015%) hue-rotate(359deg) brightness(95%) contrast(85%);
+}
   </style>
 </head>
 <body>
 
-<!--bg-->
+<!-- FIREPLACE VIDEO -->
 <video class="fireplace-bg" id="fireplace-video" autoplay loop playsinline>
   <source src="castle.mp4" type="video/mp4">
 </video>
 
-<!--sound
-<audio id="click-sound" preload="auto" volume="1.0"></audio> --> <!--come here-->
-<audio id="click-sound" preload="auto">
-  <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
-</audio>
-  <source src="clicks.mp3">
-</audio>
-<button onclick="playSound('click-sound')">TEST SOUND</button> <!--come here remov line-->
-
-<audio id="hover-sound" preload="auto" volume="1.0"></audio> <!--come here remove volumes-->
-  <!-- <source src="hover.mp3" type="audio/mpeg"> -->
-  <source src="hover.mp3"> <!--come here-->
-</audio>
-
+<!-- HALL IMAGE -->
 <div class="hall-bg" id="hall-bg"></div>
 
-<!--bg audio ++++ toggle-->
-<audio id="ambient-sound" loop>
-  <source src="ambient-sound.mp3" type="audio/mpeg">
+<!-- SOUND EFFECTS -->
+<audio id="click-sound" preload="auto">
+  <source src="clicks.mp3" type="audio/mpeg">
 </audio>
 
-<!--togg btn-->
+<audio id="hover-sound" preload="auto">
+  <source src="hover.mp3" type="audio/mpeg">
+</audio>
+
+<!--audio-->
 <div class="audio-toggle" id="audio-toggle" onclick="toggleAudio()">
-  <span id="audio-icon">🔊</span>
+  <img src="icon.png" alt="sound" id="audio-icon">
 </div>
 
-<!--landing-->
-<div class="wrapper" id="landing-page">
+<div id="main">
 
-  <!--title-->
-  <div class="title-lockup">
-    <div class="title-eyebrow">CoLab Archives</div>
-    <h1 class="main-title">THE CHAMBER</h1>
-    <div class="season-badge">The Circuit Awakens</div>
-  </div>
+  <!--landing pageee-->
+  <div id="landing-page">
+    
+    <div style="text-align:center;
+    font-weight: bold;
+    margin-bottom:12px;
+    font-family:'Cinzel',serif;
+    font-size:14px;
+    letter-spacing:6px;
+    color:var(--gold);">
+      SEASON 2: COLAB ARCHIVES
+    </div>
 
-  <!--letter slots -->
-  <div class="letter-row">
-    <div class="letter-slot locked" id="slot-0">
-      <span class="placeholder">✦</span>
-    </div>
-    <div class="letter-slot locked" id="slot-1">
-      <span class="placeholder">✦</span>
-    </div>
-    <div class="letter-slot locked" id="slot-2">
-      <span class="placeholder">✦</span>
-    </div>
-    <div class="letter-slot locked" id="slot-3">
-      <span class="placeholder">✦</span>
-    </div>
-    <div class="letter-slot locked" id="slot-4">
-      <span class="placeholder">✦</span>
-    </div>
-  </div>
-  <div class="letter-caption">Five Keys. One Ignition.</div>
+    <h1 class="title">THE CHAMBER</h1>
+    <div class="subtitle">The Circuit Awakens</div>
 
-  <!--welcome text-->
-  <div class="welcome-text">
-    <p>
+    <!--letter slots-->
+    <div class="letter-row" id="letter-row-landing">
+      <div class="letter-slot locked"><span class="glyph">✦</span></div>
+      <div class="letter-slot locked"><span class="glyph">✦</span></div>
+      <div class="letter-slot locked"><span class="glyph">✦</span></div>
+      <div class="letter-slot locked"><span class="glyph">✦</span></div>
+      <div class="letter-slot locked"><span class="glyph">✦</span></div>
+    </div>
+    <div class="letter-caption">Five Keys. One Ignition.</div>
+
+    <!--welcome txt-->
+    <div class="welcome">
       The archives have evolved. Knowledge now flows through circuits and pulses in signals.
       Five keys guard the chamber where ancient wisdom meets modern technology.
-      Only those who master both the <em>digital</em> and the <em>tangible</em> can unlock what lies within.
-    </p>
-  </div>
+      <br>Only those who master both <em>the digital and tangible</em> can unlock what lies within. <br/>
+    </div>
 
-  <!--horiz scroll-->
-  <div class="teams-section">
-    <div class="teams-title">Choose Your Team</div>
-    
-    <div class="scroll-container">
-      <div class="scroll-arrow left" onclick="scrollTeams(-1)">‹</div>
-      <div class="scroll-arrow right" onclick="scrollTeams(1)">›</div>
+    <!--teams-->
+    <div class="teams-section">
+      <div class="teams-title">CHOOSE YOUR TEAM</div>
       
-      <div class="teams-scroll" id="teams-scroll">
+      <div class="scroll-container">
+        <div class="scroll-arrow left" onclick="scrollTeams(-1)">‹</div>
+        <div class="scroll-arrow right" onclick="scrollTeams(1)">›</div>
         
-        <!--team 1:aegis-->
-        <div class="team-card" onclick="selectTeam('Aegis', this)" onmouseenter="playSound('hover-sound')">
-  <div class="team-img-placeholder">
-    <img src="aegis.png" alt="aegissss">
-  </div>
-  <div class="team-name">Aegis</div>
-</div>
+        <div class="teams-scroll" id="teams-scroll">
+          
+          <div class="team-card" onclick="selectTeam('Aegis', this)" onmouseenter="playSound('hover-sound')">
+            <div class="team-img">
+              <img src="aegis.png" alt="Aegis">
+            </div>
+            <div class="team-name">AEGIS</div>
+            <div class="team-trait">Shield Keepers</div>
+          </div>
 
-        <!--team 2:elixir-->
-        <div class="team-card" onclick="selectTeam('Elixir', this)" onmouseenter="playSound('hover-sound')">
-  <div class="team-img-placeholder">
-    <img src="potion.png" alt="elixir">
-  </div>
-  <div class="team-name">Elixir</div>
-</div>
+          <div class="team-card" onclick="selectTeam('Elixir', this)" onmouseenter="playSound('hover-sound')">
+            <div class="team-img">
+              <img src="potion.png" alt="Elixir">
+            </div>
+            <div class="team-name">ELIXIR</div>
+            <div class="team-trait">Potion Brewers</div>
+          </div>
 
-        <!--team 3:hippogriff-->
-        <div class="team-card" onclick="selectTeam('Hippogriff', this)" onmouseenter="playSound('hover-sound')">
-  <div class="team-img-placeholder">
-    <img src="hippogriff.png" alt="Hippogriff">
-  </div>
-  <div class="team-name">Hippogriff</div>
-</div>
+          <div class="team-card" onclick="selectTeam('Hippogriff', this)" onmouseenter="playSound('hover-sound')">
+            <div class="team-img">
+              <img src="hippogriff.png" alt="Hippogriff">
+            </div>
+            <div class="team-name">HIPPOGRIFF</div>
+            <div class="team-trait">Sky Riders</div>
+          </div>
 
+          <div class="team-card" onclick="selectTeam('Compass', this)" onmouseenter="playSound('hover-sound')">
+            <div class="team-img">
+              <img src="compass.png" alt="Compass">
+            </div>
+            <div class="team-name">COMPASS</div>
+            <div class="team-trait">Path Finders</div>
+          </div>
 
-        <!--team 4:compass-->
-        <div class="team-card" onclick="selectTeam('Compass', this)" onmouseenter="playSound('hover-sound')">
+          <div class="team-card" onclick="selectTeam('Citrine', this)" onmouseenter="playSound('hover-sound')">
+            <div class="team-img">
+              <img src="citrine.png" alt="Citrine">
+            </div>
+            <div class="team-name">CITRINE</div>
+            <div class="team-trait">Signal Decoders</div>
+          </div>
 
-  <div class="team-img-placeholder">
-    <img src="compass.png" alt="Compass">
-  </div>
-  <div class="team-name">Compass</div>
-</div>
+          <div class="team-card" onclick="selectTeam('Willow', this)" onmouseenter="playSound('hover-sound')">
+            <div class="team-img">
+              <img src="willow.png" alt="Willow">
+            </div>
+            <div class="team-name">WILLOW</div>
+            <div class="team-trait">Network Navigators</div>
+          </div>
 
-        <!--team 5:citrine-->
-        <div class="team-card" onclick="selectTeam('Citrine', this)" onmouseenter="playSound('hover-sound')">
-
-  <div class="team-img-placeholder">
-    <img src="team-citrine.png" alt="Citrine">
-  </div>
-  <div class="team-name">Citrine</div>
-</div>
-
-<!--team 6:aqua -->
- <div class="team-card" onclick="selectTeam('Aqua', this)" onmouseenter="playSound('hover-sound')">
-  <div class="team-img-placeholder">
-    <img src="team-aqua.png" alt="Aqua">
-  </div>
-  <div class="team-name">Aqua</div>
-</div>
-
+        </div>
       </div>
     </div>
+
+    <!--enter btn-->
+    <div class="enter-section">
+      <button class="enter-btn" id="enter-btn" onclick="enterChamber()" disabled>
+        ENTER THE ARCHIVES
+      </button>
+    </div>
+
   </div>
 
-  <!--enter button~-->
-  <div class="enter-section">
-    <button class="enter-btn" id="enter-btn" onclick="enterChamber()" disabled>
-      <span style="position:relative;z-index:1;">Enter the Archives</span>
-    </button>
-  </div>
+  <div id="dashboard">
 
-  <div class="footer">
-    CoLab Archives — Season II · May the Circuit Guide You
+    <!--letter slots-->
+    <div class="panel">
+      <div class="letter-row" id="letter-row-dashboard">
+        <div class="letter-slot locked" id="slot-0"><span class="glyph">✦</span></div>
+        <div class="letter-slot locked" id="slot-1"><span class="glyph">✦</span></div>
+        <div class="letter-slot locked" id="slot-2"><span class="glyph">✦</span></div>
+        <div class="letter-slot locked" id="slot-3"><span class="glyph">✦</span></div>
+        <div class="letter-slot locked" id="slot-4"><span class="glyph">✦</span></div>
+      </div>
+      <div class="letter-caption">Collect all five keys to ignite the chamber</div>
+    </div>
+
+    <!--challenge pan-->
+    <div class="panel">
+      <div class="welcome-banner">
+        <div class="welcome-house" id="house-display">Team —</div>
+        <div class="welcome-sub">Your quest begins. Tread carefully.</div>
+      </div>
+      <div id="challenge-list"></div>
+    </div>
+
+    <!--lb panel-->
+    <div class="panel">
+      <div class="panel-header">
+        <span>📜</span>
+        <span>The Standing Scrolls</span>
+      </div>
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Keys Found</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </div>
+
+    <!--pass pan-->
+    <div class="panel">
+      <div class="panel-header">
+        <span>🕯️</span>
+        <span>The Final Incantation</span>
+      </div>
+      <div class="passcode-section">
+        <p class="passcode-lore">
+          You have gathered the ancient letters.<br/>
+          Speak the spell. <em>Let the chamber ignite.</em>
+        </p>
+        <div class="passcode-input-wrap">
+          <input type="text" class="passcode-input" id="passcode-input" placeholder="_ _ _ _ _" maxlength="5"/>
+          <button class="cast-btn" onclick="castSpell()">CAST</button>
+        </div>
+        <p class="passcode-error" id="passcode-error">
+          ✗ &nbsp; The chamber remains sealed. Try again.
+        </p>
+      </div>
+    </div>
+
   </div>
 
 </div>
 
-<!--gurl the board-->
-<div class="dashboard" id="dashboard">
-  
-  <div class="challenges-section">
-    <h2 class="section-title">The Five Keys</h2>
-    <div class="challenge-list" id="challenge-list"></div>
-  </div>
-
-  <div class="leaderboard-section">
-    <h2 class="section-title">The Standings</h2>
-    <table class="leaderboard-table">
-      <thead>
-        <tr>
-          <th>Team</th>
-          <th>Progress</th>
-          <th>Keys Unlocked</th>
-        </tr>
-      </thead>
-      <tbody id="leaderboard-body"></tbody>
-    </table>
-  </div>
-
-  <div class="passcode-section">
-    <div class="passcode-title">Ignite the Chamber</div>
-    <p style="font-family:'EB Garamond',serif;font-style:italic;color:var(--ash);margin-bottom:20px;">
-      All five keys recovered? Speak the incantation.
-    </p>
-    <input
-      type="text"
-      class="passcode-input"
-      id="passcode-input"
-      placeholder="_ _ _ _ _"
-      maxlength="5"
-    />
-    <br/>
-    <button class="submit-passcode-btn" onclick="checkPasscode()">IGNITE</button>
-  </div>
-
-</div>
-
-<!--yay screen-->
-
+<!--YAY SCREEN-->
 <div id="win-screen">
   <video class="win-spark-video" autoplay muted loop playsinline>
-    <source src="spark-video.mp4" type="video/mp4">
+    <source src="spark.mp4" type="video/mp4">
   </video>
-  
   <div class="win-title" id="win-title">COMPLETE</div>
   <div class="win-house" id="win-house-name">Team — has unlocked the chamber!</div>
   <div class="win-sub">
@@ -988,47 +800,47 @@
 </div>
 
 <script>
-  //challenge links
+  //config
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzMynZrXaSHpsrPrTv4yEziAoXcn4m9hKoYOdsPWRq9vzLJGTsULHgBd0zjZUQhoa88zQ/exec";
   const CHALLENGES = [
     {
       id: 1,
-      name: "Packet Transmission",
-      desc: "A signal was intercepted.. analyze the data.",
-      letter: "S", // REPLACE
-      link: "#challenge-1-link", // REPLACE
+      name: "The Packet Transmission",
+      desc: "A signal was intercepted. Analyze the data.",
+      letter: "S",
+      link: "#challenge-1",
       unlocked: true,
     },
     {
       id: 2,
       name: "The Layered Cipher",
       desc: "Multiple encryptions guard this key.",
-      letter: "P", // REPLACE
-      link: "#challenge-2-link", // REPLACE
+      letter: "P",
+      link: "#challenge-2",
       unlocked: false,
     },
     {
       id: 3,
       name: "The Circuit Assembly",
-      desc: "Code meets hardware, build to unlock this level",
-      letter: "A", // REPLACE
-      link: "#challenge-3-link", // REPLACE
+      desc: "Code meets hardware. Build to unlock.",
+      letter: "A",
+      link: "#challenge-3",
       unlocked: false,
     },
     {
       id: 4,
       name: "The Recursive Riddle",
-      desc: "Solve the logic, crack the vault.",
-      letter: "R", // REPLACE
-      link: "#challenge-4-link", // REPLACE
+      desc: "Solve the logic. Crack the vault.",
+      letter: "R",
+      link: "#challenge-4",
       unlocked: false,
     },
     {
       id: 5,
       name: "The Convergence",
-      desc: "Final",
-      letter: "K", // REPLACE
-      link: "#challenge-5-link", // REPLACE
+      desc: "All skills. All codes. One final ignition.",
+      letter: "K",
+      link: "#challenge-5",
       unlocked: false,
     },
   ];
@@ -1039,40 +851,25 @@
     { team: "Hippogriff", completed: 0 },
     { team: "Compass", completed: 0 },
     { team: "Citrine", completed: 0 },
-    { team: "Aqua", completed: 0 },
+    { team: "Willow", completed: 0 },
   ];
 
-  const PASSCODE = "SPARK"; // REPLACE with your 5-letter answer
-  const LETTERS = ["S", "P", "A", "R", "K"]; // REPLACE
+  const PASSCODE = "SPARK"; //UPDATE
+  const LETTERS = ["S", "P", "A", "R", "K"]; //UPDATE
 
-  //state
   let selectedTeam = null;
   let completedChallenges = [];
 
-  /*function playSound(soundId) {
+  //audio func
+  function playSound(soundId) {
     const audio = document.getElementById(soundId);
     if (audio) {
       audio.currentTime = 0;
-      audio.play().catch(e => console.log('Sound play failed:', e));
-    }
-  } */
-  //come here
-  function playSound(soundId) {
-    const audio = document.getElementById(soundId);
-    if (!audio) return;
-
-    audio.pause();
-    audio.currentTime = 0;
-
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // silently ignore autoplay block
-      });
+      audio.play().catch(e => console.log('Sound:', e));
     }
   }
-  //select team
+
+  //team selecting
   function selectTeam(teamName, card) {
     playSound('click-sound');
     selectedTeam = teamName;
@@ -1081,60 +878,59 @@
     document.getElementById('enter-btn').disabled = false;
   }
 
-  function scrollTeams(direction) {
-    const scroll = document.getElementById('teams-scroll');
-    const scrollAmount = 200;
-    scroll.scrollBy({
-      left: direction * scrollAmount,
+  function scrollTeams(dir) {
+    document.getElementById('teams-scroll').scrollBy({
+      left: dir * 200,
       behavior: 'smooth'
     });
   }
 
   function enterChamber() {
     if (!selectedTeam) return;
+    playSound('click-sound');
     
-    //hide landing sw/dash
     document.getElementById('landing-page').style.display = 'none';
     document.getElementById('dashboard').classList.add('active');
-    
-    //sw/bg
     document.getElementById('fireplace-video').style.display = 'none';
     document.getElementById('hall-bg').classList.add('active');
     
+    document.getElementById('house-display').textContent = `Team ${selectedTeam}`;
+    
     buildChallenges();
     buildLeaderboard();
+    fetchLeaderboard();
   }
 
-  //rev letter
+  //slot func
   function updateLetterSlots() {
     LETTERS.forEach((letter, i) => {
       const slot = document.getElementById(`slot-${i}`);
       const challengeId = i + 1;
+      
       if (completedChallenges.includes(challengeId)) {
         slot.classList.remove('locked');
-        slot.classList.add('unlocked');
-        slot.innerHTML = `<span class="letter">${letter}</span>`;
+        slot.classList.add('revealed');
+        slot.querySelector('.glyph').textContent = letter;
       }
     });
   }
 
-  function markComplete(challengeId) {
-    if (!completedChallenges.includes(challengeId)) {
-      completedChallenges.push(challengeId);
-      updateLetterSlots();
-    }
-  }
-
-  //challenges
+  //challenge func
   function buildChallenges() {
     const list = document.getElementById('challenge-list');
     list.innerHTML = '';
+    
     CHALLENGES.forEach(ch => {
       const div = document.createElement('div');
       div.className = `challenge-item ${ch.unlocked ? 'unlocked' : 'locked'}`;
+      
       if (ch.unlocked) {
-        div.onclick = () => window.open(ch.link, '_blank');
+        div.onclick = () => {
+          playSound('click-sound');
+          window.open(ch.link, '_blank');
+        };
       }
+      
       div.innerHTML = `
         <div class="challenge-header">
           <span class="challenge-number">${ch.id}</span>
@@ -1145,49 +941,98 @@
         <div class="challenge-name">${ch.name}</div>
         <div class="challenge-desc">${ch.desc}</div>
       `;
+      
       list.appendChild(div);
     });
   }
 
-  //leaderboard
+  //leaderboard func
   function buildLeaderboard() {
     const tbody = document.getElementById('leaderboard-body');
-    if (!tbody) return;
     tbody.innerHTML = '';
     
     const sorted = [...LEADERBOARD].sort((a,b) => b.completed - a.completed);
+    
     sorted.forEach(t => {
-      const dots = Array(5).fill(0).map((_, i) => `
-        <div class="dot ${i < t.completed ? 'filled' : ''}"></div>
-      `).join('');
-      
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>
-          <span style="font-family:'Cinzel',serif;letter-spacing:2px;">Team ${t.team}</span>
-        </td>
-        <td><div class="progress-dots">${dots}</div></td>
-        <td style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px">
-          ${t.completed === 5 ? '<span style="color:var(--gold)">COMPLETE</span>' : `${t.completed} / 5`}
-        </td>
+        <td>${t.team}</td>
+        <td>${t.completed} / 5</td>
+        <td>${t.completed === 5 ? '<span style="color:var(--gold)">COMPLETE</span>' : 'In Progress'}</td>
       `;
       tbody.appendChild(tr);
     });
   }
 
-  //pass
-  function checkPasscode() {
+  //sheets app script func
+  async function fetchLeaderboard() {
+    if (!APPS_SCRIPT_URL) return;
+    
+    try {
+      const response = await fetch(APPS_SCRIPT_URL);
+      const data = await response.json();
+      
+      if (data.leaderboard) {
+        LEADERBOARD.length = 0;
+        data.leaderboard.forEach(item => {
+          LEADERBOARD.push({
+            team: item.team,
+            completed: item.completed
+          });
+        });
+        buildLeaderboard();
+
+        //update lb
+        if (selectedTeam) {
+          const myTeam = data.leaderboard.find(t => t.team.toLowerCase() === selectedTeam.toLowerCase());
+          
+          if (myTeam && myTeam.challenges) {
+            //unlock team
+            CHALLENGES[0].unlocked = true;
+            CHALLENGES[1].unlocked = myTeam.challenges.c1;
+            CHALLENGES[2].unlocked = myTeam.challenges.c2;
+            CHALLENGES[3].unlocked = myTeam.challenges.c3;
+            CHALLENGES[4].unlocked = myTeam.challenges.c4;
+            
+            //letter rev
+            completedChallenges = [];
+            if (myTeam.challenges.c1) completedChallenges.push(1);
+            if (myTeam.challenges.c2) completedChallenges.push(2);
+            if (myTeam.challenges.c3) completedChallenges.push(3);
+            if (myTeam.challenges.c4) completedChallenges.push(4);
+            if (myTeam.challenges.c5) completedChallenges.push(5);
+            
+            updateLetterSlots();
+            buildChallenges();
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Sync error:', err);
+    }
+  }
+
+  //auto ref
+  setInterval(fetchLeaderboard, 10000);
+
+  //pass func
+  function castSpell() {
+    playSound('click-sound');
     const input = document.getElementById('passcode-input').value.toUpperCase();
+    const error = document.getElementById('passcode-error');
+    
     if (input === PASSCODE) {
+      error.classList.remove('show');
       document.getElementById('win-title').textContent = input;
       document.getElementById('win-house-name').textContent = `Team ${selectedTeam} has unlocked the chamber!`;
       document.getElementById('win-screen').classList.add('show');
     } else {
-      alert('❌ Incorrect incantation. The chamber remains sealed.');
+      error.classList.add('show');
+      setTimeout(() => error.classList.remove('show'), 3000);
     }
   }
 
-  //audio cont
+  //audio func
   const fireplaceVideo = document.getElementById('fireplace-video');
   let videoMuted = false;
 
@@ -1197,19 +1042,17 @@
     
     if (videoMuted) {
       fireplaceVideo.muted = false;
-      icon.textContent = '🔊';
       toggle.classList.remove('muted');
       videoMuted = false;
     } else {
       fireplaceVideo.muted = true;
-      icon.textContent = '🔇';
       toggle.classList.add('muted');
       videoMuted = true;
     }
   }
 
+  //autoplay
   fireplaceVideo.play().catch(e => {
-    console.log('Autoplay with sound blocked, try and interact first');
     fireplaceVideo.muted = true;
     fireplaceVideo.play();
     videoMuted = true;
