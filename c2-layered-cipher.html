@@ -14,8 +14,8 @@
       --ash: #888880;
       --amber: #d4842a;
       --amber-dim: #7a4a10;
-      --green: #00ff9d;
-      --green-dim: #004d2e;
+      --blue: #4ba8ff;
+      --blue-dim: #75a8d8;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -184,7 +184,7 @@
       letter-spacing: 2px; transition: all 0.2s;
     }
     .slot-letter.correct {
-      border-color: var(--green); color: var(--green);
+      border-color: var(--blue); color: var(--blue);
       box-shadow: 0 0 12px rgba(0,255,157,0.3);
     }
 
@@ -197,7 +197,7 @@
     }
     .unlock-btn:hover { background: rgba(212,132,42,0.2); border-color: var(--amber); color: var(--parchment); }
     .unlock-btn.success {
-      border-color: var(--green); color: var(--green);
+      border-color: var(--blue); color: var(--blue);
       background: rgba(0,255,157,0.08); box-shadow: 0 0 20px rgba(0,255,157,0.2);
     }
 
@@ -215,7 +215,7 @@
     .layer2-panel.visible { display: block; animation: revealLayer 0.8s ease both; }
     .layer2-panel::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--green), transparent);
+      background: linear-gradient(to right, transparent, var(--blue), transparent);
     }
     .layer2-header {
       padding: 12px 20px; border-bottom: 1px solid rgba(0,255,157,0.1);
@@ -223,7 +223,7 @@
     }
     .layer2-title {
       font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px;
-      color: var(--green); text-transform: uppercase;
+      color: var(--blue); text-transform: uppercase;
     }
     .layer2-body { padding: 28px; }
 
@@ -244,11 +244,11 @@
 
     .vig-slot-btn {
       width: 40px; height: 26px; background: rgba(0,255,157,0.05);
-      border: 1px solid rgba(0,255,157,0.2); color: var(--green);
+      border: 1px solid rgba(0,255,157,0.2); color: var(--blue);
       font-family: 'Share Tech Mono', monospace; font-size: 14px;
       cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center;
     }
-    .vig-slot-btn:hover { background: rgba(0,255,157,0.15); border-color: var(--green); }
+    .vig-slot-btn:hover { background: rgba(0,255,157,0.15); border-color: var(--blue); }
 
     .vig-slot-letter {
       width: 52px; height: 58px; background: rgba(0,0,0,0.6);
@@ -271,7 +271,7 @@
       color: rgba(0,255,157,0.3); transition: all 0.3s; min-height: 32px;
     }
     .decode-text.solved {
-      color: var(--green); text-shadow: 0 0 20px rgba(0,255,157,0.6); font-size: 26px;
+      color: var(--blue); text-shadow: 0 0 20px rgba(0,255,157,0.6); font-size: 26px;
     }
 
     /* LETTER REVEAL */
@@ -376,7 +376,7 @@
   <!-- LAYER 2 -->
   <div class="layer2-panel" id="layer2-panel">
     <div class="layer2-header">
-      <span style="color:var(--green);font-size:16px;">⬡</span>
+      <span style="color:var(--blue);font-size:16px;">⬡</span>
       <span class="layer2-title">Layer 2 — Vigenère Cipher</span>
     </div>
     <div class="layer2-body">
