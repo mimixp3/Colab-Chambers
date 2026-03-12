@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Logic Oracle — CoLab Archives</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --parchment: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-dim: #7a6230;
+      --ash: #888880;
+      --amber: #d4842a;
+      --amber-dim: #7a4a10;
+      --cyan: #00d4ff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--parchment);
+      font-family: 'EB Garamond', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(212,132,42,0.012) 2px,
+        rgba(212,132,42,0.012) 4px
+      );
+      pointer-events: none; z-index: 100;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.92) 100%);
+      pointer-events: none; z-index: 1;
+    }
+
+    .wrapper {
+      position: relative; z-index: 2;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 60px 20px 80px;
+      max-width: 900px; margin: 0 auto;
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 48px; animation: fadeIn 0.8s ease both;
+    }
+
+    .back-link {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 3px;
+      color: var(--gold-dim); text-decoration: none;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    .challenge-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--gold); letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(201,168,76,0.4);
+    }
+
+    .header {
+      text-align: center; margin-bottom: 48px;
+      animation: fadeDown 1s ease both;
+    }
+
+    .challenge-number {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 5px;
+      color: var(--amber-dim); margin-bottom: 12px; display: block;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 5vw, 48px);
+      font-weight: 700; color: var(--parchment);
+      letter-spacing: 4px;
+      text-shadow: 0 0 30px rgba(212,132,42,0.2);
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 16px;
+      width: 100%; margin: 0 0 40px;
+      animation: fadeIn 1.2s ease both;
+    }
+
+    .divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    }
+
+    .divider-glyph {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--amber); font-size: 12px;
+    }
+
+    .parchment-card {
+      width: 100%;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(15,12,8,0.9);
+      padding: 32px 36px;
+      position: relative; margin-bottom: 32px;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .parchment-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .card-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--gold-dim); text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .card-eyebrow::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(201,168,76,0.15);
+    }
+
+    .card-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 17px; line-height: 1.95; color: var(--ash);
+    }
+
+    .card-text em { color: var(--gold); font-style: italic; }
+
+    .logic-panel {
+      width: 100%;
+      border: 1px solid rgba(201,168,76,0.3);
+      background: rgba(20,15,8,0.95);
+      position: relative; margin-bottom: 24px;
+      padding: 32px;
+      animation: fadeUp 1.4s ease both;
+    }
+
+    .logic-panel::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .panel-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .circuit-board {
+      width: 100%;
+      height: 500px;
+      background: rgba(0,0,0,0.8);
+      border: 2px solid rgba(201,168,76,0.3);
+      position: relative;
+      background-image: 
+        linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .circuit-board.solved {
+      border-color: #82e8ff;
+      box-shadow: 0 0 30px rgba(136, 223, 255, 0.92);
+    }
+
+    .lever {
+      position: absolute;
+      width: 60px;
+      height: 80px;
+      cursor: pointer;
+    }
+
+    .lever-base {
+      width: 60px;
+      height: 20px;
+      background: linear-gradient(to bottom, #4a4a4a, #2a2a2a);
+      border: 2px solid #666;
+      border-radius: 4px;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .lever-arm {
+      width: 8px;
+      height: 50px;
+      background: linear-gradient(to right, #888, #666);
+      position: absolute;
+      bottom: 20px;
+      left: 26px;
+      transform-origin: bottom center;
+      transition: transform 0.3s;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .lever-handle {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, var(--gold), var(--gold-dim));
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      top: -10px;
+      left: -6px;
+      box-shadow: 0 0 10px rgba(201,168,76,0.5);
+    }
+
+    .lever.on .lever-arm {
+      transform: rotate(30deg);
+    }
+
+    .lever.on .lever-handle {
+      background: radial-gradient(circle, #82e8ff, #82e8ff);
+      border-color: #82e8ff;
+      box-shadow: 0 0 15px rgba(142, 255, 255, 0.8);
+    }
+
+    .lever-label {
+      position: absolute;
+      top: -20px;
+      width: 100%;
+      text-align: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    .gate-palette {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .gate-item {
+      width: 80px;
+      height: 80px;
+      border: 2px solid rgba(201,168,76,0.4);
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .gate-item:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.1);
+    }
+
+    .gate-item:active {
+      cursor: grabbing;
+    }
+
+    .gate-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .gate-placed {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 2px solid rgba(201,168,76,0.6);
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: move;
+    }
+
+    .gate-placed.correct {
+      border-color: #82e8ff;
+      background: rgba(0, 179, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 128, 255, 0.5);
+    }
+
+    .output-indicator {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 3px solid rgba(201,168,76,0.4);
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .output-indicator.unlocked {
+      border-color: #82e8ff;
+      background: rgba(0,255,0,0.1);
+      box-shadow: 0 0 30px rgba(0, 123, 255, 0.6);
+    }
+
+    .output-icon {
+      font-size: 32px;
+    }
+
+    .output-text {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: var(--gold);
+    }
+
+    .output-indicator.unlocked .output-text {
+      color: #82e8ff;
+    }
+
+    .wire {
+      position: absolute;
+      height: 3px;
+      background: var(--gold-dim);
+      transform-origin: left center;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .gate-slot{
+      position:absolute;
+      width:80px;
+      height:80px;
+      border:2px dashed rgba(201,168,76,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .gate-slot.filled{
+      border-style:solid;
+    }
+
+    .gate-slot.active{
+      box-shadow:0 0 20px rgba(0,255,0,0.6);
+    }
+
+    /*.wire.active{
+      background:#00d9ff;
+      box-shadow:
+        0 0 5px #00d9ff,
+        0 0 12.2px #00d9ff,
+        0 0 18px #00d9ff;
+    } */
+
+    .wire.active{
+      background:linear-gradient(
+        90deg,
+        transparent,
+        #00d9ff,
+        transparent
+      );
+      background-size:200% 100%;
+      animation:signalFlow 0.6s linear;
+    }
+
+    @keyframes signalFlow{
+      from{background-position:200% 0;}
+      to{background-position:-200% 0;}
+    }
+
+    .graph-canvas {
+      width: 100%;
+      height: 350px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,212,255,0.2);
+      position: relative;
+      cursor: crosshair;
+    }
+
+    .check-btn {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      padding: 12px 24px;
+      border: 2px solid var(--gold);
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+
+    .check-btn:hover {
+      background: rgba(201,168,76,0.2);
+      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    }
+
+    .result-box {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 16px;
+      margin-top: 16px;
+      text-align: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      color: var(--gold);
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+    }
+
+    .result-box.correct {
+      border-color: #82e8ff;
+      color: #82e8ff;
+      box-shadow: 0 0 20px rgba(0, 119, 255, 0.3);
+    }
+
+    .result-box.incorrect {
+      border-color: #ad4a4a;
+      color: #ad4a4a;
+    }
+
+    .steps {
+      width: 100%;
+      display: flex; flex-direction: column; gap: 12px;
+      margin-bottom: 32px;
+      animation: fadeUp 1.8s ease both;
+    }
+
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 20px;
+      border: 1px solid rgba(201,168,76,0.08);
+      background: rgba(10,10,10,0.6);
+    }
+
+    .step-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--amber);
+      letter-spacing: 2px; flex-shrink: 0;
+    }
+
+    .step-content { flex: 1; }
+
+    .step-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12px; letter-spacing: 2px;
+      color: var(--gold); margin-bottom: 4px; text-transform: uppercase;
+    }
+
+    .step-desc {
+      font-family: 'EB Garamond', serif;
+      font-style: italic; font-size: 14px;
+      color: var(--ash); line-height: 1.6;
+    }
+
+    .footer {
+      margin-top: 20px; text-align: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: #222; letter-spacing: 2px;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="wrapper">
+
+  <div class="top-bar">
+    <a href="#" class="back-link">← The Archives</a>
+    <span class="challenge-badge">SCROLL_04 // UNSEALED</span>
+  </div>
+
+  <div class="header">
+    <span class="challenge-number">// CHALLENGE_04 //</span>
+    <h1 class="title">THE LOGIC ORACLE</h1>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-glyph">[BIN]</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="parchment-card">
+    <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
+    <p class="card-text">
+      The fourth scroll tests logic and paths.
+      Build the circuit to unlock the gate. Find the minimum tree.
+      <em>Two challenges. One answer.</em>
+    </p>
+  </div>
+
+  <!-- Circuit Building Puzzle -->
+  <div class="logic-panel">
+    <div class="panel-title">Part 1: Circuit Builder</div>
+    
+    <div style="text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--ash);margin-bottom:16px;">
+      Click levers. Drag gates onto the board. Build the correct circuit to unlock.
+    </div>
+
+    <div class="gate-palette">
+      <div class="gate-item" draggable="true" data-gate="AND">
+        <div class="gate-label">AND</div>
+      </div>
+      <div class="gate-item" draggable="true" data-gate="OR">
+        <div class="gate-label">OR</div>
+      </div>
+      <div class="gate-item" draggable="true" data-gate="XOR">
+        <div class="gate-label">XOR</div>
+      </div>
+      <div class="gate-item" draggable="true" data-gate="NOT">
+        <div class="gate-label">NOT</div>
+      </div>
+    </div>
+
+    <div class="circuit-board" id="circuitBoard">
+      <!-- Lever A -->
+      <div class="lever" id="leverA" onclick="toggleLever('A')" style="left: 50px; top: 100px;">
+        <div class="lever-label">LEVER A</div>
+        <div class="lever-arm">
+          <div class="lever-handle"></div>
+        </div>
+        <div class="lever-base"></div>
+      </div>
+
+      <!-- Lever B -->
+      <div class="lever" id="leverB" onclick="toggleLever('B')" style="left: 50px; top: 250px;">
+        <div class="lever-label">LEVER B</div>
+        <div class="lever-arm">
+          <div class="lever-handle"></div>
+        </div>
+        <div class="lever-base"></div>
+      </div>
+
+
+      <!-- SLOT 1 -->
+      <div class="gate-slot" id="slot1" data-slot="1" style="left:250px; top:120px;"></div>
+
+      <!-- SLOT 2 -->
+      <div class="gate-slot" id="slot2" data-slot="2" style="left:250px; top:260px;"></div>
+
+      <!-- SLOT 3 -->
+      <div class="gate-slot" id="slot3" data-slot="3" style="left:420px; top:200px;"></div>
+
+      <!-- WIRES -->
+      <div class="wire" id="wireA" style="left:120px;top:140px;width:120px;"></div>
+      <div class="wire" id="wireB" style="left:120px;top:290px;width:120px;"></div>
+
+      <div class="wire" id="wireAB" style="left:330px;top:160px;width:90px;"></div>
+      <div class="wire" id="wireNB" style="left:330px;top:300px;width:90px;"></div>
+
+      <div class="wire" id="wireOUT" style="left:500px;top:220px;width:120px;"></div>
+
+      <!-- Output -->
+      <div class="output-indicator" id="output" style="right: 50px; top: 200px;">
+        <div class="output-icon">🔒</div>
+        <div class="output-text">LOCKED</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:16px;">
+      <button class="check-btn" onclick="resetCircuit()">Reset Circuit</button>
+    </div>
+
+    <div class="result-box" id="circuit-result"></div>
+  </div>
+
+  <!-- MST Graph Builder -->
+  <div class="logic-panel">
+    <div class="panel-title">Part 2: Minimum Spanning Tree (Kruskal's Algorithm)</div>
+    
+    <div style="text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--ash);margin-bottom:16px;">
+      Click two nodes to connect them. Build the MST to get Part 2 value.
+    </div>
+
+    <canvas class="graph-canvas" id="graphCanvas" width="800" height="350"></canvas>
+
+    <div style="text-align:center;margin-top:16px;">
+      <button class="check-btn" onclick="resetGraph()">Reset Graph</button>
+      <button class="check-btn" onclick="checkMST()">Check MST</button>
+    </div>
+
+    <div class="result-box" id="mst-result"></div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
+    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
+    <a href="https://forms.gle/a4pRE9WbHcdGxfBdA" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/a4pRE9WbHcdGxfBdA</a>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01 //</span>
+      <div class="step-content">
+        <div class="step-title">Build the Circuit</div>
+        <div class="step-desc">
+          Toggle the levers representing your 0 and 1 and drag gates to build the circuit and if it glows you know whats up bruva.
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">02 //</span>
+      <div class="step-content">
+        <div class="step-title">Minimum Spanning Tree</div>
+        <div class="step-desc">
+          Ya'll remember this uncle named Kruskal?
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">03 //</span>
+      <div class="step-content">
+        <div class="step-title">Combine Results</div>
+        <div class="step-desc">
+          Add them both to get the ASCII and drop the final letter in the form
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">// COLAB_ARCHIVES - SCROLL_04 //</div>
+
+</div>
+
+<script>
+  // Firefly particles
+  (function() {
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const sparks = Array(40).fill(0).map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 1.5 + 0.3,
+      speed: Math.random() * 0.4 + 0.1,
+      opacity: Math.random() * 0.4 + 0.1,
+      drift: (Math.random() - 0.5) * 0.3
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      sparks.forEach(s => {
+        s.y -= s.speed;
+        s.x += s.drift;
+        s.opacity += (Math.random() - 0.5) * 0.02;
+        s.opacity = Math.max(0.05, Math.min(0.5, s.opacity));
+
+        if (s.y < -10) {
+          s.y = canvas.height + 10;
+          s.x = Math.random() * canvas.width;
+        }
+
+        ctx.globalAlpha = s.opacity;
+        ctx.fillStyle = '#c9a84c';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // CIRCUIT LOGIC
+
+  const levers = { A: false, B: false };
+  const placedGates = [];
+  let part1Value = 0;
+
+  function toggleLever(lever) {
+    levers[lever] = !levers[lever];
+    document.getElementById(`lever${lever}`).classList.toggle('on', levers[lever]);
+    evaluateCircuit();
+  }
+
+  function activateWire(id){
+
+    const wire = document.getElementById(id);
+
+    wire.classList.add("active");
+
+    setTimeout(()=>{
+      wire.classList.remove("active");
+    },500);
+  }
+
+  // Drag and drop
+  const board = document.getElementById('circuitBoard');
+  let draggedGate = null;
+
+  document.querySelectorAll('.gate-item').forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+      draggedGate = e.target.dataset.gate;
+    });
+  });
+
+  board.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
+
+  document.querySelectorAll('.gate-slot').forEach(slot=>{
+
+  slot.addEventListener('dragover',e=>{
+    e.preventDefault();
+  });
+
+  slot.addEventListener('drop',e=>{
+    e.preventDefault();
+
+    if(!draggedGate) return;
+
+    slot.innerHTML = `<div class="gate-label">${draggedGate}</div>`;
+    slot.dataset.gate = draggedGate;
+    slot.classList.add("filled");
+
+    evaluateCircuit();
+
+    draggedGate=null;
+  });
+
+});
+
+  function evaluateCircuit() {
+      const s1 = document.getElementById("slot1").dataset.gate;
+      const s2 = document.getElementById("slot2").dataset.gate;
+      const s3 = document.getElementById("slot3").dataset.gate;
+
+      const A = levers.A ? 1 : 0;
+      const B = levers.B ? 1 : 0;
+
+      // reset wires first
+      ["wireA","wireB","wireAB","wireNB","wireOUT"].forEach(id=>{
+          const w = document.getElementById(id);
+          w.classList.remove("active");
+          w.style.background = "#00d4ff"; // electric blue
+      });
+
+      // always show wireA and wireB if levers exist
+      activateWire("wireA");
+      activateWire("wireB");
+
+      let orOut = 0;
+      let notOut = 0;
+      let final = 0;
+
+      if(s1 === "OR") {
+          orOut = A || B;
+          activateWire("wireAB");
+      } else {
+          orOut = 0; // ensures it resets
+      }
+
+      if(s2 === "NOT") {
+          notOut = B ? 0 : 1;
+          activateWire("wireNB");
+      } else {
+          notOut = 0;
+      }
+
+      if(s3 === "AND") {
+          final = orOut && notOut;
+          activateWire("wireOUT");
+      } else {
+          final = 0;
+      }
+
+      if(final) {
+          unlockOutput();
+      } else {
+          lockOutput();
+      }
+  }
+
+function unlockOutput() {
+
+  const output = document.getElementById('output');
+
+  output.classList.add('unlocked');
+  output.querySelector('.output-icon').textContent = '🔓';
+  output.querySelector('.output-text').textContent = 'UNLOCKED';
+
+  document.getElementById('circuitBoard').classList.add('solved');
+
+  part1Value = 64;
+
+  const box = document.getElementById('circuit-result');
+  box.textContent = `✓ Circuit Unlocked! Part 1: ${part1Value}`;
+  box.classList.add('show','correct');
+}
+
+function lockOutput() {
+
+  const output = document.getElementById('output');
+
+  output.classList.remove('unlocked');
+  output.querySelector('.output-icon').textContent = '🔒';
+  output.querySelector('.output-text').textContent = 'LOCKED';
+
+  document.getElementById('circuitBoard').classList.remove('solved');
+}
+
+  function resetCircuit() {
+
+    levers.A = false;
+    levers.B = false;
+
+    document.getElementById('leverA').classList.remove('on');
+    document.getElementById('leverB').classList.remove('on');
+
+    document.querySelectorAll(".gate-slot").forEach(slot=>{
+      slot.innerHTML = "";
+      slot.classList.remove("filled","active");
+      delete slot.dataset.gate;
+    });
+
+    part1Value = 0;
+
+    const box = document.getElementById('circuit-result');
+    box.classList.remove('show','correct');
+    box.textContent = "";   // ← THIS fixes the problem
+
+    lockOutput();
+  }
+
+  // MST GRAPH (same as before)
+  const canvas2 = document.getElementById('graphCanvas');
+  const ctx2 = canvas2.getContext('2d');
+
+  const nodes = [
+    { id: 'A', x: 100, y: 100 },
+    { id: 'B', x: 300, y: 100 },
+    { id: 'C', x: 500, y: 100 },
+    { id: 'D', x: 200, y: 250 },
+    { id: 'E', x: 400, y: 250 }
+  ];
+
+  const allEdges = [
+    { from: 'A', to: 'B', weight: 2 },
+    { from: 'A', to: 'D', weight: 3 },
+    { from: 'B', to: 'C', weight: 1 },
+    { from: 'B', to: 'D', weight: 4 },
+    { from: 'B', to: 'E', weight: 5 },
+    { from: 'C', to: 'E', weight: 1 },
+    { from: 'D', to: 'E', weight: 3 }
+  ];
+
+  let userEdges = [];
+  let selectedNode = null;
+  let part2Value = 0;
+
+  function drawGraph() {
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+    ctx2.strokeStyle = 'rgba(0,212,255,0.2)';
+    ctx2.lineWidth = 1;
+    allEdges.forEach(edge => {
+      const from = nodes.find(n => n.id === edge.from);
+      const to = nodes.find(n => n.id === edge.to);
+      ctx2.beginPath();
+      ctx2.moveTo(from.x, from.y);
+      ctx2.lineTo(to.x, to.y);
+      ctx2.stroke();
+
+      const mx = (from.x + to.x) / 2;
+      const my = (from.y + to.y) / 2;
+      ctx2.fillStyle = 'rgba(0,212,255,0.5)';
+      ctx2.font = '12px Share Tech Mono';
+      ctx2.fillText(edge.weight, mx, my);
+    });
+
+    ctx2.strokeStyle = '#c9a84c';
+    ctx2.lineWidth = 3;
+    userEdges.forEach(edge => {
+      const from = nodes.find(n => n.id === edge.from);
+      const to = nodes.find(n => n.id === edge.to);
+      ctx2.beginPath();
+      ctx2.moveTo(from.x, from.y);
+      ctx2.lineTo(to.x, to.y);
+      ctx2.stroke();
+    });
+
+    nodes.forEach(node => {
+      ctx2.fillStyle = selectedNode === node.id ? '#c9a84c' : '#00d4ff';
+      ctx2.beginPath();
+      ctx2.arc(node.x, node.y, 20, 0, Math.PI * 2);
+      ctx2.fill();
+
+      ctx2.fillStyle = '#0a0a0a';
+      ctx2.font = 'bold 14px Share Tech Mono';
+      ctx2.textAlign = 'center';
+      ctx2.textBaseline = 'middle';
+      ctx2.fillText(node.id, node.x, node.y);
+    });
+  }
+
+  canvas2.addEventListener('click', (e) => {
+    const rect = canvas2.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const clicked = nodes.find(n => {
+      const dx = x - n.x;
+      const dy = y - n.y;
+      return Math.sqrt(dx*dx + dy*dy) < 20;
+    });
+
+    if (clicked) {
+      if (!selectedNode) {
+        selectedNode = clicked.id;
+      } else if (selectedNode !== clicked.id) {
+        const edge = allEdges.find(e => 
+          (e.from === selectedNode && e.to === clicked.id) ||
+          (e.from === clicked.id && e.to === selectedNode)
+        );
+        if (edge) {
+          const exists = userEdges.find(ue => 
+            (ue.from === edge.from && ue.to === edge.to) ||
+            (ue.from === edge.to && ue.to === edge.from)
+          );
+          if (!exists) {
+            userEdges.push(edge);
+          }
+        }
+        selectedNode = null;
+      }
+      drawGraph();
+    }
+  });
+
+  function resetGraph() {
+    userEdges = [];
+    selectedNode = null;
+    part2Value = 0;
+    drawGraph();
+    document.getElementById('mst-result').classList.remove('show');
+  }
+
+  function checkMST() {
+      const totalWeight = userEdges.reduce((sum, e) => sum + e.weight, 0);
+
+      const box = document.getElementById('mst-result');
+
+      if (totalWeight === 7 && userEdges.length === 4) {
+          part2Value = 9;
+          box.textContent = `✓ MST Correct! Part 2: ${part2Value}`;
+          box.classList.add('show','correct');
+      } else {
+          box.textContent = `✗ Incorrect MST. Weight: ${totalWeight}`;
+          box.classList.add('show','incorrect');
+          setTimeout(() => {
+              box.classList.remove('show','incorrect');
+          }, 2000);
+      }
+  }
+
+  drawGraph();
+</script>
+
+</body>
+</html>
