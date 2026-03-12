@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Circuit Assembly — CoLab Archives</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --parchment: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-dim: #7a6230;
+      --ash: #888880;
+      --amber: #d4842a;
+      --amber-dim: #7a4a10;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--parchment);
+      font-family: 'EB Garamond', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(212,132,42,0.012) 2px,
+        rgba(212,132,42,0.012) 4px
+      );
+      pointer-events: none; z-index: 100;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.92) 100%);
+      pointer-events: none; z-index: 1;
+    }
+
+    .wrapper {
+      position: relative; z-index: 2;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 60px 20px 80px;
+      max-width: 780px; margin: 0 auto;
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 48px; animation: fadeIn 0.8s ease both;
+    }
+
+    .back-link {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 3px;
+      color: var(--gold-dim); text-decoration: none;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    .challenge-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--gold); letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(201,168,76,0.4);
+    }
+
+    .header {
+      text-align: center; margin-bottom: 48px;
+      animation: fadeDown 1s ease both;
+    }
+
+    .challenge-number {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 5px;
+      color: var(--amber-dim); margin-bottom: 12px; display: block;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 5vw, 48px);
+      font-weight: 700; color: var(--parchment);
+      letter-spacing: 4px;
+      text-shadow: 0 0 30px rgba(212,132,42,0.2);
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 16px;
+      width: 100%; margin: 0 0 40px;
+      animation: fadeIn 1.2s ease both;
+    }
+
+    .divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    }
+
+    .divider-glyph {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--amber); font-size: 12px;
+    }
+
+    .parchment-card {
+      width: 100%;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(15,12,8,0.9);
+      padding: 32px 36px;
+      position: relative; margin-bottom: 32px;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .parchment-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .card-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--gold-dim); text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .card-eyebrow::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(201,168,76,0.15);
+    }
+
+    .card-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 17px; line-height: 1.95; color: var(--ash);
+    }
+
+    .card-text em { color: var(--gold); font-style: italic; }
+
+    .code-scroll {
+      width: 100%;
+      border: 1px solid rgba(212,132,42,0.25);
+      background: rgba(20,10,4,0.95);
+      position: relative; margin-bottom: 32px;
+      animation: fadeUp 1.4s ease both;
+    }
+
+    .code-scroll::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--amber), transparent);
+    }
+
+    .code-header {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(212,132,42,0.1);
+    }
+
+    .code-header-title {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--amber); text-transform: uppercase;
+    }
+
+    .code-body {
+      padding: 24px;
+    }
+
+    .code-box {
+      background: #000;
+      border: 1px solid rgba(107,75,161,0.3);
+      padding: 20px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      color: #00ff00;
+      overflow-x: auto;
+      line-height: 1.8;
+    }
+
+    .code-box .comment { color: #888; }
+    .code-box .keyword { color: #569cd6; }
+    .code-box .register { color: #c9a84c; }
+    .code-box .value { color: #ff79c6; }
+
+    .steps {
+      width: 100%;
+      display: flex; flex-direction: column; gap: 12px;
+      margin-bottom: 32px;
+      animation: fadeUp 1.6s ease both;
+    }
+
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 20px;
+      border: 1px solid rgba(201,168,76,0.08);
+      background: rgba(10,10,10,0.6);
+    }
+
+    .step-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--amber);
+      letter-spacing: 2px; flex-shrink: 0;
+    }
+
+    .step-content { flex: 1; }
+
+    .step-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12px; letter-spacing: 2px;
+      color: var(--gold); margin-bottom: 4px; text-transform: uppercase;
+    }
+
+    .step-desc {
+      font-family: 'EB Garamond', serif;
+      font-style: italic; font-size: 14px;
+      color: var(--ash); line-height: 1.6;
+    }
+
+    .step-desc code {
+      font-family: 'Share Tech Mono', monospace;
+      font-style: normal; font-size: 12px;
+      color: var(--amber);
+      background: rgba(212,132,42,0.06);
+      padding: 1px 6px;
+      border: 1px solid rgba(212,132,42,0.15);
+    }
+
+    .step-desc a {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 20px; text-align: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: #222; letter-spacing: 2px;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="wrapper">
+
+  <div class="top-bar">
+    <a href="#" class="back-link">← The Archives</a>
+    <span class="challenge-badge">SCROLL_03 // UNSEALED</span>
+  </div>
+
+  <div class="header">
+    <span class="challenge-number">// CHALLENGE_03 //</span>
+    <h1 class="title">THE CIRCUIT ASSEMBLY</h1>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-glyph">[HEX]</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="parchment-card">
+    <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
+    <p class="card-text">
+      The third scroll bridges the ancient and modern.
+      Code reveals specifications. Hardware brings truth to light.
+      <em>Decode the assembly. Build the circuit.</em>
+    </p>
+  </div>
+
+  <div class="code-scroll">
+    <div class="code-header">
+      <span class="code-header-title">8086 Assembly Code</span>
+    </div>
+    <div class="code-body">
+      <div class="code-box">
+<span class="comment">; Run in 8086 Emulator</span>
+<span class="comment">; Outputs reveal circuit specs</span>
+
+<span class="keyword">MOV</span> <span class="register">AX</span>, <span class="value">DC</span>h    <span class="comment">; Resistor value</span>
+<span class="keyword">MOV</span> <span class="register">BX</span>, <span class="value">0D</span>h    <span class="comment">; LED pin number</span>
+<span class="keyword">MOV</span> <span class="register">CX</span>, <span class="value">05</span>h    <span class="comment">; Voltage</span>
+<span class="keyword">HLT</span>                  <span class="comment">; Halt execution</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
+    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
+    <a href="https://forms.gle/J2QLxyN42MKoN9QL7" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/J2QLxyN42MKoN9QL7</a>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01 //</span>
+      <div class="step-content">
+        <div class="step-title">Run Assembly Code</div>
+        <div class="step-desc">
+          Execute in the <a href="https://yjdoc2.github.io/8086-emulator-web/" target="_blank">8086 emulator</a>.
+          Read register values: AX, BX, CX. Convert hex to decimal.
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">02 //</span>
+      <div class="step-content">
+        <div class="step-title">Build Circuit</div>
+        <div class="step-desc">
+          Use specs from registers in <a href="https://www.tinkercad.com/circuits" target="_blank">TinkerCAD</a>.
+          Arduino + LED + Resistor + LCD. The LCD displays the letter when built correctly.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">// COLAB_ARCHIVES - SCROLL_03 //</div>
+
+</div>
+
+<script>
+  // Firefly particles
+  (function() {
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const sparks = Array(40).fill(0).map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 1.5 + 0.3,
+      speed: Math.random() * 0.4 + 0.1,
+      opacity: Math.random() * 0.4 + 0.1,
+      drift: (Math.random() - 0.5) * 0.3
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      sparks.forEach(s => {
+        s.y -= s.speed;
+        s.x += s.drift;
+        s.opacity += (Math.random() - 0.5) * 0.02;
+        s.opacity = Math.max(0.05, Math.min(0.5, s.opacity));
+
+        if (s.y < -10) {
+          s.y = canvas.height + 10;
+          s.x = Math.random() * canvas.width;
+        }
+
+        ctx.globalAlpha = s.opacity;
+        ctx.fillStyle = '#c9a84c';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+</script>
+
+</body>
+</html>
