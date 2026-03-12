@@ -946,15 +946,18 @@
   function buildLeaderboard() {
     const tbody = document.getElementById('leaderboard-body');
     tbody.innerHTML = '';
-    
     const sorted = [...LEADERBOARD].sort((a,b) => b.completed - a.completed);
-    
     sorted.forEach(t => {
+      const dots = Array(5).fill(0).map((_,i) =>
+        `<div class="dot ${i < t.completed ? 'filled' : ''}"></div>`
+      ).join('');
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${t.team}</td>
-        <td>${t.completed} / 5</td>
-        <td>${t.completed === 5 ? '<span style="color:var(--gold)">COMPLETE</span>' : 'In Progress'}</td>
+        <td><span class="team-badge">${t.team}</span></td>
+        <td><div class="progress-dots">${dots}</div></td>
+        <td style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;">
+          ${t.completed === 5 ? '<span style="color:var(--gold)">✦ COMPLETE</span>' : `${t.completed} / 5`}
+        </td>
       `;
       tbody.appendChild(tr);
     });
