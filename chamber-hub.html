@@ -413,26 +413,22 @@
     }
 
     /*leaderboard*/
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
+    .leaderboard-table { width: 100%; border-collapse: collapse; }
     .leaderboard-table th {
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: var(--gold-dim);
-      text-align: left;
-      padding: 12px;
-      border-bottom: 1px solid rgba(107,75,161,0.2);
+      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px;
+      color: var(--gold-dim); text-transform: uppercase; text-align: left;
+      padding: 8px 12px; border-bottom: 1px solid rgba(201,168,76,0.2);
     }
-
     .leaderboard-table td {
-      padding: 12px;
-      color: var(--parchment);
-      border-bottom: 1px solid rgba(107,75,161,0.1);
+      padding: 12px; font-size: 14px; color: var(--ash);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
     }
+    .leaderboard-table tbody tr:first-child td { color: var(--gold); }
+    .leaderboard-table tbody tr:first-child td:first-child::before { content: '✦ '; }
+    .team-badge { font-family: 'Cinzel', serif; font-size: 12px; }
+    .progress-dots { display: flex; gap: 4px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.3); background: transparent; }
+    .dot.filled { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 6px rgba(201,168,76,0.5); }
 
     /*passcode*/
     .passcode-section {
