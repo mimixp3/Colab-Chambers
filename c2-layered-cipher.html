@@ -208,8 +208,8 @@
 
     /* LAYER 2 */
     .layer2-panel {
-      width: 100%; border: 1px solid rgba(0,255,157,0.2);
-      background: rgba(0,15,8,0.97); position: relative; margin-bottom: 32px;
+      width: 100%; border: 1px solid rgba(0, 179, 255, 0.2);
+      background: rgba(7, 0, 15, 0.97); position: relative; margin-bottom: 32px;
       display: none;
     }
     .layer2-panel.visible { display: block; animation: revealLayer 0.8s ease both; }
@@ -377,14 +377,14 @@
   <div class="layer2-panel" id="layer2-panel">
     <div class="layer2-header">
       <span style="color:var(--blue);font-size:16px;">⬡</span>
-      <span class="layer2-title">Layer 2 — Vigenère Cipher</span>
+      <span class="layer2-title">Layer 2: Vigenère Cipher</span>
     </div>
     <div class="layer2-body">
 
       <div class="vig-label">Encrypted message</div>
       <div class="vigenere-text">G &nbsp; H &nbsp; V &nbsp; R &nbsp; G &nbsp; F &nbsp; M</div>
 
-      <div class="vig-label" style="margin-top:24px;">Set the key — use ▲ ▼ to change each letter</div>
+      <div class="vig-label" style="margin-top:24px;">Set the key and use the arrows to change each letter</div>
       <div class="vig-slots" id="vig-slots"></div>
 
       <div class="decode-display">
@@ -413,7 +413,7 @@
 </div>
 
 <script>
-// ── FIREFLIES ──
+//FIREFLIES
 (function() {
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
