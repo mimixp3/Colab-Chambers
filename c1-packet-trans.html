@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Packet Transmission — CoLab Archives</title>
+  <title>CoLab Archives: The Packet Transmission</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -74,7 +74,6 @@
       text-transform: uppercase; transition: color 0.3s;
     }
     .back-link:hover { color: var(--gold); }
-
     .challenge-badge {
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; color: var(--gold); letter-spacing: 2px;
@@ -85,13 +84,11 @@
       text-align: center; margin-bottom: 48px;
       animation: fadeDown 1s ease both;
     }
-
     .challenge-number {
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; letter-spacing: 5px;
       color: var(--amber-dim); margin-bottom: 12px; display: block;
     }
-
     .title {
       font-family: 'Cinzel', serif;
       font-size: clamp(24px, 5vw, 48px);
@@ -138,7 +135,6 @@
       margin-bottom: 16px;
       display: flex; align-items: center; gap: 10px;
     }
-
     .card-eyebrow::after {
       content: ''; flex: 1; height: 1px;
       background: rgba(201,168,76,0.15);
@@ -282,7 +278,6 @@
     }
 
     .step-content { flex: 1; }
-
     .step-title {
       font-family: 'Cinzel', serif;
       font-size: 12px; letter-spacing: 2px;
@@ -331,7 +326,7 @@
 <div class="wrapper">
 
   <div class="top-bar">
-    <a href="https://mimixp3.github.io/Colab-Chambers/chamber-hub.html" class="back-link">← The Archives</a>
+    <a href="https://mimixp3.github.io/Colab-Chambers/chamber-hub.html" class="back-link">← Archives</a>
     <span class="challenge-badge">SCROLL_01 // UNSEALED</span>
   </div>
 
@@ -350,8 +345,8 @@
     <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
     <p class="card-text">
       A transmission was intercepted during routine network monitoring.
-      The packets contain an encrypted payload.
-      <em>Analyze the stream. Extract the data. Decode the message.</em>
+      The packets contain an encrypted payload. <br>
+      <em>Analyze the stream. Extract the data. Decode the message.</em> </br>
     </p>
   </div>
 
@@ -361,16 +356,15 @@
       <span class="viewer-filter">Filter: HTTP</span>
     </div>
     <div class="packet-list" id="packet-list">
-      <!-- Populated by JS -->
+    
     </div>
   </div>
 
   <div class="packet-details" id="packet-details">
-    <!-- Populated when packet selected -->
   </div>
 
   <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
-    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER: &nbsp;</span>
     <a href="https://forms.gle/wT1AwS8aMfRwzqWF8" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/wT1AwS8aMfRwzqWF8</a>
   </div>
 
@@ -400,7 +394,7 @@
 </div>
 
 <script>
-  // Firefly particles
+  //firefly
   (function() {
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
@@ -446,7 +440,7 @@
     draw();
   })();
 
-  // Packet data
+  //packet data
   const packets = [
     { num: 1, proto: 'TCP', info: '192.168.1.5 → 10.0.0.1 [SYN]', type: 'normal' },
     { num: 2, proto: 'TCP', info: '10.0.0.1 → 192.168.1.5 [SYN, ACK]', type: 'normal' },
