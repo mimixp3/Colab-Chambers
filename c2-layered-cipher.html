@@ -301,9 +301,28 @@
 
     .submit-row { text-align: center; margin-bottom: 32px; animation: fadeUp 1.6s ease both; }
 
+    .step-desc {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: var(--ash);
+      line-height: 1.6;
+    }
+
+    .step-desc code {
+      font-family: 'Share Tech Mono', monospace;
+      font-style: normal; font-size: 12px;
+      color: var(--amber);
+      background: rgba(212,132,42,0.06);
+      padding: 1px 6px;
+      border: 1px solid rgba(212,132,42,0.15);
+    }
     .footer {
-      margin-top: 20px; text-align: center;
-      font-family: 'Share Tech Mono', monospace; font-size: 11px; color: #222; letter-spacing: 2px;
+      margin-top: 20px; 
+      text-align: center;
+      
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: #222;
+      letter-spacing: 2px;
     }
 
     @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
@@ -402,6 +421,37 @@
     <div class="reveal-sub">// KEY_02 // PHANTOM //</div>
   </div>
 
+  <!--gurrrl the hints-->
+  <div class="steps">
+  <div class="step">
+    <span class="step-num">01 //</span>
+    <div class="step-content">
+      <div class="step-title">Decode Layer 1</div>
+      <div class="step-desc">
+        Drag the outer wheel to find the correct Caesar shift. When the cipher text makes sense, spell out the decoded word using the ▲ ▼ slots below.
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <span class="step-num">02 //</span>
+    <div class="step-content">
+      <div class="step-title">Unlock Layer 2</div>
+      <div class="step-desc">
+        Enter the decoded word exactly and hit <code>Unlock Layer 2</code>. The second cipher will reveal itself.
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <span class="step-num">03 //</span>
+    <div class="step-content">
+      <div class="step-title">Crack the Vigenère</div>
+      <div class="step-desc">
+        Use the ▲ ▼ key slots to set the cipher key. Watch the live decode update in real time — when it spells a real word, you've found the letter.
+      </div>
+    </div>
+  </div>
+</div>
+  
   <!--submit-->
   <div class="submit-row">
     <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
