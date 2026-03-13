@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Circuit Assembly: CoLab Archives</title>
+  <title>CoLab Archives: The Circuit Assembly</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -12,12 +12,10 @@
       --gold: #c9a84c;
       --gold-dim: #7a6230;
       --ash: #888880;
-      --amber: #d4842a;
-      --amber-dim: #7a4a10;
+      --amber:#d4842a;
+      --amber-dim:#7a4a10;
     }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    *, *::before, *::after {box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--black);
       color: var(--parchment);
@@ -72,7 +70,6 @@
       text-transform: uppercase; transition: color 0.3s;
     }
     .back-link:hover { color: var(--gold); }
-
     .challenge-badge {
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; color: var(--gold); letter-spacing: 2px;
@@ -265,11 +262,10 @@
 <body>
 
 <canvas id="particles"></canvas>
-
 <div class="wrapper">
 
   <div class="top-bar">
-    <a href="https://mimixp3.github.io/Colab-Chambers/chamber-hub.html" class="back-link">← The Archives</a>
+    <a href="https://mimixp3.github.io/Colab-Chambers/chamber-hub.html" class="back-link">← Archives</a>
     <span class="challenge-badge">SCROLL_03 // UNSEALED</span>
   </div>
 
@@ -288,8 +284,8 @@
     <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
     <p class="card-text">
       The third scroll bridges the ancient and modern.
-      Code reveals specifications. Hardware brings truth to light.
-      <em>Decode the assembly. Build the circuit.</em>
+      Code reveals specifications. Hardware brings truth to light. <br>
+      <em>Decode the assembly. Build the circuit.</em> </br>
     </p>
   </div>
 
@@ -311,7 +307,7 @@
   </div>
 
   <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
-    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER: &nbsp;</span>
     <a href="https://forms.gle/J2QLxyN42MKoN9QL7" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/J2QLxyN42MKoN9QL7</a>
   </div>
 
@@ -343,11 +339,10 @@
 </div>
 
 <script>
-  // Firefly particles
+  //firefly
   (function() {
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
-
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -363,7 +358,6 @@
       opacity: Math.random() * 0.4 + 0.1,
       drift: (Math.random() - 0.5) * 0.3
     }));
-
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       sparks.forEach(s => {
