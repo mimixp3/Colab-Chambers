@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Layered Cipher: CoLab Archives</title>
+  <title>CoLab Archives: The Layered Cipher</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -105,7 +105,7 @@
     .card-text { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.95; color: var(--ash); }
     .card-text em { color: var(--gold); font-style: italic; }
 
-    /* SECTION PANELS */
+    /*section stuff*/
     .section-panel {
       width: 100%; border: 1px solid rgba(212,132,42,0.25);
       background: rgba(20,10,4,0.95); position: relative; margin-bottom: 32px;
@@ -124,7 +124,7 @@
     }
     .section-body { padding: 28px; }
 
-    /* CIPHER TEXT */
+    /*cipher text and area*/
     .cipher-text {
       font-family: 'Share Tech Mono', monospace; font-size: 26px;
       color: rgba(212,132,42,0.9); letter-spacing: 8px; text-align: center;
@@ -132,7 +132,7 @@
       background: rgba(0,0,0,0.4); user-select: text;
     }
 
-    /* CIPHER WHEEL */
+    /*wheel stuff*/
     .wheel-area { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 
     .cipher-wheel-container {
@@ -158,7 +158,7 @@
       color: var(--gold); letter-spacing: 3px; text-align: center;
     }
 
-    /* KEYPAD */
+    /*keypad sect*/
     .keypad-label {
       font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px;
       color: var(--gold-dim); text-transform: uppercase; text-align: center; margin-bottom: 20px;
@@ -206,7 +206,7 @@
       color: #ff4444; letter-spacing: 2px; text-align: center; margin-top: 12px; min-height: 20px;
     }
 
-    /* LAYER 2 */
+    /*layer 2*/
     .layer2-panel {
       width: 100%; border: 1px solid rgba(0, 179, 255, 0.2);
       background: rgba(7, 0, 15, 0.97); position: relative; margin-bottom: 32px;
@@ -274,7 +274,7 @@
       color: var(--blue); text-shadow: 0 0 20px rgba(0, 157, 255, 0.6); font-size: 26px;
     }
 
-    /* LETTER REVEAL */
+    /*letter slot rev*/
     .letter-reveal {
       display: none; text-align: center; padding: 40px;
       border: 1px solid rgba(201,168,76,0.3); background: rgba(10,8,4,0.97);
@@ -343,10 +343,10 @@
     </p>
   </div>
 
-  <!-- LAYER 1 -->
+  <!--layer 1-->
   <div class="section-panel" style="animation:fadeUp 1.2s ease both;">
     <div class="section-header">
-      <span class="section-title">Layer 1 — Caesar Cipher</span>
+      <span class="section-title">Layer 1: Caesar Cipher</span>
       <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--amber-dim);letter-spacing:2px;">ROTATE TO DECODE</span>
     </div>
     <div class="section-body">
@@ -360,7 +360,7 @@
           <div class="outer-letters-container" id="outer-letters"></div>
           <div id="inner-letters" style="position:absolute;inset:0;pointer-events:none;"></div>
         </div>
-        <div class="shift-display" id="shift-display">SHIFT: 0 &nbsp;|&nbsp; A → A</div>
+        <div class="shift-display" id="shift-display">SHIFT: 0 &nbsp;|&nbsp; A : A</div>
       </div>
 
       <div style="height:32px;"></div>
@@ -373,7 +373,7 @@
     </div>
   </div>
 
-  <!-- LAYER 2 -->
+  <!--layer2-->
   <div class="layer2-panel" id="layer2-panel">
     <div class="layer2-header">
       <span style="color:var(--blue);font-size:16px;">⬡</span>
@@ -395,14 +395,14 @@
     </div>
   </div>
 
-  <!-- LETTER REVEAL -->
+  <!--letter revwal-->
   <div class="letter-reveal" id="letter-reveal">
     <div class="reveal-label">✦ &nbsp; The Second Key Is Revealed &nbsp; ✦</div>
     <div class="reveal-letter">P</div>
     <div class="reveal-sub">// KEY_02 // PHANTOM //</div>
   </div>
 
-  <!-- SUBMIT -->
+  <!--submit-->
   <div class="submit-row">
     <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
     <a href="https://forms.gle/TSJqB7psCRoHn53p6" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/TSJqB7psCRoHn53p6</a>
@@ -413,7 +413,7 @@
 </div>
 
 <script>
-//FIREFLIES
+//fireflies
 (function() {
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
@@ -443,14 +443,14 @@
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
-// ── CIPHER WHEEL ──
-const outerLettersEl = document.getElementById('outer-letters');
-const innerLettersEl = document.getElementById('inner-letters');
-const shiftDisplay   = document.getElementById('shift-display');
-const svgEl          = document.getElementById('wheel-svg');
-const ns = 'http://www.w3.org/2000/svg';
+//cipher wheel letters + 
+const outerLettersEl =document.getElementById('outer-letters');
+const innerLettersEl =document.getElementById('inner-letters');
+const shiftDisplay= document.getElementById('shift-display');
+const svgEl= document.getElementById('wheel-svg');
+const ns ='http://www.w3.org/2000/svg';
 
-// SVG rings
+//svg rings
 [[148,'#d4842a',0.45],[118,'#d4842a',0.15],[95,'#c9a84c',0.3]].forEach(([r,col,op]) => {
   const c = document.createElementNS(ns,'circle');
   c.setAttribute('cx',160); c.setAttribute('cy',160); c.setAttribute('r',r);
@@ -458,11 +458,11 @@ const ns = 'http://www.w3.org/2000/svg';
   c.setAttribute('stroke-opacity',op); c.setAttribute('stroke-width','1');
   svgEl.appendChild(c);
 });
-// Pointer
+//pointer
 const tri = document.createElementNS(ns,'polygon');
 tri.setAttribute('points','155,8 165,8 160,22'); tri.setAttribute('fill','#c9a84c'); svgEl.appendChild(tri);
 
-// Place outer letters
+//outer letters
 alphabet.forEach((letter, i) => {
   const angle = (i*360/26) - 90;
   const rad   = angle * Math.PI / 180;
@@ -475,7 +475,7 @@ alphabet.forEach((letter, i) => {
   outerLettersEl.appendChild(el);
 });
 
-// Place inner letters (fixed)
+//fixed inner
 alphabet.forEach((letter, i) => {
   const angle = (i*360/26) - 90;
   const rad   = angle * Math.PI / 180;
@@ -489,7 +489,7 @@ alphabet.forEach((letter, i) => {
   innerLettersEl.appendChild(el);
 });
 
-// Drag
+//drags
 let currentRotation=0, isDragging=false, startAngle=0;
 
 function getAngle(e) {
@@ -513,7 +513,7 @@ document.addEventListener('mousemove', e => {
 document.addEventListener('touchmove', e => {
   if (!isDragging) return;
   const curr = getAngle(e);
-  currentRotation = ((currentRotation + curr - startAngle) % 360 + 360) % 360;
+  currentRotation= ((currentRotation + curr - startAngle) % 360 + 360) % 360;
   outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
   startAngle = curr;
   const shift = Math.round(currentRotation / (360/26)) % 26;
@@ -522,19 +522,19 @@ document.addEventListener('touchmove', e => {
 document.addEventListener('mouseup',  () => isDragging=false);
 document.addEventListener('touchend', () => isDragging=false);
 
-// ── LAYER 1 KEYPAD ──
+//keypad l1
 const LAYER1_ANSWER = 'RAVEN';
-const keySlots = [];
-const slotsContainer = document.getElementById('keypad-slots');
+const keySlots=[];
+const slotsContainer =document.getElementById('keypad-slots');
 
 LAYER1_ANSWER.split('').forEach((_, i) => {
-  let val = 0;
-  const wrap = document.createElement('div'); wrap.className = 'key-slot';
+  let val= 0;
+  const wrap=document.createElement('div'); wrap.className= 'key-slot';
   const up   = document.createElement('button'); up.className = 'slot-btn'; up.textContent = '▲';
-  const box  = document.createElement('div');   box.className = 'slot-letter'; box.textContent = 'A';
-  const dn   = document.createElement('button'); dn.className = 'slot-btn'; dn.textContent = '▼';
+  const box=document.createElement('div');   box.className ='slot-letter'; box.textContent = 'A';
+  const dn= document.createElement('button'); dn.className = 'slot-btn'; dn.textContent = '▼';
 
-  up.onclick = () => { val=(val+1)%26;  box.textContent=alphabet[val]; };
+  up.onclick= () => { val=(val+1)%26;  box.textContent=alphabet[val]; };
   dn.onclick = () => { val=(val+25)%26; box.textContent=alphabet[val]; };
 
   wrap.appendChild(up); wrap.appendChild(box); wrap.appendChild(dn);
@@ -543,13 +543,13 @@ LAYER1_ANSWER.split('').forEach((_, i) => {
 });
 
 function highlightSlots() {
-  const curr = keySlots.map(s=>s.get()).join('');
+  const curr= keySlots.map(s=>s.get()).join('');
   keySlots.forEach((s,i) => s.el.classList.toggle('correct', curr[i]===LAYER1_ANSWER[i]));
 }
 
 function checkLayer1() {
   const entered = keySlots.map(s=>s.get()).join('');
-  const errEl   = document.getElementById('keypad-error');
+  const errEl= document.getElementById('keypad-error');
   if (entered === LAYER1_ANSWER) {
     const btn = document.getElementById('unlock-btn');
     btn.textContent = '✦  Layer 2 Unlocked';
@@ -588,22 +588,22 @@ VIG_KEY_ANSWER.split('').forEach(() => {
 
 function vigenereDecrypt(cipherArr, keyArr) {
   return cipherArr.map((c,i) => {
-    const ci = alphabet.indexOf(c);
-    const ki = alphabet.indexOf(keyArr[i % keyArr.length]);
+    const ci=alphabet.indexOf(c);
+    const ki= alphabet.indexOf(keyArr[i % keyArr.length]);
     return ci === -1 ? c : alphabet[(ci - ki + 26) % 26];
   }).join('');
 }
 
 function updateVigenere() {
-  const key     = vigSlots.map(s=>s.get());
-  const decoded = vigenereDecrypt(CIPHER, key);
-  const el      = document.getElementById('decode-text');
-  el.textContent = decoded.split('').join(' \u00a0');
+  const key= vigSlots.map(s=>s.get());
+  const decoded= vigenereDecrypt(CIPHER, key);
+  const el= document.getElementById('decode-text');
+  el.textContent=decoded.split('').join(' \u00a0');
 
   if (decoded === 'PHANTOM') {
     el.classList.add('solved');
-    setTimeout(() => {
-      const rev = document.getElementById('letter-reveal');
+    setTimeout(()=> {
+      const rev=document.getElementById('letter-reveal');
       rev.classList.add('visible');
       rev.scrollIntoView({behavior:'smooth', block:'center'});
     }, 700);
