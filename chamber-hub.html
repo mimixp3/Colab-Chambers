@@ -612,7 +612,6 @@
 <div class="audio-toggle" id="audio-toggle" onclick="toggleAudio()">
   <img src="icon.png" alt="sound" id="audio-icon">
 </div>
-
 <div id="main">
 
   <!--landing pageee-->
@@ -786,7 +785,7 @@
 
 <!--YAY SCREEN-->
 <div id="win-screen">
-  <video class="win-spark-video" autoplay muted loop playsinline>
+  <video class="win-spark-video" autoplay loop playsinline>
     <source src="forest.mp4" type="video/mp4">
   </video>
   <div class="win-title" id="win-title">COMPLETE</div>
@@ -1020,14 +1019,16 @@
   //pass func
   function castSpell() {
     playSound('click-sound');
-    const input = document.getElementById('passcode-input').value.toUpperCase();
+    const input=document.getElementById('passcode-input').value.toUpperCase();
     const error = document.getElementById('passcode-error');
     
-    if (input === PASSCODE) {
+    if (input===PASSCODE) {
       error.classList.remove('show');
       document.getElementById('win-title').textContent = input;
-      document.getElementById('win-house-name').textContent = `Team ${selectedTeam} has unlocked the chamber!`;
+      document.getElementById('win-house-name').textContent = `Team ${selectedTeam} has unlocked the chamber!`; //yasss mama
       document.getElementById('win-screen').classList.add('show');
+      document.getElementById('fireplace-video').pause();
+      document.getElementById('fireplace-video').muted = true; //cus i need tew close that prev audio
     } else {
       error.classList.add('show');
       setTimeout(() => error.classList.remove('show'), 3000);
@@ -1058,7 +1059,6 @@
     fireplaceVideo.muted = true;
     fireplaceVideo.play();
     videoMuted = true;
-    document.getElementById('audio-icon').textContent = '🔇';
     document.getElementById('audio-toggle').classList.add('muted');
   });
 </script>
