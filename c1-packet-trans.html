@@ -16,7 +16,8 @@
       --amber-dim: #7a4a10;
       --cyan: #00d4ff;
       --cyan-dim: #007a99;
-      --white: #ffffff;
+      --purple: #a78bfa;
+      --purple-dim: #4c3a8a;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,6 +30,7 @@
       overflow-x: hidden;
     }
 
+    /*fixed canvas behind everything*/
     #particles {
       position: fixed;
       inset: 0;
@@ -36,6 +38,7 @@
       z-index: 0;
     }
 
+    /*scanline overlay very subtle lol*/
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -47,6 +50,7 @@
       pointer-events: none; z-index: 100;
     }
 
+    /*vignette so edges go dark*/
     body::after {
       content: '';
       position: fixed; inset: 0;
@@ -75,6 +79,7 @@
       text-transform: uppercase; transition: color 0.3s;
     }
     .back-link:hover { color: var(--gold); }
+
     .challenge-badge {
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; color: var(--gold); letter-spacing: 2px;
@@ -85,11 +90,13 @@
       text-align: center; margin-bottom: 48px;
       animation: fadeDown 1s ease both;
     }
+
     .challenge-number {
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; letter-spacing: 5px;
       color: var(--amber-dim); margin-bottom: 12px; display: block;
     }
+
     .title {
       font-family: 'Cinzel', serif;
       font-size: clamp(24px, 5vw, 48px);
@@ -114,6 +121,7 @@
       color: var(--amber); font-size: 12px;
     }
 
+    /*da lore box*/
     .parchment-card {
       width: 100%;
       border: 1px solid rgba(201,168,76,0.2);
@@ -129,6 +137,7 @@
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
 
+    /*ran out of names for stuff like wym eyebrow*/
     .card-eyebrow {
       font-family: 'Cinzel', serif;
       font-size: 10px; letter-spacing: 4px;
@@ -136,6 +145,7 @@
       margin-bottom: 16px;
       display: flex; align-items: center; gap: 10px;
     }
+
     .card-eyebrow::after {
       content: ''; flex: 1; height: 1px;
       background: rgba(201,168,76,0.15);
@@ -148,6 +158,7 @@
 
     .card-text em { color: var(--gold); font-style: italic; }
 
+    /*wireshark panel*/
     .packet-viewer {
       width: 100%;
       border: 1px solid rgba(0,212,255,0.3);
@@ -183,85 +194,118 @@
       color: var(--cyan-dim);
     }
 
+    /*proto color legend strip*/
+    .proto-legend {
+      padding: 8px 20px;
+      border-bottom: 1px solid rgba(0,212,255,0.1);
+      display: flex; gap: 20px; align-items: center;
+    }
+
+    .legend-item {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 1px;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .legend-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+
     .packet-list {
-      max-height: 400px;
+      max-height: 420px;
       overflow-y: auto;
     }
 
     .packet-item {
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(0,212,255,0.1);
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(0,212,255,0.08);
       font-family: 'Share Tech Mono', monospace;
       font-size: 12px;
       cursor: pointer;
       transition: all 0.2s;
+      display: flex; align-items: center; gap: 0;
     }
 
-    .packet-item:hover {
-      background: rgba(0,212,255,0.05);
-    }
+    .packet-item:hover { background: rgba(0,212,255,0.05); }
 
     .packet-item.selected {
       background: rgba(0,212,255,0.1);
       border-left: 3px solid var(--cyan);
     }
 
+    /*time col*/
+    .packet-time {
+      color: rgba(136,136,128,0.5);
+      margin-right: 14px;
+      font-size: 11px;
+      min-width: 60px;
+    }
+
     .packet-num {
       color: var(--cyan-dim);
       margin-right: 12px;
+      min-width: 28px;
     }
 
+    /*each proto gets its own color*/
     .packet-proto {
-      color: var(--cyan);
       margin-right: 12px;
+      min-width: 44px;
+      font-weight: bold;
     }
 
-    .packet-info {
-      color: var(--ash);
-    }
+    .proto-dns  { color: var(--purple); }
+    .proto-http { color: var(--cyan); }
+    .proto-tcp  { color: rgba(136,136,128,0.7); }
 
+    .packet-info { color: var(--ash); font-size: 11px; }
+
+    /*deeeetail expansion*/
     .packet-details {
       width: 100%;
       border: 1px solid rgba(212,132,42,0.25);
       background: rgba(20,10,4,0.95);
       padding: 24px;
       margin-bottom: 32px;
-      animation: fadeUp 1.6s ease both;
       display: none;
     }
 
-    .packet-details.show {
-      display: block;
-    }
+    /*feeling feverish imaginw i just abandon this project..*/
+    .packet-details.show { display: block; animation: fadeUp 0.3s ease both; }
 
-    .detail-section {
-      margin-bottom: 16px;
-    }
+    .detail-section { margin-bottom: 16px; }
 
     .detail-title {
       font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--gold);
-      margin-bottom: 8px;
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--gold); margin-bottom: 8px;
       text-transform: uppercase;
     }
 
     .detail-content {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 13px; line-height: 1.9;
       color: var(--parchment);
       background: rgba(0,0,0,0.5);
-      padding: 12px;
+      padding: 14px;
       border: 1px solid rgba(212,132,42,0.1);
       word-break: break-all;
     }
 
-        .steps {
+    /*highlight the answer field in dns responses so they actually see it*/
+    .detail-content .highlight {
+      color: var(--purple-dim);
+    }
+
+    /*highlight suspicious stuff in red-ish*/
+    .detail-content .suspicious {
+      color: #ff6b6b;
+    }
+
+    .steps {
       width: 100%;
-      display: flex; flex-direction: column; gap: 12px;
-      margin-bottom: 32px;
+      display: flex;flex-direction: column; gap: 12px;
+      margin-bottom:32px;
       animation: fadeUp 1.8s ease both;
     }
 
@@ -282,14 +326,23 @@
 
     .step-title {
       font-family: 'Cinzel', serif;
-      font-size: 15px; letter-spacing: 2px;
+      font-size: 15px; letter-spacing:2px;
       color: var(--gold); margin-bottom: 4px; text-transform: uppercase;
     }
 
     .step-desc {
       font-family: 'EB Garamond', serif;
-      font-style: italic; font-size: 15px;
+      font-style:italic; font-size: 15px;
       color: var(--ash); line-height: 1.6;
+    }
+
+    .step-desc code {
+      font-family: 'Share Tech Mono', monospace;
+      font-style: normal; font-size: 12px;
+      color: var(--amber);
+      background: rgba(212,132,42,0.06);
+      padding: 1px 6px;
+      border: 1px solid rgba(212,132,42,0.15);
     }
 
     .footer {
@@ -299,16 +352,16 @@
     }
 
     @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {opacity: 0;transform:translateY(-20px);}
+      to   { opacity:1; transform: translateY(0);}
     }
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {opacity: 0;transform: translateY(20px); }
+      to   {opacity: 1;transform:translateY(0); }
     }
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      from {opacity: 0;}
+      to   {opacity: 1;}
     }
   </style>
 </head>
@@ -337,24 +390,42 @@
   <div class="parchment-card">
     <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
     <p class="card-text">
-      A transmission was intercepted during routine network monitoring.
-      The packets contain an encrypted payload. <br>
-      <em>Analyze the stream. Extract the data. Decode the message.</em> </br>
+      Suspicious traffic was flagged during routine monitoring.
+      Someone looked up a domain that shouldn't exist — then reached out to it.
+      <em>Follow the DNS trail. Find the HTTP request. Read what was sent.</em>
     </p>
   </div>
 
+  <!--wireshark capture-->
   <div class="packet-viewer">
     <div class="viewer-header">
       <span class="viewer-title">Network Packet Analyzer</span>
-      <span class="viewer-filter">Filter: HTTP</span>
+      <span class="viewer-filter">Filter: dns || http</span>
     </div>
+
+    <!--color system to tell em apart-->
+    <div class="proto-legend">
+      <div class= "legend-item">
+        <div class="legend-dot" style="background:var(--purple);"></div>
+        <span style="color:var(--purple);">DNS</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--cyan);"></div>
+        <span style="color:var(--cyan);">HTTP</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(136,136,128,0.7);"></div>
+        <span style="color:rgba(136,136,128,0.7);">TCP</span>
+      </div>
+    </div>
+
     <div class="packet-list" id="packet-list">
-    
+      <!--packets go here js-->
     </div>
   </div>
 
-  <div class="packet-details" id="packet-details">
-  </div>
+  <!--expand whilw clicking-->
+  <div class ="packet-details" id="packet-details"></div>
 
   <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
     <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER: &nbsp;</span>
@@ -365,18 +436,27 @@
     <div class="step">
       <span class="step-num">01 //</span>
       <div class="step-content">
-        <div class="step-title">Find the Target Packet</div>
+        <div class="step-title">Spot the Suspicious DNS Query</div>
         <div class="step-desc">
-          Click through packets to view details. Look for User-Agent: <code>CoLabArchives/2.0</code>
+          Click through the DNS packets. One domain looks very out of place among the rest — that's your target. Note it down.
         </div>
       </div>
     </div>
     <div class="step">
       <span class="step-num">02 //</span>
       <div class="step-content">
-        <div class="step-title">Decode the Payload</div>
+        <div class="step-title">Read the DNS Response</div>
         <div class="step-desc">
-          Extract the base64 string from the POST data. Decode it to reveal the letter.
+          Find the DNS response for that domain. Open it and check the <code>Answers</code> field — it gives you the IP address the domain resolved to.
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">03 //</span>
+      <div class="step-content">
+        <div class="step-title">Follow the HTTP Request</div>
+        <div class="step-desc">
+          Now find the HTTP packet going to that same IP. The request path contains the letter.
         </div>
       </div>
     </div>
@@ -387,7 +467,7 @@
 </div>
 
 <script>
-  //firefly
+  /*fireflies*/
   (function() {
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
@@ -415,12 +495,10 @@
         s.x += s.drift;
         s.opacity += (Math.random() - 0.5) * 0.02;
         s.opacity = Math.max(0.05, Math.min(0.5, s.opacity));
-
         if (s.y < -10) {
           s.y = canvas.height + 10;
           s.x = Math.random() * canvas.width;
         }
-
         ctx.globalAlpha = s.opacity;
         ctx.fillStyle = '#c9a84c';
         ctx.beginPath();
@@ -433,66 +511,265 @@
     draw();
   })();
 
-  //packet data
+  /*packet data has 'details'
+    types: dns-query, dns-response, dns-query-sus, dns-response-sus, http-target need to update*/
   const packets = [
-    { num: 1, proto: 'TCP', info: '192.168.1.5 → 10.0.0.1 [SYN]', type: 'normal' },
-    { num: 2, proto: 'TCP', info: '10.0.0.1 → 192.168.1.5 [SYN, ACK]', type: 'normal' },
-    { num: 3, proto: 'HTTP', info: 'GET /index.html HTTP/1.1', type: 'normal', userAgent: 'Mozilla/5.0' },
-    { num: 4, proto: 'HTTP', info: 'POST /api/data HTTP/1.1', type: 'normal', userAgent: 'curl/7.68.0' },
-    { num: 5, proto: 'TCP', info: '192.168.1.10 → 10.0.0.5 [ACK]', type: 'normal' },
-    { num: 6, proto: 'HTTP', info: 'POST /upload HTTP/1.1', type: 'target', userAgent: 'CoLabArchives/2.0', payload: 'Uw==' },
-    { num: 7, proto: 'HTTP', info: 'GET /style.css HTTP/1.1', type: 'normal', userAgent: 'Mozilla/5.0' },
-    { num: 8, proto: 'TCP', info: '10.0.0.1 → 192.168.1.5 [FIN]', type: 'normal' },
+    {
+      num: 1, time: '0.000000',
+      proto: 'DNS', protoClass: 'proto-dns',
+      info: 'Standard query A google.com',
+      type: 'dns-query',
+      details: {
+        src: '192.168.1.5', dst: '10.0.0.53',
+        protocol: 'DNS (UDP)',
+        port: 'Source: 54821  →  Destination: 53',
+        questions: 1, answers: 0,
+        query: 'google.com', queryType: 'A (Host Address)'
+      }
+    },
+    {
+      num: 2, time: '0.014382',
+      proto: 'DNS', protoClass: 'proto-dns',
+      info: 'Standard query response A google.com → 142.250.80.46',
+      type: 'dns-response',
+      details: {
+        src: '10.0.0.53', dst: '192.168.1.5',
+        protocol: 'DNS (UDP)',
+        port: 'Source: 53  →  Destination: 54821',
+        questions: 1, answers: 1,
+        query: 'google.com', queryType: 'A (Host Address)',
+        answer: 'google.com → 142.250.80.46', ttl: '299'
+      }
+    },
+    {
+      num: 3, time: '0.021100',
+      proto: 'TCP', protoClass: 'proto-tcp',
+      info: '192.168.1.5 → 142.250.80.46 [SYN]',
+      type: 'tcp',
+      details: { src: '192.168.1.5', dst: '142.250.80.46', flags: '[SYN]', protocol: 'TCP' }
+    },
+    {
+      num: 4, time: '0.033910',
+      proto: 'HTTP', protoClass: 'proto-http',
+      info: 'GET /exfil/key=... HTTP/1.1  →  142.250.80.46',
+      type: 'http-normal',
+      details: {
+        src: '192.168.1.5', dst: '142.250.80.46',
+        method: 'GET', path: '/exfil/key=R',
+        host: 'google.com', userAgent: 'Mozilla/5.0'
+      }
+    },
+    {
+      num: 5, time: '0.041200',
+      proto: 'DNS', protoClass: 'proto-dns',
+      info: 'Standard query A youtube.com',
+      type: 'dns-query',
+      details: {
+        src: '192.168.1.5', dst: '10.0.0.53',
+        protocol: 'DNS (UDP)',
+        port: 'Source: 61042  →  Destination: 53',
+        questions: 1, answers: 0,
+        query: 'youtube.com', queryType: 'A (Host Address)'
+      }
+    },
+    {
+      num: 6, time: '0.055803',
+      proto: 'DNS', protoClass: 'proto-dns',
+      info: 'Standard query response A youtube.com → 216.58.215.110',
+      type: 'dns-response',
+      details: {
+        src: '10.0.0.53', dst: '192.168.1.5',
+        protocol: 'DNS (UDP)',
+        port: 'Source: 53  →  Destination: 61042',
+        questions: 1, answers: 1,
+        query: 'youtube.com', queryType: 'A (Host Address)',
+        answer: 'youtube.com → 216.58.215.110', ttl: '180'
+      }
+    },
+    {
+      /*this is the weird one — sketchy domain nobody should be querying*/
+      num: 7, time: '0.102441',
+      proto: 'DNS', protoClass: 'proto-dns',
+      info: 'Standard query A arc.signal-node.net',
+      type: 'dns-query-sus',
+      details: {
+        src: '192.168.1.5', dst: '10.0.0.53',
+        protocol: 'DNS (UDP)',
+        port: 'Source: 49301  →  Destination: 53',
+        questions: 1, answers: 0,
+        query: 'arc.signal-node.net', queryType: 'A (Host Address)',
+        suspicious: true
+      }
+    },
+    {
+      num: 8, time: '0.119007',
+      proto: 'TCP', protoClass: 'proto-tcp',
+      info: '192.168.1.5 → 216.58.215.110 [SYN]',
+      type: 'tcp',
+      details: { src: '192.168.1.5', dst: '216.58.215.110', flags: '[SYN]', protocol: 'TCP' }
+    },
+    {
+      /*dns response for the sketchy domain*/
+      num: 9, time: '0.134882',
+      proto: 'DNS', protoClass: 'proto-dns',
+      info: 'Standard query response A arc.signal-node.net → 185.220.101.47',
+      type: 'dns-response-sus',
+      details: {
+        src: '10.0.0.53', dst: '192.168.1.5',
+        protocol: 'DNS (UDP)',
+        port: 'Source: 53  →  Destination: 49301',
+        questions: 1, answers: 1,
+        query: 'arc.signal-node.net', queryType: 'A (Host Address)',
+        answer: 'arc.signal-node.net → 185.220.101.47', ttl: '60',
+        suspicious: true
+      }
+    },
+    {
+      num: 10, time: '0.148200',
+      proto: 'HTTP', protoClass: 'proto-http',
+      info: 'GET /exfil/key=... HTTP/1.1  →  216.58.215.110',
+      type: 'http-normal',
+      details: {
+        src: '192.168.1.5', dst: '216.58.215.110',
+        method: 'GET', path: '/exfil/key=K',
+        host: 'youtube.com', userAgent: 'Mozilla/5.0'
+      }
+    },
+    {
+      num: 11, time: '0.155620',
+      proto: 'HTTP', protoClass: 'proto-http',
+      info: 'GET /exfil/key=... HTTP/1.1  →  74.125.200.91',
+      type: 'http-normal',
+      details: {
+        src: '192.168.1.5', dst: '74.125.200.91',
+        method: 'GET', path: '/exfil/key=P',
+        host: 'gmail.com', userAgent: 'Mozilla/5.0'
+      }
+    },
+    {
+      /*sameip& got a path*/
+      num: 12, time: '0.162993',
+      proto: 'HTTP', protoClass: 'proto-http',
+      info: 'GET /exfil/key=... HTTP/1.1  →  185.220.101.47',
+      type: 'http-target',
+      details: {
+        src: '192.168.1.5', dst: '185.220.101.47',
+        method: 'GET', path: '/exfil/key=S',
+        host: '185.220.101.47', userAgent: 'Mozilla/5.0'
+      }
+    },
+    {
+      num: 13, time: '0.179410',
+      proto: 'TCP', protoClass: 'proto-tcp',
+      info: '185.220.101.47 → 192.168.1.5 [ACK]',
+      type: 'tcp',
+      details: { src: '185.220.101.47', dst: '192.168.1.5', flags: '[ACK]', protocol: 'TCP' }
+    },
   ];
 
-  const packetList = document.getElementById('packet-list');
+  const packetList    = document.getElementById('packet-list');
   const packetDetails = document.getElementById('packet-details');
 
+  /*packet rows*/
   packets.forEach(p => {
     const div = document.createElement('div');
     div.className = 'packet-item';
     div.innerHTML = `
+      <span class="packet-time">${p.time}</span>
       <span class="packet-num">#${p.num}</span>
-      <span class="packet-proto">${p.proto}</span>
+      <span class="packet-proto ${p.protoClass}">${p.proto}</span>
       <span class="packet-info">${p.info}</span>
     `;
-    div.onclick = () => showPacket(p, div);
+    div.onclick = () => { new Audio('clicks.mp3').play(); showPacket(p, div); };
     packetList.appendChild(div);
   });
 
+  /*detail pan switchin*/
   function showPacket(packet, element) {
     document.querySelectorAll('.packet-item').forEach(el => el.classList.remove('selected'));
     element.classList.add('selected');
 
+    const d = packet.details;
     let html = '';
 
-    if (packet.type === 'target') {
-      html = `
+    /*header row*/
+    const headerBlock = `
+      <div class="detail-section">
+        <div class="detail-title">Packet #${packet.num} — ${packet.proto}</div>
+        <div class="detail-content">
+Source IP: ${d.src}<br/>
+Destination IP: ${d.dst}<br/>
+Protocol: ${d.protocol || packet.proto}
+        </div>
+      </div>
+    `;
+
+    if (packet.type === 'dns-query' || packet.type === 'dns-query-sus') {
+      /*dns query stuff shows deets*/
+      html = headerBlock + `
         <div class="detail-section">
-          <div class="detail-title">Packet #${packet.num} Details</div>
+          <div class="detail-title">DNS Details</div>
           <div class="detail-content">
-Protocol: ${packet.proto}<br/>
-Method: POST<br/>
-Path: /upload<br/>
-User-Agent: ${packet.userAgent}
+${d.port}<br/>
+Questions: ${d.questions} &nbsp;|&nbsp; Answers: ${d.answers}<br/>
+<br/>
+Queries:<br/>
+&nbsp;&nbsp;Name: <span class="${d.suspicious ? 'suspicious' : ''}">${d.query}</span><br/>
+&nbsp;&nbsp;Type: ${d.queryType}
           </div>
         </div>
+      `;
+    } else if (packet.type === 'dns-response' || packet.type === 'dns-response-sus') {
+      /*dns response*/
+      html = headerBlock + `
         <div class="detail-section">
-          <div class="detail-title">POST Data</div>
+          <div class="detail-title">DNS Details</div>
           <div class="detail-content">
-payload=${packet.payload}
+${d.port}<br/>
+Questions: ${d.questions} &nbsp;|&nbsp; Answers: ${d.answers}<br/>
+<br/>
+Queries:<br/>
+&nbsp;&nbsp;Name: <span class="${d.suspicious ? 'suspicious' : ''}">${d.query}</span><br/>
+&nbsp;&nbsp;Type: ${d.queryType}<br/>
+<br/>
+Answers:<br/>
+&nbsp;&nbsp;<span class="${d.suspicious ? 'highlight' : ''}">${d.answer}</span><br/>
+&nbsp;&nbsp;TTL: ${d.ttl}
+          </div>
+        </div>
+      `;
+    } else if (packet.type === 'http-normal') {
+      /*normal http nothaang special*/
+      html = headerBlock + `
+        <div class="detail-section">
+          <div class="detail-title">HTTP Details</div>
+          <div class="detail-content">
+Method: ${d.method}<br/>
+Path: ${d.path}<br/>
+Host: ${d.host}<br/>
+User-Agent: ${d.userAgent}
+          </div>
+        </div>
+      `;
+    } else if (packet.type === 'http-target') {
+      /*this the one */
+      html = headerBlock + `
+        <div class="detail-section">
+          <div class="detail-title">HTTP Details</div>
+          <div class="detail-content">
+Method: ${d.method}<br/>
+Path: <span class="highlight">${d.path}</span><br/>
+Host: ${d.host}<br/>
+User-Agent: ${d.userAgent}
           </div>
         </div>
       `;
     } else {
-      html = `
+      /*tcp handshake packets*/
+      html = headerBlock + `
         <div class="detail-section">
-          <div class="detail-title">Packet #${packet.num} Details</div>
-          <div class="detail-content">
-Protocol: ${packet.proto}<br/>
-${packet.userAgent ? `User-Agent: ${packet.userAgent}` : ''}
-${packet.info}
-          </div>
+          <div class="detail-title">TCP Flags</div>
+          <div class="detail-content">${d.flags}</div>
         </div>
       `;
     }
