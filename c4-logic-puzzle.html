@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Logic Oracle — CoLab Archives</title>
+  <title>CoLab Archives: The Logic Oracle</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
-    :root {
+    :root{
       --black: #0a0a0a;
       --parchment: #f5f0e8;
       --gold: #c9a84c;
@@ -17,7 +17,7 @@
       --cyan: #00d4ff;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--black);
@@ -86,7 +86,7 @@
     }
 
     .challenge-number {
-      font-family: 'Share Tech Mono', monospace;
+      font-family:'Share Tech Mono', monospace;
       font-size: 11px; letter-spacing: 5px;
       color: var(--amber-dim); margin-bottom: 12px; display: block;
     }
@@ -150,6 +150,40 @@
 
     .card-text em { color: var(--gold); font-style: italic; }
 
+    /*journal lightbox*/
+    .journal-wrap {
+      display: flex; justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+    
+    .journal-thumb {
+      width: 72px; height: 90px;
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.3);
+      cursor: pointer;
+      opacity: 0.85;
+      transition: all 0.2s;
+      transform: rotate(2deg);
+      filter: sepia(0.3);
+    }
+    .journal-thumb:hover {
+      opacity: 1; transform: rotate(0deg) scale(1.05);
+      border-color: var(--gold);
+    }
+    
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 999;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.open{ display: flex; animation: fadeIn 0.2s ease both; }
+    
+    .lightbox img {
+      max-width: 88vw; max-height: 88vh;
+      border: 1px solid rgba(201,168,76,0.3);
+      filter: sepia(0.2);
+    }
     .logic-panel {
       width: 100%;
       border: 1px solid rgba(201,168,76,0.3);
@@ -527,14 +561,23 @@
       Build the circuit to unlock the gate. Find the minimum tree.
       <em>Two challenges. One answer.</em>
     </p>
+
+    <div class="journal-wrap">
+      <img class="journal-thumb" src="journal-c1.png" alt="journal entry" onclick="openJournal(this)"/>
+    </div>
   </div>
 
-  <!-- Circuit Building Puzzle -->
+  <!--lightbox-->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <img id="lightbox-img" src="" alt="journal"/>
+  </div>
+
+  <!--circuit building puzzle-->
   <div class="logic-panel">
     <div class="panel-title">Part 1: Circuit Builder</div>
     
     <div style="text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--ash);margin-bottom:16px;">
-      Click levers. Drag gates onto the board. Build the correct circuit to unlock.
+      Click the levers and drag the gates onto the board to build the circuit
     </div>
 
     <div class="gate-palette">
@@ -572,16 +615,16 @@
       </div>
 
 
-      <!-- SLOT 1 -->
+      <!--slot1-->
       <div class="gate-slot" id="slot1" data-slot="1" style="left:250px; top:120px;"></div>
 
-      <!-- SLOT 2 -->
+      <!--slot2-->
       <div class="gate-slot" id="slot2" data-slot="2" style="left:250px; top:260px;"></div>
 
-      <!-- SLOT 3 -->
+      <!--slot3-->
       <div class="gate-slot" id="slot3" data-slot="3" style="left:420px; top:200px;"></div>
 
-      <!-- WIRES -->
+      <!--wires-->
       <div class="wire" id="wireA" style="left:120px;top:140px;width:120px;"></div>
       <div class="wire" id="wireB" style="left:120px;top:290px;width:120px;"></div>
 
@@ -590,7 +633,7 @@
 
       <div class="wire" id="wireOUT" style="left:500px;top:220px;width:120px;"></div>
 
-      <!-- Output -->
+      <!--outpewwwtttt-->
       <div class="output-indicator" id="output" style="right: 50px; top: 200px;">
         <div class="output-icon">🔒</div>
         <div class="output-text">LOCKED</div>
@@ -604,12 +647,12 @@
     <div class="result-box" id="circuit-result"></div>
   </div>
 
-  <!-- MST Graph Builder -->
+  <!--mst graph-->
   <div class="logic-panel">
     <div class="panel-title">Part 2: Minimum Spanning Tree (Kruskal's Algorithm)</div>
     
     <div style="text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--ash);margin-bottom:16px;">
-      Click two nodes to connect them. Build the MST to get Part 2 value.
+      Click any two nodes to connect them. You must find the MST
     </div>
 
     <canvas class="graph-canvas" id="graphCanvas" width="800" height="350"></canvas>
@@ -662,7 +705,7 @@
 </div>
 
 <script>
-  // Firefly particles
+  //fireflies
   (function() {
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
@@ -794,17 +837,17 @@
           orOut = A || B;
           activateWire("wireAB");
       } else {
-          orOut = 0; // ensures it resets
+          orOut = 0; //ensures it resets
       }
 
-      if(s2 === "NOT") {
+      if(s2==="NOT") {
           notOut = B ? 0 : 1;
           activateWire("wireNB");
       } else {
           notOut = 0;
       }
 
-      if(s3 === "AND") {
+      if(s3 ==="AND") {
           final = orOut && notOut;
           activateWire("wireOUT");
       } else {
@@ -864,54 +907,54 @@ function lockOutput() {
 
     const box = document.getElementById('circuit-result');
     box.classList.remove('show','correct');
-    box.textContent = "";   // ← THIS fixes the problem
+    box.textContent = "";
 
     lockOutput();
   }
 
-  // MST GRAPH (same as before)
+  //mst graph
   const canvas2 = document.getElementById('graphCanvas');
   const ctx2 = canvas2.getContext('2d');
 
   const nodes = [
-    { id: 'A', x: 100, y: 100 },
-    { id: 'B', x: 300, y: 100 },
-    { id: 'C', x: 500, y: 100 },
-    { id: 'D', x: 200, y: 250 },
-    { id: 'E', x: 400, y: 250 }
+    {id: 'A',x: 100, y: 100 },
+    {id: 'B',x: 300, y:100 },
+    {id: 'C',x:500,y: 100},
+    {id:'D', x:200, y: 250 },
+    {id:'E', x: 400,y:250}
   ];
 
   const allEdges = [
-    { from: 'A', to: 'B', weight: 2 },
-    { from: 'A', to: 'D', weight: 3 },
-    { from: 'B', to: 'C', weight: 1 },
-    { from: 'B', to: 'D', weight: 4 },
-    { from: 'B', to: 'E', weight: 5 },
-    { from: 'C', to: 'E', weight: 1 },
-    { from: 'D', to: 'E', weight: 3 }
+    { from:'A',to:'B', weight: 2 },
+    { from:'A',to:'D', weight:3 },
+    { from: 'B',to :'C', weight:1 },
+    { from:'B',to:'D', weight: 4},
+    { from :'B',to:'E', weight: 5 },
+    { from:'C',to:'E', weight: 1 },
+    { from:'D',to: 'E', weight:3}
   ];
 
   let userEdges = [];
-  let selectedNode = null;
+  let selectedNode =null;
   let part2Value = 0;
 
-  function drawGraph() {
-    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+  function drawGraph(){
+    ctx2.clearRect(0, 0 , canvas2.width, canvas2.height);
 
-    ctx2.strokeStyle = 'rgba(0,212,255,0.2)';
+    ctx2.strokeStyle='rgba(0,212,255,0.2)';
     ctx2.lineWidth = 1;
-    allEdges.forEach(edge => {
-      const from = nodes.find(n => n.id === edge.from);
-      const to = nodes.find(n => n.id === edge.to);
+    allEdges.forEach(edge=> {
+      const from=nodes.find(n=>n.id===edge.from);
+      const to =nodes.find(n=>n.id ===edge.to);
       ctx2.beginPath();
       ctx2.moveTo(from.x, from.y);
-      ctx2.lineTo(to.x, to.y);
+      ctx2.lineTo(to.x,to.y);
       ctx2.stroke();
 
-      const mx = (from.x + to.x) / 2;
-      const my = (from.y + to.y) / 2;
-      ctx2.fillStyle = 'rgba(0,212,255,0.5)';
-      ctx2.font = '12px Share Tech Mono';
+      const mx=(from.x + to.x)/2;
+      const my=(from.y + to.y)/ 2;
+      ctx2.fillStyle='rgba(0,212,255,0.5)';
+      ctx2.font='12px Share Tech Mono';
       ctx2.fillText(edge.weight, mx, my);
     });
 
@@ -946,8 +989,8 @@ function lockOutput() {
     const y = e.clientY - rect.top;
 
     const clicked = nodes.find(n => {
-      const dx = x - n.x;
-      const dy = y - n.y;
+      const dx = x-n.x;
+      const dy = y-n.y;
       return Math.sqrt(dx*dx + dy*dy) < 20;
     });
 
@@ -959,10 +1002,10 @@ function lockOutput() {
           (e.from === selectedNode && e.to === clicked.id) ||
           (e.from === clicked.id && e.to === selectedNode)
         );
-        if (edge) {
-          const exists = userEdges.find(ue => 
-            (ue.from === edge.from && ue.to === edge.to) ||
-            (ue.from === edge.to && ue.to === edge.from)
+        if (edge){
+          const exists=userEdges.find(ue => 
+            (ue.from===edge.from && ue.to === edge.to) ||
+            (ue.from===edge.to && ue.to === edge.from)
           );
           if (!exists) {
             userEdges.push(edge);
@@ -987,22 +1030,19 @@ function lockOutput() {
 
       const box = document.getElementById('mst-result');
 
-      if (totalWeight === 7 && userEdges.length === 4) {
+      if (totalWeight === 7 && userEdges.length === 4){
           part2Value = 9;
           box.textContent = `✓ MST Correct! Part 2: ${part2Value}`;
           box.classList.add('show','correct');
       } else {
           box.textContent = `✗ Incorrect MST. Weight: ${totalWeight}`;
           box.classList.add('show','incorrect');
-          setTimeout(() => {
+          setTimeout(()=>{
               box.classList.remove('show','incorrect');
           }, 2000);
       }
   }
-
   drawGraph();
 </script>
-
 </body>
-
 </html>
