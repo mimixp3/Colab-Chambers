@@ -822,6 +822,7 @@ User-Agent: ${d.userAgent}
   }
 
   function openJournal(img) {
+    new Audio('journal.mp3').play();
     document.getElementById('lightbox-img').src = img.src;
     document.getElementById('lightbox').classList.add('open');
   }
