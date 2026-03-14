@@ -158,6 +158,40 @@
 
     .card-text em { color: var(--gold); font-style: italic; }
 
+    /*journal and da lightbox*/
+    .journal-wrap {
+      display: flex; justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+    
+    .journal-thumb {
+      width: 72px; height: 90px;
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.3);
+      cursor: pointer;
+      opacity: 0.85;
+      transition: all 0.2s;
+      transform: rotate(2deg);
+      filter: sepia(0.3);
+    }
+    .journal-thumb:hover {
+      opacity: 1; transform: rotate(0deg) scale(1.05);
+      border-color: var(--gold);
+    }
+    
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 999;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.open { display: flex; animation: fadeIn 0.2s ease both; }
+    
+    .lightbox img {
+      max-width: 88vw; max-height: 88vh;
+      border: 1px solid rgba(201,168,76,0.3);
+      filter: sepia(0.2);
+    }
     /*wireshark panel*/
     .packet-viewer {
       width: 100%;
@@ -394,6 +428,14 @@
       Someone looked up a domain that shouldn't exist — then reached out to it.
       <em>Follow the DNS trail. Find the HTTP request. Read what was sent.</em>
     </p>
+    <div class="journal-wrap">
+    <img class="journal-thumb" src="jc1.png" alt="journal entry" onclick="openJournal(this)"/>
+    </div>
+  
+    <!--lightbox thingy to open-->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <img id="lightbox-img" src="" alt="journal"/>
+    </div>
   </div>
 
   <!--wireshark capture-->
@@ -776,6 +818,14 @@ User-Agent: ${d.userAgent}
 
     packetDetails.innerHTML = html;
     packetDetails.classList.add('show');
+  }
+
+  function openJournal(img) {
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
   }
 </script>
 
