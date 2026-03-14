@@ -784,7 +784,7 @@
 
 <!--YAY SCREEN-->
 <div id="win-screen">
-  <video class="win-spark-video" autoplay loop playsinline>
+  <video class="win-spark-video" muted autoplay loop playsinline>
     <source src="forest.mp4" type="video/mp4">
   </video>
   <div class="win-title" id="win-title">COMPLETE</div>
@@ -1028,6 +1028,9 @@
       document.getElementById('win-screen').classList.add('show');
       document.getElementById('fireplace-video').pause();
       document.getElementById('fireplace-video').muted = true; //cus i need tew close that prev audio
+      const winVid = document.querySelector('.win-spark-video');
+      winVid.muted = false;
+      winVid.play();
     } else {
       error.classList.add('show');
       setTimeout(() => error.classList.remove('show'), 3000);
