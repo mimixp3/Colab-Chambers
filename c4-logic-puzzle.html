@@ -1045,6 +1045,7 @@ function lockOutput() {
   drawGraph();
 
   function openJournal(img) {
+      new Audio('journal.mp4').play();
       document.getElementById('lightbox-img').src = img.src;
       document.getElementById('lightbox').classList.add('open');
     }
