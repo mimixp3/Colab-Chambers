@@ -1043,6 +1043,14 @@ function lockOutput() {
       }
   }
   drawGraph();
+
+  function openJournal(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
 </script>
 </body>
 </html>
