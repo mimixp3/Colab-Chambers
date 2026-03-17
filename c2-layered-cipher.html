@@ -640,7 +640,7 @@ function getAngle(e) {
       outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
       startAngle = curr;
       if (!window._wheelAudio) window._wheelAudio = new Audio('gear.mp3');
-      if (!window._lastClick||Date.now() - window._lastClick > 80) {
+      if (!window._lastClick||Date.now() - window._lastClick >140) {
         window._wheelAudio.currentTime = 0;
         window._wheelAudio.play();
         window._lastClick = Date.now();
@@ -663,8 +663,8 @@ function getAngle(e) {
     const shift = Math.round(currentRotation/(360/26)) % 26;
     shiftDisplay.textContent = `SHIFT: ${shift}|A → ${alphabet[shift]}`;
   }, {passive:false});
- document.addEventListener('mouseup',() => isDragging=false);
-document.addEventListener('touchend',() => isDragging=false); //stawping the non stop audio omg
+ document.addEventListener('mouseup',()=>{ isDragging=false; if(window._wheelAudio)window._wheelAudio.pause();});
+document.addEventListener('touchend',()=> { isDragging=false; if(window._wheelAudio) window._wheelAudio.pause();}); //stawping the non stop audio omg
   
   //keypad l1
   const LAYER1_ANSWER = 'RAVEN';
