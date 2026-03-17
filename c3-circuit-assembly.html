@@ -120,12 +120,31 @@
       animation: fadeUp 1.2s ease both;
     }
 
+    
     .parchment-card::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
 
+    .card-inner {
+      display:flex; gap: 24px; align-items: flex-start;
+    }
+    .card-inner .card-text{ flex: 1;}
+    @keyframes float{
+      0%, 100% {transform: rotate(2deg) translateY(0);}
+      50% {transform: rotate(2deg) translateY(-8px);}
+    }
+  
+    .journal-thumb {
+      width: 80px; flex-shrink: 0;object-fit: cover; cursor: pointer;border: 1px solid rgba(201,168,76,0.4);
+filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px rgba(201,168,76,0.35), 0 0 40px rgba(201,168,76,0.15);
+      transition: box-shadow 0.3s;
+    }
+    
+  .journal-thumb:hover {
+    box-shadow: 0 0 28px rgba(201,168,76,0.7), 0 0 60px rgba(201,168,76,0.3);
+  }
     .card-eyebrow {
       font-family: 'Cinzel', serif;
       font-size: 10px; letter-spacing: 4px;
@@ -135,7 +154,7 @@
     }
 
     .card-eyebrow::after {
-      content: ''; flex: 1; height: 1px;
+      content:''; flex: 1; height: 1px;
       background: rgba(201,168,76,0.15);
     }
 
@@ -144,21 +163,17 @@
       font-size: 17px; line-height: 1.95; color: var(--ash);
     }
 
-    .card-text em { color: var(--gold); font-style: italic; }
+    .card-text em {color: var(--gold);}
 
 
     /*journal and lightbox*/
     .journal-wrap {
-      display: flex; justify-content: flex-end;
-      margin-bottom: 15.4px;
+      display: flex; justify-content:flex-end; margin-bottom:15.4px;
     }
     
     .journal-thumb {
-      width: 72px; height: 90px;
-      object-fit: cover;
-      border: 1px solid rgba(201,168,76,0.3);
-      cursor: pointer;
-      opacity: 0.85;
+      width: 72px; height: 90px; object-fit: cover; border: 1px solid rgba(201,168,76,0.3);
+      cursor:pointer;opacity: 0.85;
       transition: all 0.2s;
       transform: rotate(2deg);
       filter: sepia(0.3);
@@ -188,7 +203,6 @@
       position: relative; margin-bottom: 32px;
       animation: fadeUp 1.4s ease both;
     }
-
     .code-scroll::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
@@ -321,11 +335,9 @@
       The code will reveal specifications and the hardware brings truth to light. <br>
       <em>Decode the assembly and build the circuit</em> </br>
     </p>
-
-    <div class="journal-wrap">
-      <img class="journal-thumb" src="jc3.png" alt="journal entry" onclick="openJournal(this)"/>
-    </div>
+    <img class="journal-thumb" src="jc3.png" onclick="openJournal(this)"/>
   </div>
+</div>
 
   <!--cant put it in the parchment card its stackin-->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
