@@ -161,6 +161,28 @@
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
 
+    .card-inner {
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    
+    .card-inner .card-text { flex: 1; }
+    @keyframes float {
+      0%, 100% { transform: rotate(2deg) translateY(0); }
+      50% { transform: rotate(2deg) translateY(-8px); }
+    }
+    
+    .journal-thumb {
+      width: 80px; flex-shrink: 0;
+      object-fit: cover; cursor: pointer;
+      border: none;
+      filter: sepia(0.3);
+      animation: float 4s ease-in-out infinite;
+      box-shadow: 0 0 18px rgba(201,168,76,0.35), 0 0 40px rgba(201,168,76,0.15);
+      transition: box-shadow 0.3s;
+    }
+    .journal-thumb:hover {
+      box-shadow: 0 0 28px rgba(201,168,76,0.7), 0 0 60px rgba(201,168,76,0.3);
+    }
     .card-eyebrow {
       font-family: 'Cinzel', serif;
       font-size: 10px; letter-spacing: 4px;
@@ -311,7 +333,7 @@
 
     .step-desc {
       font-family: 'EB Garamond', serif;
-      font-style: italic; font-size: 15px;
+    font-size: 15px;
       color: var(--ash); line-height: 1.6;
     }
 
@@ -369,10 +391,9 @@
       Decode. Compute. Convert. The convergence of all knowledge reveals the final truth.
       <em>Follow each stage. The letter awaits.</em>
     </p>
-    <div class="journal-wrap">
-      <img class="journal-thumb" src="jc5.png" alt="journal entry" onclick="openJournal(this)"/>
-    </div>
+    <img class="journal-thumb" src="jc5.png" onclick="openJournal(this)"/>
   </div>
+</div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <img id="lightbox-img" src="" alt="journal"/>
