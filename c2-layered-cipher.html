@@ -692,7 +692,7 @@ function checkLayer1() {
   const errEl= document.getElementById('keypad-error');
   if (entered === LAYER1_ANSWER) {
     const btn = document.getElementById('unlock-btn');
-    btn.textContent = '✦  Layer 2 Unlocked';
+    btn.textContent = 'Layer 2 Unlocked';
     btn.classList.add('success'); btn.disabled = true;
     errEl.textContent = '';
     keySlots.forEach(s => s.el.classList.add('correct'));
@@ -700,7 +700,7 @@ function checkLayer1() {
     l2.classList.add('visible');
     setTimeout(() => l2.scrollIntoView({behavior:'smooth',block:'start'}), 100);
   } else {
-    errEl.textContent = '✗  Incorrect. The archives remain sealed.';
+    errEl.textContent = '✗ Your answer is just pure foolishness, almost laughable';
     setTimeout(() => errEl.textContent='', 2500);
   }
 }
