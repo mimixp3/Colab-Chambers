@@ -640,7 +640,7 @@ function getAngle(e) {
       outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
       startAngle = curr;
       if (!window._wheelAudio) window._wheelAudio = new Audio('gear.mp3');
-      if (!window._lastClick||Date.now() - window._lastClick >50) {
+      if (!window._lastClick||Date.now() - window._lastClick >100) {
         window._wheelAudio.currentTime = 0;
         window._wheelAudio.play();
         window._lastClick = Date.now();
@@ -655,7 +655,7 @@ function getAngle(e) {
     outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
     startAngle = curr;
     if (!window._wheelAudio) window._wheelAudio = new Audio('gear.mp3');
-    if (!window._lastClick || Date.now() - window._lastClick > 80) {
+    if (!window._lastClick || Date.now() - window._lastClick >100) {
       window._wheelAudio.currentTime = 0;
       window._wheelAudio.play();
       window._lastClick = Date.now();
