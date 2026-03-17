@@ -630,57 +630,57 @@ function getAngle(e) {
   return Math.atan2(evt.clientY-(rect.top+rect.height/2), evt.clientX-(rect.left+rect.width/2)) * 180/Math.PI;
 }
 
-outerLettersEl.addEventListener('mousedown', e => { isDragging=true; startAngle=getAngle(e); e.preventDefault(); });
-outerLettersEl.addEventListener('touchstart', e => { isDragging=true; startAngle=getAngle(e); e.preventDefault(); }, {passive:false});
-
-document.addEventListener('mousemove', e => {
-  if(!isDragging) return;
-  const curr = getAngle(e);
-  currentRotation = ((currentRotation + curr - startAngle) % 360 + 360) % 360;
-  outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
-  startAngle = curr;
-  if (!window._lastClick || Date.now() - window._lastClick > 80) {
-    new Audio('gear.mp3').play();
-    window._lastClick = Date.now();
-  }
-  const shift = Math.round(currentRotation / (360/26)) % 26;
-  shiftDisplay.textContent = `SHIFT: ${shift}  |  A → ${alphabet[shift]}`;
-});
-document.addEventListener('touchmove', e => {
-  if (!isDragging) return;
-  const curr = getAngle(e);
-  currentRotation= ((currentRotation + curr - startAngle) % 360 + 360) % 360;
-  outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
-  startAngle = curr;
-  if (!window._lastClick || Date.now() - window._lastClick > 80) {
-    new Audio('gear.mp3').play();
-    window._lastClick = Date.now(); //dragging gear sounds
-  }
-  const shift = Math.round(currentRotation / (360/26)) % 26;
-  shiftDisplay.textContent = `SHIFT: ${shift}  |  A → ${alphabet[shift]}`;
-}, {passive:false});
-document.addEventListener('mouseup',  () => isDragging=false);
-document.addEventListener('touchend', () => isDragging=false);
-
-//keypad l1
-const LAYER1_ANSWER = 'RAVEN';
-const keySlots=[];
-const slotsContainer =document.getElementById('keypad-slots');
-
-LAYER1_ANSWER.split('').forEach((_, i) => {
-  let val= 0;
-  const wrap=document.createElement('div'); wrap.className= 'key-slot';
-  const up   = document.createElement('button'); up.className = 'slot-btn'; up.textContent = '▲';
-  const box=document.createElement('div');   box.className ='slot-letter'; box.textContent = 'A';
-  const dn= document.createElement('button'); dn.className = 'slot-btn'; dn.textContent = '▼';
-
-  up.onclick= () => { val=(val+1)%26;  box.textContent=alphabet[val]; new Audio('clicks.mp3').play()};
-  dn.onclick = () => { val=(val+25)%26; box.textContent=alphabet[val];new Audio('clicks.mp3').play()};
-
-  wrap.appendChild(up); wrap.appendChild(box); wrap.appendChild(dn);
-  slotsContainer.appendChild(wrap);
-  keySlots.push({ get: () => alphabet[val], el: box });
-});
+  outerLettersEl.addEventListener('mousedown', e => { isDragging=true; startAngle=getAngle(e); e.preventDefault(); });
+  outerLettersEl.addEventListener('touchstart', e => { isDragging=true; startAngle=getAngle(e); e.preventDefault(); }, {passive:false});
+  
+  document.addEventListener('mousemove', e => {
+    if(!isDragging) return;
+      const curr = getAngle(e);
+      currentRotation = ((currentRotation + curr - startAngle) % 360 + 360) % 360;
+      outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
+      startAngle = curr;
+      if (!window._lastClick || Date.now() - window._lastClick > 80) {
+        new Audio('gear.mp3').play();
+        window._lastClick = Date.now();
+      }
+      const shift = Math.round(currentRotation / (360/26)) % 26;
+      shiftDisplay.textContent = `SHIFT: ${shift}  |  A → ${alphabet[shift]}`;
+    });
+  document.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const curr = getAngle(e);
+    currentRotation= ((currentRotation + curr - startAngle) % 360 + 360) % 360;
+    outerLettersEl.style.transform = `rotate(${currentRotation}deg)`;
+    startAngle = curr;
+    if (!window._lastClick || Date.now() - window._lastClick > 80) {
+      new Audio('gear.mp3').play();
+      window._lastClick = Date.now(); //dragging gear sounds
+    }
+    const shift = Math.round(currentRotation / (360/26)) % 26;
+    shiftDisplay.textContent = `SHIFT: ${shift}  |  A → ${alphabet[shift]}`;
+  }, {passive:false});
+  document.addEventListener('mouseup', () =>{ isDragging=false; window._lastClick = null;});
+  document.addEventListener('touchend',() =>{ isDragging=false; window._lastClick = null;}); //stawping the non stop audio omg
+  
+  //keypad l1
+  const LAYER1_ANSWER = 'RAVEN';
+  const keySlots=[];
+  const slotsContainer =document.getElementById('keypad-slots');
+  
+  LAYER1_ANSWER.split('').forEach((_, i) => {
+    let val= 0;
+    const wrap=document.createElement('div'); wrap.className= 'key-slot';
+    const up   = document.createElement('button'); up.className = 'slot-btn'; up.textContent = '▲';
+    const box=document.createElement('div');   box.className ='slot-letter'; box.textContent = 'A';
+    const dn= document.createElement('button'); dn.className = 'slot-btn'; dn.textContent = '▼';
+  
+    up.onclick= () => { val=(val+1)%26;  box.textContent=alphabet[val]; new Audio('clicks.mp3').play()};
+    dn.onclick = () => { val=(val+25)%26; box.textContent=alphabet[val];new Audio('clicks.mp3').play()};
+  
+    wrap.appendChild(up); wrap.appendChild(box); wrap.appendChild(dn);
+    slotsContainer.appendChild(wrap);
+    keySlots.push({ get: () => alphabet[val], el: box });
+  });
 
 function highlightSlots() {
   const curr= keySlots.map(s=>s.get()).join('');
