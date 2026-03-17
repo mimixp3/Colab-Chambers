@@ -618,7 +618,7 @@
 
     <div class="circuit-board" id="circuitBoard">
       <!-- Lever A -->
-      <div class="lever" id="leverA" onclick="toggleLever('A')" style="left: 50px; top: 100px;">
+      <div class="lever" id="leverA" onclick="toggleLever('A'); new Audio('clicks.mp3').play()" style="left: 50px; top: 100px;">
         <div class="lever-label">LEVER A</div>
         <div class="lever-arm">
           <div class="lever-handle"></div>
@@ -627,7 +627,7 @@
       </div>
 
       <!-- Lever B -->
-      <div class="lever" id="leverB" onclick="toggleLever('B')" style="left: 50px; top: 250px;">
+      <div class="lever" id="leverB" onclick="toggleLever('B');new Audio('clicks.mp3').play()" style="left: 50px; top: 250px;">
         <div class="lever-label">LEVER B</div>
         <div class="lever-arm">
           <div class="lever-handle"></div>
@@ -662,7 +662,7 @@
     </div>
 
     <div style="text-align:center;margin-top:16px;">
-      <button class="check-btn" onclick="resetCircuit()">Reset Circuit</button>
+      <button class="check-btn" onclick="resetCircuit(); new Audio('clicks.mp3').play()">Reset Circuit</button>
     </div>
 
     <div class="result-box" id="circuit-result"></div>
@@ -679,8 +679,8 @@
     <canvas class="graph-canvas" id="graphCanvas" width="800" height="350"></canvas>
 
     <div style="text-align:center;margin-top:16px;">
-      <button class="check-btn" onclick="resetGraph()">Reset Graph</button>
-      <button class="check-btn" onclick="checkMST()">Check MST</button>
+      <button class="check-btn" onclick="resetGraph();new Audio('clicks.mp3').play()">Reset Graph</button>
+      <button class="check-btn" onclick="checkMST();new Audio('clicks.mp3').play()">Check MST</button>
     </div>
 
     <div class="result-box" id="mst-result"></div>
