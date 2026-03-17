@@ -120,14 +120,17 @@
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
     .card-eyebrow {
-      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px;
-      color: var(--gold-dim); text-transform: uppercase; margin-bottom: 16px;
+      font-family: 'Cinzel', serif;
+      font-size: 16px; letter-spacing: 4px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 16px;
       display: flex; align-items: center; gap: 10px;
     }
-    .card-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.15); }
-    .card-text { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.95; color: var(--ash); }
-    .card-text em { color: var(--gold); font-style: italic; }
 
+    .card-eyebrow::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(201,168,76,0.15);
+    }
     /*section stuff*/
     .section-panel {
       width: 100%; border: 1px solid rgba(212,132,42,0.25);
