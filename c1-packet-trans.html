@@ -139,8 +139,8 @@
     /*ran out of names for stuff like wym eyebrow*/
     .card-eyebrow {
       font-family: 'Cinzel', serif;
-      font-size: 10px; letter-spacing: 4px;
-      color: var(--gold-dim); text-transform: uppercase;
+      font-size: 16px; letter-spacing: 4px;
+      color: var(--gold); text-transform: uppercase;
       margin-bottom: 16px;
       display: flex; align-items: center; gap: 10px;
     }
@@ -155,7 +155,7 @@
       font-size: 17px; line-height: 1.95; color: var(--ash);
     }
 
-    .card-text em { color: var(--gold); font-style: italic; }
+    .card-text em { color: var(--gold); }
 
     /*journal and da lightbox*/
     .journal-wrap {
@@ -365,7 +365,7 @@
 
     .step-desc {
       font-family: 'EB Garamond', serif;
-      font-style:italic; font-size: 15px;
+       font-size: 15px;
       color: var(--ash); line-height: 1.6;
     }
 
@@ -423,9 +423,9 @@
   <div class="parchment-card">
     <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
     <p class="card-text">
-      Suspicious traffic was flagged during routine monitoring.
-      Someone looked up a domain that shouldn't exist, then reached out to it.
-      <em>Follow the DNS trail. Find the HTTP request. Read what was sent.</em>
+      There has been some suspicious traffic flagged by an employee during the routine monitoring
+      Someone has been looking into domains that shouldn't exist.. 
+      <em>Read the journal entry.</em>
     </p>
     <div class="journal-wrap">
     <img class="journal-thumb" src="jc1.png" alt="journal entry" onclick="openJournal(this)"/>
@@ -480,7 +480,7 @@
       <div class="step-content">
         <div class="step-title">Spot the Suspicious DNS Query</div>
         <div class="step-desc">
-          Click through the DNS packets. One domain looks very out of place among the rest — that's your target. Note it down.
+          Click through the DNS packets for domains that look out of place among the rest and note it
         </div>
       </div>
     </div>
@@ -489,7 +489,7 @@
       <div class="step-content">
         <div class="step-title">Read the DNS Response</div>
         <div class="step-desc">
-          Find the DNS response for that domain. Open it and check the <code>Answers</code> field — it gives you the IP address the domain resolved to.
+          Find the DNS response for that domain and check the <code>Answers</code> field, this will lead you to the IP address the domain resolved to.
         </div>
       </div>
     </div>
@@ -629,7 +629,7 @@
       }
     },
     {
-      /*this is the weird one — sketchy domain nobody should be querying*/
+      /*this is the weird one sketchy domain nobody should be querying*/
       num: 7, time: '0.102441',
       proto: 'DNS', protoClass: 'proto-dns',
       info: 'Standard query A arc.signal-node.net',
