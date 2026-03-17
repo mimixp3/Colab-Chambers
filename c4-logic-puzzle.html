@@ -129,6 +129,29 @@
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
+    .card-inner {
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    
+    .card-inner .card-text { flex: 1; }
+    @keyframes float {
+      0%, 100% { transform: rotate(2deg) translateY(0); }
+      50% { transform: rotate(2deg) translateY(-8px); }
+    }
+    
+    .journal-thumb {
+      width: 80px; flex-shrink: 0;
+      object-fit: cover; cursor: pointer;
+      border: none;
+      filter: sepia(0.3);
+      animation: float 4s ease-in-out infinite;
+      box-shadow: 0 0 18px rgba(201,168,76,0.35), 0 0 40px rgba(201,168,76,0.15);
+      transition: box-shadow 0.3s;
+    }
+    .journal-thumb:hover {
+      box-shadow: 0 0 28px rgba(201,168,76,0.7), 0 0 60px rgba(201,168,76,0.3);
+    }
+    
 
     .card-eyebrow {
       font-family: 'Cinzel', serif;
@@ -508,7 +531,7 @@
 
     .step-desc {
       font-family: 'EB Garamond', serif;
-      font-style: italic; font-size: 15px;
+    font-size: 15px;
       color: var(--ash); line-height: 1.6;
     }
 
@@ -561,11 +584,9 @@
       Build the circuit to unlock the gate. Find the minimum tree.
       <em>Two challenges. One answer.</em>
     </p>
-
-    <div class="journal-wrap">
-      <img class="journal-thumb" src="jc4.png" alt="journal entry" onclick="openJournal(this)"/>
-    </div>
+    <img class="journal-thumb" src="jc4.png" onclick="openJournal(this)"/>
   </div>
+</div>
 
   <!--lightbox-->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
