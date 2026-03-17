@@ -468,7 +468,7 @@
 
       <div class="keypad-label">Enter the decoded word</div>
       <div class="keypad-slots" id="keypad-slots"></div>
-      <button class="unlock-btn" id="unlock-btn" onclick="checkLayer1()">Unlock Layer 2</button>
+      <button class="unlock-btn" id="unlock-btn" onclick="checkLayer1(); new Audio('clicks.mp3').play()">Unlock Layer 2</button>
       <div class="keypad-error" id="keypad-error"></div>
 
     </div>
@@ -666,8 +666,8 @@ LAYER1_ANSWER.split('').forEach((_, i) => {
   const box=document.createElement('div');   box.className ='slot-letter'; box.textContent = 'A';
   const dn= document.createElement('button'); dn.className = 'slot-btn'; dn.textContent = '▼';
 
-  up.onclick= () => { val=(val+1)%26;  box.textContent=alphabet[val]; };
-  dn.onclick = () => { val=(val+25)%26; box.textContent=alphabet[val]; };
+  up.onclick= () => { val=(val+1)%26;  box.textContent=alphabet[val]; new Audio('clicks.mp3').play()};
+  dn.onclick = () => { val=(val+25)%26; box.textContent=alphabet[val];new Audio('clicks.mp3').play()};
 
   wrap.appendChild(up); wrap.appendChild(box); wrap.appendChild(dn);
   slotsContainer.appendChild(wrap);
@@ -710,8 +710,8 @@ VIG_KEY_ANSWER.split('').forEach(() => {
   const box  = document.createElement('div');   box.className = 'vig-slot-letter'; box.textContent = 'A';
   const dn   = document.createElement('button'); dn.className = 'vig-slot-btn'; dn.textContent = '▼';
 
-  up.onclick = () => { val=(val+1)%26;  box.textContent=alphabet[val]; updateVigenere(); };
-  dn.onclick = () => { val=(val+25)%26; box.textContent=alphabet[val]; updateVigenere(); };
+  up.onclick = () => { val=(val+1)%26;  box.textContent=alphabet[val]; updateVigenere();new Audio('clicks.mp3').play()};
+  dn.onclick = () => { val=(val+25)%26; box.textContent=alphabet[val]; updateVigenere();new Audio('clicks.mp3').play()};
 
   wrap.appendChild(up); wrap.appendChild(box); wrap.appendChild(dn);
   vigContainer.appendChild(wrap);
