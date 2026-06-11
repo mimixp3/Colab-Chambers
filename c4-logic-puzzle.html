@@ -553,10 +553,55 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
+
+
+    #parchment-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: none; align-items: center; justify-content: center; }
+    #parchment-overlay.show { display: flex; }
+    #parchment-note { background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 520px; width: 90%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+    #parchment-overlay.show #parchment-note { transform: translateY(0) rotate(-0.5deg); opacity: 1; }
+    #parchment-note::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+    #parchment-note::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
+    .note-eyebrow { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 5px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 24px; }
+    .note-text { font-family: 'EB Garamond', serif; font-size: 18px; line-height: 1.9; color: #c8b898; margin-bottom: 28px; }
+    .note-close { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--amber); background: none; border: 1px solid rgba(212,132,42,0.3); padding: 10px 28px; cursor: pointer; transition: all 0.2s; }
+    .note-close:hover { border-color: var(--amber); color: var(--parchment); }
+    .note-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
+    .note-corner.tl { top: 10px; left: 14px; }
+    .note-corner.tr { top: 10px; right: 14px; }
+    .note-corner.bl { bottom: 10px; left: 14px; }
+    .note-corner.br { bottom: 10px; right: 14px; }
+    
   </style>
 </head>
 <body>
 
+
+  <div id="parchment-overlay">
+  <div id="parchment-note">
+    <span class="note-corner tl">+</span>
+    <span class="note-corner tr">+</span>
+    <span class="note-corner bl">+</span>
+    <span class="note-corner br">+</span>
+    <div class="note-eyebrow">// Libraries and Folders //</div>
+    <p class="note-text">
+      There's a file here with your name on it.. Of course there is.<br><br>
+      The date on the folder says it was filed before you ever arrived. The first thing that comes to mind is maybe it's your coworker who hates you planning all of this, but he's not smart enough so back to the sentient castle.<br>
+      You haven't told anyone your name. You haven't touched anything. You walked into this nightmare three levels ago after a perfectly normal drive through the rain.<br>
+      And yet there it is.<br>
+      Waiting neatly labeled.<br><br>
+      Apparently, privacy laws don't exist in haunted castles and you probably need a lawyer but you could just leave it alone. <br>
+      You won't.<br>
+      Everyone knows you're going to pull the file. So did the castle.<br>
+      There's a pattern here and you don't understand the point of these. <br>
+      Unfortunately for you, finding what it is means opening the file. Which was inevitable since you saw the name on the folder.<br>
+
+      Get to work Curious George!
+      
+    </p>
+    <button class="note-close" onclick="closeNote(); new Audio('clicks.mp3').play()">FIND THE PATTERN</button>
+  </div>
+</div>
+  
 <canvas id="particles"></canvas>
 
 <div class="wrapper">
@@ -726,6 +771,29 @@
 </div>
 
 <script>
+
+  //ambient stufh
+  const ambientSounds = ['walk.mp3', 'door.mp3'];
+  let ambientActive = true;
+  function playAmbient() {
+    if (!ambientActive) return;
+    const a = new Audio(ambientSounds[Math.floor(Math.random()*ambientSounds.length)]);
+    a.volume = 0.18;
+    a.play().catch(()=>{});
+    setTimeout(playAmbient, 12000 + Math.random() * 20000);
+  }
+  window.addEventListener('beforeunload', () => { ambientActive = false; });
+  window.addEventListener('load', () => {
+    new Audio('bat.mp3').play().catch(()=>{});
+    setTimeout(() => document.getElementById('parchment-overlay').classList.add('show'), 400);
+  });
+  
+  function closeNote() {
+    document.getElementById('parchment-overlay').classList.remove('show');
+    setTimeout(playAmbient, 4000);
+  }
+  
+    
   //fireflies
   (function() {
     const canvas = document.getElementById('particles');
