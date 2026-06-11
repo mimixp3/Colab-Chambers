@@ -306,10 +306,54 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
       from { opacity: 0; }
       to   { opacity: 1; }
     }
+
+
+    /*MESSAGE*/
+    #parchment-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: none; align-items: center; justify-content: center; }
+    #parchment-overlay.show { display: flex; }
+    #parchment-note { background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 520px; width: 90%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+    #parchment-overlay.show #parchment-note { transform: translateY(0) rotate(-0.5deg); opacity: 1; }
+    #parchment-note::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+    #parchment-note::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
+    .note-eyebrow { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 5px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 24px; }
+    .note-text { font-family: 'EB Garamond', serif; font-size: 18px; line-height: 1.9; color: #c8b898; margin-bottom: 28px; }
+    .note-close { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--amber); background: none; border: 1px solid rgba(212,132,42,0.3); padding: 10px 28px; cursor: pointer; transition: all 0.2s; }
+    .note-close:hover { border-color: var(--amber); color: var(--parchment); }
+    .note-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
+    .note-corner.tl { top: 10px; left: 14px; }
+    .note-corner.tr { top: 10px; right: 14px; }
+    .note-corner.bl { bottom: 10px; left: 14px; }
+    .note-corner.br { bottom: 10px; right: 14px; }
+  
   </style>
 </head>
 <body>
 
+
+  <div id="parchment-overlay">
+  <div id="parchment-note">
+    <span class="note-corner tl">✦</span>
+    <span class="note-corner tr">✦</span>
+    <span class="note-corner bl">✦</span>
+    <span class="note-corner br">✦</span>
+    <div class="note-eyebrow">// Chamber II · The Cipher Hall //</div>
+    <p class="note-text">
+      The room looks like someone threw up wired spaghetti.<br><br>
+      None of these machines match. Different designs, different parts, different decades. It's like someone raided an electronics dumpster and decided to build a computer.<br><br>
+      And somehow... it works.<br>
+      Aside from the room vibrating like it's one power strip away from becoming a historical event, it's good.<br>
+      Whoever built this clearly knew what they were doing. Which is honestly the most terrifying part.<br>
+      Because this isn't the work of a clueless idiot. <br>
+      This is the work of a professional idiot.<br>
+      A highly trained, extremely motivated professional idiot<br>
+
+      Since you're already here, you might as well figure out what the genius was cooking before it cooks you instead.
+    </p>
+    <button class="note-close" onclick="closeNote(); new Audio('clicks.mp3').play()">LOOK DEEPER</button>
+  </div>
+</div>
+
+  
 <canvas id="particles"></canvas>
 <div class="wrapper">
 
@@ -395,6 +439,31 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
 </div>
 
 <script>
+
+
+  //AMBIENT bg stuff
+  const ambientSounds = ['lock.mp3', 'door.mp3'];
+  let ambientActive = true;
+  function playAmbient() {
+    if (!ambientActive) return;
+    const a = new Audio(ambientSounds[Math.floor(Math.random() * ambientSounds.length)]);
+    a.volume = 0.18;
+    a.play().catch(()=>{});
+    setTimeout(playAmbient, 12000 + Math.random() * 20000);
+  }
+  window.addEventListener('beforeunload', () => { ambientActive = false; });
+  
+  window.addEventListener('load', () => {
+    new Audio('bat.mp3').play().catch(()=>{});
+    setTimeout(() => document.getElementById('parchment-overlay').classList.add('show'), 400);
+  });
+  
+  function closeNote() {
+    document.getElementById('parchment-overlay').classList.remove('show');
+    setTimeout(playAmbient, 4000);
+  }
+  
+    
   //firefly
   (function() {
     const canvas = document.getElementById('particles');
