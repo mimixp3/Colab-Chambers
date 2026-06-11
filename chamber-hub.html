@@ -26,7 +26,7 @@
     }
 
     /*bg*/
-    .fireplace-bg {
+    .castle-bg {
       position: fixed;
       inset: 0;
       width: 100%;
@@ -584,8 +584,8 @@
 </head>
 <body>
 
-<!-- FIREPLACE VIDEO -->
-<video class="fireplace-bg" id="fireplace-video" autoplay loop playsinline>
+<!-- CASTLE VIDEO -->
+<video class="castle-bg" id="castle-video" autoplay loop playsinline>
   <source src="castle.mp4" type="video/mp4">
 </video>
 
@@ -878,7 +878,7 @@
     
     document.getElementById('landing-page').style.display = 'none';
     document.getElementById('dashboard').classList.add('active');
-    document.getElementById('fireplace-video').style.display = 'none';
+    document.getElementById('castle-video').style.display = 'none';
     document.getElementById('hall-bg').classList.add('active');
     
     document.getElementById('house-display').textContent = `Team ${selectedTeam}`;
@@ -1016,8 +1016,8 @@
       document.getElementById('win-title').textContent = input;
       document.getElementById('win-house-name').textContent = `Team ${selectedTeam} has unlocked the chamber!`; //yasss mama
       document.getElementById('win-screen').classList.add('show');
-      document.getElementById('fireplace-video').pause();
-      document.getElementById('fireplace-video').muted = true; //cus i need tew close that prev audio
+      document.getElementById('castle-video').pause();
+      document.getElementById('castle-video').muted = true; //cus i need tew close that prev audio
       const winVid = document.querySelector('.win-spark-video');
       winVid.muted = false;
       winVid.play();
@@ -1028,7 +1028,7 @@
   }
 
   //audio func
-  const fireplaceVideo = document.getElementById('fireplace-video');
+  const fireplaceVideo = document.getElementById('castle-video');
   let videoMuted = false;
 
   function toggleAudio() {
