@@ -324,6 +324,79 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     .note-corner.tr { top: 10px; right: 14px; }
     .note-corner.bl { bottom: 10px; left: 14px; }
     .note-corner.br { bottom: 10px; right: 14px; }
+
+
+        /*folder button*/
+    #journal-fab {
+      position: fixed; bottom: 24px; left: 24px;
+      width: 56px; height: 56px;
+      cursor: pointer; z-index: 9000;
+      transition: transform 0.2s;
+    }
+    #journal-fab:hover { transform: scale(1.08); }
+    #journal-fab img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); }
+    
+    /*journal overlay*/
+    #journal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 9500;
+      display: none; align-items: center; justify-content: center;
+    }
+    #journal-overlay.open { display: flex; animation: fadeIn 0.2s ease both; }
+    
+    #journal-panel {
+      background: #1a1408;
+      border: 1px solid rgba(201,168,76,0.4);
+      max-width: 600px; width: 90%;
+      padding: 36px;
+      position: relative;
+    }
+    #journal-panel::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    
+    .journal-panel-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12px; letter-spacing: 5px;
+      color: var(--gold); text-transform: uppercase;
+      text-align: center; margin-bottom: 28px;
+    }
+    
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    
+    .journal-grid-item {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.3);
+      filter: sepia(0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .journal-grid-item:hover { border-color: var(--gold); transform: scale(1.04); }
+    
+    .journal-grid-item.locked {
+      filter: grayscale(1) brightness(0.4);
+      cursor: default;
+      border-color: rgba(120,120,120,0.2);
+    }
+    .journal-grid-item.locked:hover { transform: none; border-color: rgba(120,120,120,0.2); }
+    
+    .journal-panel-close {
+      display: block; margin: 28px auto 0;
+      font-family: 'Cinzel', serif;
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--amber); background: none;
+      border: 1px solid rgba(212,132,42,0.3);
+      padding: 10px 28px; cursor: pointer; transition: all 0.2s;
+    }
+    .journal-panel-close:hover { border-color: var(--amber); color: var(--parchment); }
   
   </style>
 </head>
