@@ -547,6 +547,20 @@
     </div>
   </div>
 
+
+  <!--JOURNAL FOLDER-->
+  <div id="journal-fab" onclick="openJournalPanel(); new Audio('clicks.mp3').play()">
+    <img src="jfolder.png" alt="journals"/>
+  </div>
+  
+  <div id="journal-overlay">
+    <div id="journal-panel">
+      <div class="journal-panel-title">// Collected Journals //</div>
+      <div class="journal-grid" id="journal-grid"></div>
+      <button class="journal-panel-close" onclick="closeJournalPanel(); new Audio('clicks.mp3').play()">CLOSE</button>
+    </div>
+  </div>
+
   
 <canvas id="particles"></canvas>
 
@@ -659,6 +673,31 @@
 
 
 
+
+  //JOURNAL FOLDER LOGIC
+  const CURRENT_LEVEL= 1;
+  
+  function openJournalPanel(){
+    const grid=document.getElementById('journal-grid');
+    grid.innerHTML = '';
+    for (let i=1; i <= 5; i++) {
+      const img = document.createElement('img');
+      if (i <= CURRENT_LEVEL){
+        img.src=`jc${i}.png`;
+        img.className = 'journal-grid-item';
+        img.onclick=()=>{new Audio('journal.mp3').play(); document.getElementById('lightbox-img').src=img.src; document.getElementById('lightbox').classList.add('open'); closeJournalPanel(); };
+      } else {
+        img.src = 'locked.png';
+        img.className ='journal-grid-item locked';
+      }
+      grid.appendChild(img);
+    }
+    document.getElementById('journal-overlay').classList.add('open');
+  }
+  
+  function closeJournalPanel() {
+    document.getElementById('journal-overlay').classList.remove('open');
+  }
 
   //ambience stuff
   const ambientSounds = ['walk.mp3', 'door.mp3'];
