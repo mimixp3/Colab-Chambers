@@ -467,6 +467,20 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
   </div>
 </div>
 
+
+  <!--JOURNAL FOLDER-->
+<div id="journal-fab" onclick="openJournalPanel(); new Audio('clicks.mp3').play()">
+    <img src="jfolder.png" alt="journals"/>
+  </div>
+  
+  <div id="journal-overlay">
+    <div id="journal-panel">
+      <div class="journal-panel-title">// Collected Journals //</div>
+      <div class="journal-grid" id="journal-grid"></div>
+      <button class="journal-panel-close" onclick="closeJournalPanel(); new Audio('clicks.mp3').play()">CLOSE</button>
+    </div>
+  </div>
+
   
 <canvas id="particles"></canvas>
 <div class="wrapper">
