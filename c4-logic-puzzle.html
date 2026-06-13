@@ -714,6 +714,20 @@
     <button class="note-close" onclick="closeNote(); new Audio('clicks.mp3').play()">FIND THE PATTERN</button>
   </div>
 </div>
+
+
+  <!--JOURNAL FOLDER-->
+  <div id="journal-fab" onclick="openJournalPanel(); new Audio('clicks.mp3').play()">
+    <img src="jfolder.png" alt="journals"/>
+  </div>
+  
+  <div id="journal-overlay">
+    <div id="journal-panel">
+      <div class="journal-panel-title">// Collected Journals //</div>
+      <div class="journal-grid" id="journal-grid"></div>
+      <button class="journal-panel-close" onclick="closeJournalPanel(); new Audio('clicks.mp3').play()">CLOSE</button>
+    </div>
+  </div>
   
 <canvas id="particles"></canvas>
 
