@@ -748,11 +748,7 @@
     setTimeout(playAmbient, 12000 + Math.random() * 20000);
   }
   window.addEventListener('beforeunload', () => { ambientActive = false; });
-  
-  window.addEventListener('load', () => {
-    new Audio('bat.mp3').play().catch(()=>{});
-    setTimeout(() => document.getElementById('parchment-overlay').classList.add('show'), 400);
-  });
+
   
   function closeNote() {
     document.getElementById('parchment-overlay').classList.remove('show');
@@ -983,15 +979,6 @@ function updateVigenere() {
     document.getElementById('lightbox').classList.remove('open');
   }
 
-  window.addEventListener('load', () => {
-    new Audio('bat.mp3').play().catch(()=>{});
-    setTimeout(() => document.getElementById('parchment-overlay').classList.add('show'), 400);
-  });
-  
-  function closeNote() {
-    document.getElementById('parchment-overlay').classList.remove('show');
-    setTimeout(playAmbient, 4000);
-  }
 </script>
 </body>
 </html>
