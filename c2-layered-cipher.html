@@ -410,33 +410,28 @@
     @keyframes revealLayer { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
 
-
-    #parchment-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: none; align-items: center; justify-content: center; }
-    #parchment-overlay.show { display: flex; }
-    #parchment-note { background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 520px; width: 90%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
-    #parchment-overlay.show #parchment-note { transform: translateY(0) rotate(-0.5deg); opacity: 1; }
-    #parchment-note::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
-    #parchment-note::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
-    .note-eyebrow { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 5px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 24px; }
-    .note-text { font-family: 'EB Garamond', serif; font-size: 18px; line-height: 1.9; color: #c8b898; margin-bottom: 28px; }
-    .note-close { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--amber); background: none; border: 1px solid rgba(212,132,42,0.3); padding: 10px 28px; cursor: pointer; transition: all 0.2s; }
-    .note-close:hover { border-color: var(--amber); color: var(--parchment); }
-    .note-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
-    .note-corner.tl { top: 10px; left: 14px; }
-    .note-corner.tr { top: 10px; right: 14px; }
-    .note-corner.bl { bottom: 10px; left: 14px; }
-    .note-corner.br { bottom: 10px; right: 14px; }
-
-
-        /*folder button*/
+    /*folder button*/
     #journal-fab {
-      position: fixed; bottom: 24px; left: 24px;
-      width: 56px; height: 56px;
+      position: fixed; top: 24px; right: 24px;
+      width: 71px; height: 71px;
       cursor: pointer; z-index: 9000;
       transition: transform 0.2s;
     }
+    #journal-fab::before {
+      content: '';
+      position: absolute; inset: -16px;
+      background: radial-gradient(circle, rgba(201,168,76,0.35), transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+      animation: fabGlow 3s ease-in-out infinite alternate;
+    }
     #journal-fab:hover { transform: scale(1.08); }
-    #journal-fab img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); }
+    #journal-fab img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); position: relative; z-index: 1; }
+    
+    @keyframes fabGlow {
+      from { opacity: 0.5; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1.15); }
+    }
     
     /*journal overlay*/
     #journal-overlay {
@@ -448,16 +443,22 @@
     #journal-overlay.open { display: flex; animation: fadeIn 0.2s ease both; }
     
     #journal-panel {
-      background: #1a1408;
+      background: linear-gradient(135deg, rgba(26,20,8,0.98), rgba(15,12,8,0.98));
       border: 1px solid rgba(201,168,76,0.4);
-      max-width: 600px; width: 90%;
-      padding: 36px;
+      max-width: 620px; width: 90%;
+      padding: 40px;
       position: relative;
+      box-shadow: 0 0 60px rgba(201,168,76,0.15), 0 20px 60px rgba(0,0,0,0.6);
     }
     #journal-panel::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    #journal-panel::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
     }
     
     .journal-panel-title {
@@ -466,6 +467,11 @@
       color: var(--gold); text-transform: uppercase;
       text-align: center; margin-bottom: 28px;
     }
+    .journal-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
+    .journal-corner.tl { top: 12px; left: 16px; }
+    .journal-corner.tr { top: 12px; right: 16px; }
+    .journal-corner.bl { bottom: 12px; left: 16px; }
+    .journal-corner.br { bottom: 12px; right: 16px; }
     
     .journal-grid {
       display: grid;
@@ -483,10 +489,36 @@
     }
     .journal-grid-item:hover { border-color: var(--gold); transform: scale(1.04); }
     
+    .journal-grid-item-wrap {
+        position: relative;
+      }
+    .journal-grid-item-wrap::before {
+      content: '';
+      position: absolute; inset: -8px;
+      background: radial-gradient(circle, rgba(201,168,76,0.25), transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+    .journal-grid-item-wrap.locked::before {
+      background:radial-gradient(circle, rgba(120,120,120,0.2), transparent 70%);
+    }
+    
+    .journal-grid-item {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.3);
+      filter: sepia(0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative; z-index: 1;
+      display: block;
+    }
+    .journal-grid-item:hover { border-color: var(--gold); transform: scale(1.04); }
+    
     .journal-grid-item.locked {
-      filter: grayscale(1) brightness(0.4);
       cursor: default;
       border-color: rgba(120,120,120,0.2);
+      filter: none;
     }
     .journal-grid-item.locked:hover { transform: none; border-color: rgba(120,120,120,0.2); }
     
@@ -523,6 +555,18 @@
   </div>
 </div>
 
+  <!--JOURNAL FOLDER-->
+  <div id="journal-fab" onclick="openJournalPanel(); new Audio('clicks.mp3').play()">
+    <img src="jfolder.png" alt="journals"/>
+  </div>
+  
+  <div id="journal-overlay">
+    <div id="journal-panel">
+      <div class="journal-panel-title">// Collected Journals //</div>
+      <div class="journal-grid" id="journal-grid"></div>
+      <button class="journal-panel-close" onclick="closeJournalPanel(); new Audio('clicks.mp3').play()">CLOSE</button>
+    </div>
+  </div>
   
 <canvas id="particles"></canvas>
 
@@ -664,6 +708,35 @@
 
 
 
+  //JOURNAL FOLDER LOGIC
+  const CURRENT_LEVEL= 2;
+  
+  function openJournalPanel() {
+    const grid = document.getElementById('journal-grid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const wrap = document.createElement('div');
+      const img = document.createElement('img');
+      if (i <= CURRENT_LEVEL) {
+        img.src = `jc${i}.png`;
+        img.className = 'journal-grid-item';
+        wrap.className = 'journal-grid-item-wrap';
+        img.onclick = () => { new Audio('journal.mp3').play(); document.getElementById('lightbox-img').src = img.src; document.getElementById('lightbox').classList.add('open'); closeJournalPanel(); };
+      } else {
+        img.src = 'locked.png';
+        img.className = 'journal-grid-item locked';
+        wrap.className = 'journal-grid-item-wrap locked';
+      }
+      wrap.appendChild(img);
+      grid.appendChild(wrap);
+    }
+    document.getElementById('journal-overlay').classList.add('open');
+  }
+  
+  function closeJournalPanel() {
+    document.getElementById('journal-overlay').classList.remove('open');
+  }
+
   //AMBIENCE
   const ambientSounds = ['walk.mp3', 'door.mp3'];
   let ambientActive = true;
@@ -693,7 +766,7 @@
   const ctx = canvas.getContext('2d');
   function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
   resize(); window.addEventListener('resize', resize);
-  const sparks = Array(60).fill(0).map(() => ({
+  const sparks = Array(110).fill(0).map(() => ({
     x: Math.random()*innerWidth, y: Math.random()*innerHeight,
     size: Math.random()*1.5+0.3, speed: Math.random()*0.4+0.1,
     opacity: Math.random()*0.4+0.1, drift: (Math.random()-0.5)*0.3
