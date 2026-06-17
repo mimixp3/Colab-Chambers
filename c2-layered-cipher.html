@@ -999,8 +999,10 @@ function updateVigenere() {
       const vid = document.getElementById('lever-video');
       overlay.classList.add('show');
       vid.play();
+      const spin = new Audio('spin.mp3');
+      setTimeout(() => { spin.play().catch(()=>{}); }, 2000);
       vid.addEventListener('ended', () => { overlay.classList.remove('show'); }, { once: true });
-    }, 700);
+    }, 3700);
   } else {
     el.classList.remove('solved');
     document.getElementById('letter-reveal').classList.remove('visible');
