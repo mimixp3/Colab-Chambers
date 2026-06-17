@@ -1067,13 +1067,17 @@
 });
 
   function tryPlayLever() {
-    if (part1Value > 0 && part2Value > 0) {
-      const overlay = document.getElementById('lever-overlay');
-      const vid = document.getElementById('lever-video');
-      overlay.classList.add('show');
-      vid.play();
-      vid.addEventListener('ended', () => { overlay.classList.remove('show'); }, { once: true });
-    }
+    setTimeout(() => {
+      if (part1Value > 0 && part2Value > 0) {
+        const overlay = document.getElementById('lever-overlay');
+        const vid = document.getElementById('lever-video');
+        overlay.classList.add('show');
+        vid.play();
+        const spin = new Audio('spin.mp3');
+        setTimeout(() => { spin.play().catch(()=>{}); }, 2000);
+        vid.addEventListener('ended', () => { overlay.classList.remove('show'); }, { once: true });
+      }
+    }, 3000);
   }
 
   function evaluateCircuit() {
