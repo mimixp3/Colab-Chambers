@@ -1142,6 +1142,7 @@ function unlockOutput() {
   const box = document.getElementById('circuit-result');
   box.textContent = `✓ Circuit Unlocked! Part 1: ${part1Value}`;
   box.classList.add('show','correct');
+  tryPlayLever();
 }
 
 function lockOutput() {
@@ -1300,6 +1301,7 @@ function lockOutput() {
           part2Value = 9;
           box.textContent = `✓ MST Correct! Part 2: ${part2Value}`;
           box.classList.add('show','correct');
+          tryPlayLever();
       } else {
           box.textContent = `✗ Incorrect MST. Weight: ${totalWeight}`;
           box.classList.add('show','incorrect');
