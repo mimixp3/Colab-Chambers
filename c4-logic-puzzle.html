@@ -685,6 +685,12 @@
       padding: 10px 28px; cursor: pointer; transition: all 0.2s;
     }
     .journal-panel-close:hover { border-color: var(--amber); color: var(--parchment); }
+
+
+    /*css for lever*/
+    #lever-overlay { position: fixed; inset: 0; background: #000; z-index: 99999; display: none; align-items: center; justify-content: center; }
+    #lever-overlay.show { display: flex; }
+    #lever-video { width: 100%; height: 100%; object-fit: cover; }
   </style>
 </head>
 <body>
@@ -728,6 +734,13 @@
       <div class="journal-grid" id="journal-grid"></div>
       <button class="journal-panel-close" onclick="closeJournalPanel(); new Audio('clicks.mp3').play()">CLOSE</button>
     </div>
+  </div>
+
+
+  <div id="lever-overlay">
+    <video id="lever-video" playsinline>
+      <source src="lever.mp4" type="video/mp4">
+    </video>
   </div>
   
 <canvas id="particles"></canvas>
@@ -1011,11 +1024,8 @@
   }
 
   function activateWire(id){
-
     const wire = document.getElementById(id);
-
     wire.classList.add("active");
-
     setTimeout(()=>{
       wire.classList.remove("active");
     },500);
@@ -1024,7 +1034,6 @@
   // Drag and drop
   const board = document.getElementById('circuitBoard');
   let draggedGate = null;
-
   document.querySelectorAll('.gate-item').forEach(item => {
     item.addEventListener('dragstart', (e) => {
       draggedGate = e.target.dataset.gate;
@@ -1056,6 +1065,16 @@
   });
 
 });
+
+  function tryPlayLever() {
+    if (part1Value > 0 && part2Value > 0) {
+      const overlay = document.getElementById('lever-overlay');
+      const vid = document.getElementById('lever-video');
+      overlay.classList.add('show');
+      vid.play();
+      vid.addEventListener('ended', () => { overlay.classList.remove('show'); }, { once: true });
+    }
+  }
 
   function evaluateCircuit() {
       const s1 = document.getElementById("slot1").dataset.gate;
