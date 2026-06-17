@@ -39,7 +39,6 @@
     .hall-bg {
       position: fixed;
       inset: 0;
-      background: url('hall.jpg') center/cover;
       z-index: -5;
       opacity: 0.6;
       display: none;
@@ -589,8 +588,12 @@
   <source src="castle.mp4" type="video/mp4">
 </video>
 
-<!-- HALL IMAGE -->
-<div class="hall-bg" id="hall-bg"></div>
+<!--lobby area hall-->
+<div class="hall-bg" id="hall-bg">
+  <video autoplay loop muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+    <source src="lobby.mp4" type="video/mp4">
+  </video>
+</div>
 
 <!-- SOUND EFFECTS -->
 <audio id="click-sound" preload="auto">
