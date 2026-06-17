@@ -551,6 +551,11 @@
       padding: 10px 28px; cursor: pointer; transition: all 0.2s;
     }
     .journal-panel-close:hover { border-color: var(--amber); color: var(--parchment); }
+
+    /*lever vid*/
+    #lever-overlay { position: fixed; inset: 0; background: #000; z-index: 99999; display: none; align-items: center; justify-content: center; }
+    #lever-overlay.show { display: flex; }
+    #lever-video { width: 100%; height: 100%; object-fit: cover; }
   </style>
 </head>
 <body>
@@ -587,6 +592,13 @@
       <button class="journal-panel-close" onclick="closeJournalPanel(); new Audio('clicks.mp3').play()">CLOSE</button>
     </div>
   </div>
+
+
+<div id="lever-overlay">
+  <video id="lever-video" playsinline>
+    <source src="lever.mp4" type="video/mp4">
+  </video>
+</div>
   
 <canvas id="particles"></canvas>
 
@@ -983,6 +995,11 @@ function updateVigenere() {
       const rev=document.getElementById('letter-reveal');
       rev.classList.add('visible');
       rev.scrollIntoView({behavior:'smooth', block:'center'});
+      const overlay = document.getElementById('lever-overlay');
+      const vid = document.getElementById('lever-video');
+      overlay.classList.add('show');
+      vid.play();
+      vid.addEventListener('ended', () => { overlay.classList.remove('show'); }, { once: true });
     }, 700);
   } else {
     el.classList.remove('solved');
