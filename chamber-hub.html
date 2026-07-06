@@ -773,6 +773,25 @@
 
 </div>
 
+
+  <!-- ENCOUNTER CUTSCENE -->
+    <div id="encounter-screen" style="
+      position: fixed;
+      inset: 0;
+      background: black;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    ">
+      <video id="encounter-video"
+        style="width:100%; height:100%; object-fit:cover;"
+        playsinline>
+        <source src="encounter.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  
 <!--YAY SCREEN-->
 <div id="win-screen">
   
@@ -875,20 +894,46 @@
     });
   }
 
+  function playEncounterCutscene(callback) {
+    const screen = document.getElementById('encounter-screen');
+    const video = document.getElementById('encounter-video');
+  
+    screen.style.display = 'flex';
+    video.currentTime = 0;
+  
+    video.controls = false;
+    video.setAttribute('disablepictureinpicture', true);
+  
+    video.play().catch(e => console.log("video blocked:", e));
+  
+    video.onended = () => {
+      screen.style.display = 'none';
+      callback();
+    };
+  
+    //prevent skipping via clicks
+    screen.onclick = (e) => e.preventDefault();
+  }
+
   function enterChamber() {
     if (!selectedTeam) return;
     playSound('click-sound');
-    
-    document.getElementById('landing-page').style.display = 'none';
-    document.getElementById('dashboard').classList.add('active');
-    document.getElementById('castle-video').style.display = 'none';
-    document.getElementById('hall-bg').classList.add('active');
-    
-    document.getElementById('house-display').textContent = `Team ${selectedTeam}`;
-    
-    buildChallenges();
-    buildLeaderboard();
-    fetchLeaderboard();
+  
+    //play encounter FIRST
+    playEncounterCutscene(() => {
+  
+      //AFTER video ends then your original logic
+      document.getElementById('landing-page').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      document.getElementById('castle-video').style.display = 'none';
+      document.getElementById('hall-bg').classList.add('active');
+  
+      document.getElementById('house-display').textContent = `Team ${selectedTeam}`;
+  
+      buildChallenges();
+      buildLeaderboard();
+      fetchLeaderboard();
+    });
   }
 
   //slot func
