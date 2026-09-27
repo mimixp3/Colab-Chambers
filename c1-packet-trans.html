@@ -6,7 +6,7 @@
   <title>CoLab Archives: The Packet Transmission</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
-    :root {
+    :root{
       --black: #0a0a0a;
       --parchment: #f5f0e8;
       --gold: #c9a84c;
@@ -20,9 +20,9 @@
       --purple-dim: #4c3a8a;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after{box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
+    body{
       background: var(--black);
       color: var(--parchment);
       font-family: 'EB Garamond', serif;
@@ -30,7 +30,7 @@
       overflow-x: hidden;
     }
     /*fixed canvas behind everything*/
-    #particles {
+    #particles{
       position: fixed;
       inset: 0;
       pointer-events: none;
@@ -38,7 +38,7 @@
     }
 
     /*scanline overlay very subtle lol*/
-    body::before {
+    body::before{
       content: '';
       position: fixed; inset: 0;
       background: repeating-linear-gradient(
@@ -50,14 +50,14 @@
     }
 
     /*vignette so edges go dark*/
-    body::after {
+    body::after{
       content: '';
       position: fixed; inset: 0;
       background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.92) 100%);
       pointer-events: none; z-index: 1;
     }
 
-    .wrapper {
+    .wrapper{
       position: relative; z-index: 2;
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center;
@@ -65,38 +65,38 @@
       max-width: 900px; margin: 0 auto;
     }
 
-    .top-bar {
+    .top-bar{
       width: 100%;
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 48px; animation: fadeIn 0.8s ease both;
     }
 
-    .back-link {
+    .back-link{
       font-family: 'Cinzel', serif;
       font-size: 14px; letter-spacing: 3px; font-weight:bold;
       color: var(--gold-dim); text-decoration: none;
       text-transform: uppercase; transition: color 0.3s;
     }
-    .back-link:hover { color: var(--gold); }
+    .back-link:hover{color: var(--gold); }
 
-    .challenge-badge {
+    .challenge-badge{
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; color: var(--gold); letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(201,168,76,0.4);
     }
 
-    .header {
+    .header{
       text-align: center; margin-bottom: 48px;
       animation: fadeDown 1s ease both;
     }
 
-    .challenge-number {
+    .challenge-number{
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; letter-spacing: 5px;
       color: var(--amber-dim); margin-bottom: 12px; display: block;
     }
 
-    .title {
+    .title{
       font-family: 'Cinzel', serif;
       font-size: clamp(24px, 5vw, 48px);
       font-weight: 700; color: var(--parchment);
@@ -104,24 +104,24 @@
       text-shadow: 0 0 30px rgba(212,132,42,0.2);
     }
 
-    .divider {
+    .divider{
       display: flex; align-items: center; gap: 16px;
       width: 100%; margin: 0 0 40px;
       animation: fadeIn 1.2s ease both;
     }
 
-    .divider-line {
+    .divider-line{
       flex: 1; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
     }
 
-    .divider-glyph {
+    .divider-glyph{
       font-family: 'Share Tech Mono', monospace;
       color: var(--amber); font-size: 12px;
     }
 
     /*da lore box*/
-    .parchment-card {
+    .parchment-card{
       width: 100%;
       border: 1px solid rgba(201,168,76,0.2);
       background: rgba(15,12,8,0.9);
@@ -130,17 +130,17 @@
       animation: fadeUp 1.2s ease both;
     }
 
-    .card-inner {
+    .card-inner{
       display: flex; gap: 24px; align-items: flex-start;
     }
     
-    .card-inner .card-text { flex: 1; }
-    @keyframes float {
-      0%, 100% { transform: rotate(2deg) translateY(0); }
-      50% { transform: rotate(2deg) translateY(-8px); }
+    .card-inner .card-text{flex: 1; }
+    @keyframes float{
+      0%, 100%{transform: rotate(2deg) translateY(0); }
+      50%{transform: rotate(2deg) translateY(-8px); }
     }
     
-    .journal-thumb {
+    .journal-thumb{
       width: 80px; flex-shrink: 0;
       object-fit: cover; cursor: pointer;
       filter: sepia(0.3);
@@ -148,18 +148,18 @@
       box-shadow: 0 0 18px rgba(201,168,76,0.35), 0 0 40px rgba(201,168,76,0.15);
       transition: box-shadow 0.3s;
     }
-    .journal-thumb:hover {
+    .journal-thumb:hover{
       box-shadow: 0 0 28px rgba(201,168,76,0.7);
     }
 
-    .parchment-card::before {
+    .parchment-card::before{
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
 
     /*ran out of names for stuff like wym eyebrow*/
-    .card-eyebrow {
+    .card-eyebrow{
       font-family: 'Cinzel', serif;
       font-size: 16px; letter-spacing: 4px;
       color: var(--gold); text-transform: uppercase;
@@ -167,25 +167,25 @@
       display: flex; align-items: center; gap: 10px;
     }
 
-    .card-eyebrow::after {
+    .card-eyebrow::after{
       content: ''; flex: 1; height: 1px;
       background: rgba(201,168,76,0.15);
     }
 
-    .card-text {
+    .card-text{
       font-family: 'EB Garamond', serif;
       font-size: 19.5px; line-height: 1.95; color: var(--ash);
     }
 
-    .card-text em {color: var(--gold);}
+    .card-text em{color: var(--gold);}
 
     /*journal and da lightbox*/
-    .journal-wrap {
+    .journal-wrap{
       display: flex; justify-content: flex-end;
       margin-bottom: 16px;
     }
     
-    .journal-thumb {
+    .journal-thumb{
       width: 72px; height: 90px;
       object-fit: cover;
       border: 1px solid rgba(201,168,76,0.3);
@@ -195,25 +195,25 @@
       transform: rotate(2deg);
       filter: sepia(0.3);
     }
-    .journal-thumb:hover {
+    .journal-thumb:hover{
       opacity: 1; transform: rotate(0deg) scale(1.05);
       border-color: var(--gold);
     }
     
-    .lightbox {
+    .lightbox{
       display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.95); z-index: 9999;
-      align-items: center; justify-content: center;
+      background:rgba(0,0,0,0.95); z-index:9999;
+      align-items:center; justify-content:center;
       cursor: pointer;
     }
-    .lightbox.open { display: flex; animation: fadeIn 0.2s ease both; }
+    .lightbox.open{display: flex; animation: fadeIn 0.2s ease both; }
     
-    .lightbox img {
+    .lightbox img{
       max-width: 88vw; max-height: 88vh;
       filter: sepia(0.2);
     }
-    /*wireshark panel*/
-    .packet-viewer {
+    /*wireshark panel THWINGG i need to fix*/
+    .packet-viewer{
       width: 100%;
       border: 1px solid rgba(0,212,255,0.3);
       background: rgba(0,20,30,0.95);
@@ -221,323 +221,345 @@
       animation: fadeUp 1.4s ease both;
     }
 
-    .packet-viewer::before {
+    .packet-viewer::before{
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--cyan), transparent);
     }
 
-    .viewer-header {
+    .viewer-header{
       padding: 12px 20px;
       border-bottom: 1px solid rgba(0,212,255,0.2);
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      justify-content:space-between;
+      align-items:center;
     }
 
-    .viewer-title {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px; letter-spacing: 3px;
-      color: var(--cyan);
-      text-transform: uppercase;
+    .viewer-title{
+      font-family:'Share Tech Mono', monospace;
+      font-size:11px; letter-spacing:3px;
+      color:var(--cyan);
+      text-transform:uppercase;
     }
 
-    .viewer-filter {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px;
-      color: var(--cyan-dim);
+    .viewer-filter{
+      font-family:'Share Tech Mono', monospace;
+      font-size:10px;
+      color:var(--cyan-dim);
     }
 
     /*proto color legend strip*/
-    .proto-legend {
-      padding: 8px 20px;
-      border-bottom: 1px solid rgba(0,212,255,0.1);
-      display: flex; gap: 20px; align-items: center;
+    .proto-legend{
+      padding:8px 20px;
+      border-bottom:1px solid rgba(0,212,255,0.1);
+      display:flex; gap:20px; align-items:center;
     }
 
-    .legend-item {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px; letter-spacing: 1px;
-      display: flex; align-items: center; gap: 6px;
+    .legend-item{
+      font-family:'Share Tech Mono', monospace;
+      font-size:10px; letter-spacing:1px;
+      display:flex; align-items:center; gap:6px;
     }
 
-    .legend-dot {
-      width: 8px; height: 8px; border-radius: 50%;
+    .legend-dot{
+      width:8px; height:8px; border-radius:50%;
     }
 
-    .packet-list {
-      max-height: 420px;
-      overflow-y: auto;
+    .packet-list{
+      max-height:420px;
+      overflow-y:auto;
     }
 
-    .packet-item {
-      padding: 10px 20px;
-      border-bottom: 1px solid rgba(0,212,255,0.08);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex; align-items: center; gap: 0;
+    .packet-item{
+      padding:10px 20px;
+      border-bottom:1px solid rgba(0,212,255,0.08);
+      font-family:'Share Tech Mono', monospace;
+      font-size:12px;
+      cursor:pointer;
+      transition:all 0.2s;
+      display:flex; align-items:center; gap:0;
     }
 
-    .packet-item:hover { background: rgba(0,212,255,0.05); }
+    .packet-item:hover{background:rgba(0,212,255,0.05); }
 
-    .packet-item.selected {
-      background: rgba(0,212,255,0.1);
-      border-left: 3px solid var(--cyan);
+    .packet-item.selected{
+      background:rgba(0,212,255,0.1);
+      border-left:3px solid var(--cyan);
     }
 
     /*time col*/
-    .packet-time {
-      color: rgba(136,136,128,0.5);
-      margin-right: 14px;
-      font-size: 11px;
-      min-width: 60px;
+    .packet-time{
+      color:rgba(136,136,128,0.5);
+      margin-right:14px;
+      font-size:11px;
+      min-width:60px;
     }
 
-    .packet-num {
+    .packet-num{
       color: var(--cyan-dim);
       margin-right: 12px;
       min-width: 28px;
     }
 
     /*each proto gets its own color*/
-    .packet-proto {
+    .packet-proto{
       margin-right: 12px;
       min-width: 44px;
       font-weight: bold;
     }
 
-    .proto-dns  { color: var(--purple); }
-    .proto-http { color: var(--cyan); }
-    .proto-tcp  { color: rgba(136,136,128,0.7); }
+    .proto-dns{color: var(--purple); }
+    .proto-http{color: var(--cyan); }
+    .proto-tcp{color: rgba(136,136,128,0.7); }
 
-    .packet-info { color: var(--ash); font-size: 11px; }
+    .packet-info{color: var(--ash); font-size: 11px; }
 
     /*deeeetail expansion*/
-    .packet-details {
+    .packet-details{
       width: 100%;
-      border: 1px solid rgba(212,132,42,0.25);
-      background: rgba(20,10,4,0.95);
-      padding: 24px;
-      margin-bottom: 32px;
-      display: none;
+      border:1px solid rgba(212,132,42,0.25);
+      background:rgba(20,10,4,0.95);
+      padding:24px;
+      margin-bottom:32px;
+      display:none;
     }
 
     /*feeling feverish imaginw i just abandon this project..*/
-    .packet-details.show { display: block; animation: fadeUp 0.3s ease both; }
+    .packet-details.show{display: block; animation: fadeUp 0.3s ease both; }
 
-    .detail-section { margin-bottom: 16px; }
+    .detail-section{margin-bottom: 16px; }
 
-    .detail-title {
+    .detail-title{
       font-family: 'Cinzel', serif;
       font-size: 11px; letter-spacing: 3px;
-      color: var(--gold); margin-bottom: 8px;
-      text-transform: uppercase;
+      color:var(--gold); margin-bottom:8px;
+      text-transform:uppercase;
     }
 
-    .detail-content {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 13px; line-height: 1.9;
-      color: var(--parchment);
-      background: rgba(0,0,0,0.5);
-      padding: 14px;
+    .detail-content{
+      font-family:'Share Tech Mono', monospace;
+      font-size:13px; line-height:1.9;
+      color:var(--parchment);
+      background:rgba(0,0,0,0.5);
+      padding:14px;
       border: 1px solid rgba(212,132,42,0.1);
       word-break: break-all;
     }
 
     /*highlight the answer field in dns responses so they actually see it*/
-    .detail-content .highlight {
+    .detail-content .highlight{
       color: var(--purple-dim);
     }
 
     /*highlight suspicious stuff in red-ish*/
-    .detail-content .suspicious {
+    .detail-content .suspicious{
       color: #ff6b6b;
     }
 
-    .steps {
+    .steps{
       width: 100%;
       display: flex;flex-direction: column; gap: 12px;
       margin-bottom:32px;
       animation: fadeUp 1.8s ease both;
     }
 
-    .step {
-      display: flex; gap: 16px; align-items: flex-start;
-      padding: 16px 20px;
-      border: 1px solid rgba(201,168,76,0.08);
-      background: rgba(10,10,10,0.6);
+    .step{
+      display:flex; gap:16px; align-items:flex-start;
+      padding:16px 20px;
+      border:1px solid rgba(201,168,76,0.08);
+      background:rgba(10,10,10,0.6);
     }
 
-    .step-num {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px; color: var(--amber);
-      letter-spacing: 2px; flex-shrink: 0;
+    .step-num{
+      font-family:'Share Tech Mono', monospace;
+      font-size:11px; color:var(--amber);
+      letter-spacing:2px; flex-shrink: 0;
     }
 
-    .step-content { flex: 1; }
+    .step-content{flex: 1;}
 
-    .step-title {
+    .step-title{
       font-family: 'Cinzel', serif;
       font-size: 15px; letter-spacing:2px;
       color: var(--gold); margin-bottom: 4px; text-transform: uppercase;
     }
 
-    .step-desc {
+    .step-desc{
       font-family: 'EB Garamond', serif;
-       font-size: 20px;
+      font-size: 20px;
       color: var(--ash); line-height: 1.6;
     }
 
-    .step-desc code {
+    .step-desc code{
       font-family: 'Share Tech Mono', monospace;
       font-style: normal; font-size: 12px;
       color: var(--amber);
-      background: rgba(212,132,42,0.06);
-      padding: 1px 6px;
-      border: 1px solid rgba(212,132,42,0.15);
+      background:rgba(212,132,42,0.06);
+      padding:1px 6px;
+      border:1px solid rgba(212,132,42,0.15);
     }
 
-    .footer {
-      margin-top: 20px; text-align: center;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px; color: #222; letter-spacing: 2px;
+    .footer{
+      margin-top:20px; text-align:center;
+      font-family:'Share Tech Mono', monospace;
+      font-size:11px; color:#222; letter-spacing:2px;
     }
 
-    @keyframes fadeDown {
-      from {opacity: 0;transform:translateY(-20px);}
-      to   { opacity:1; transform: translateY(0);}
+    @keyframes fadeDown{
+      from{opacity:0;transform:translateY(-20px);}
+      to{opacity:1; transform:translateY(0);}
     }
-    @keyframes fadeUp {
-      from {opacity: 0;transform: translateY(20px); }
-      to   {opacity: 1;transform:translateY(0); }
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(20px); }
+      to{opacity:1;transform:translateY(0); }
     }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to   {opacity: 1;}
+    @keyframes fadeIn{
+      from{opacity:0;}
+      to{opacity:1;}
+
+    @keyframes revealLayer{
+      from{opacity:0; transform:translateY(16px); }
+      to{opacity:1; transform:translateY(0); }
+    }
+
+    @keyframes glitchJitter{
+      0%, 100%{transform:translate(0,0);}
+      20%{transform:translate(-1px, 1px);}
+      40%{transform:translate(1px, -1px);}
+      60%{transform:translate(-1px, -1px);}
+      80%{transform:translate(1px, 1px);}
+    }
+    @keyframes glitchFlicker{
+      0%, 92%, 100%{opacity:1;}
+      93%{opacity:0.4; }
+      94%{opacity:1;}
+      96%{opacity:0.6; }
+      97%{opacity:1;}
+    }
+
     }
 
 
 
     /*OVERLAY ENTER*/
-    #entry-overlay { position: fixed; inset: 0; background: #000; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    #entry-video { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0.85; }
-    #skip-btn { position: absolute; bottom: 32px; right: 32px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--gold-dim); background: none; border: 1px solid var(--gold-dim); padding: 8px 20px; cursor: pointer; transition: all 0.3s; z-index: 2; }
-    #skip-btn:hover { color: var(--gold); border-color: var(--gold); }
+    #entry-overlay{position:fixed; inset:0; background:#000; z-index:99999; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    #entry-video{width:100%; height:100%; object-fit:cover; position:absolute; inset:0; opacity:0.85; }
+    #skip-btn{position:absolute; bottom:32px; right:32px; font-family:'Cinzel', serif; font-size:11px; letter-spacing:3px; color:var(--gold-dim); background:none; border:1px solid var(--gold-dim); padding:8px 20px; cursor:pointer; transition:all 0.3s; z-index:2; }
+    #skip-btn:hover{color:var(--gold); border-color:var(--gold); }
     
     /*INTRO MESSAGE*/
-    #parchment-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: none; align-items: center; justify-content: center; }
-    #parchment-overlay.show { display: flex; }
-    #parchment-note { background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 520px; width: 90%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
-    #parchment-overlay.show #parchment-note { transform: translateY(0) rotate(-0.5deg); opacity: 1; }
-    #parchment-note::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
-    #parchment-note::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
-    .note-eyebrow { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 5px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 24px; }
-    .note-text { font-family: 'EB Garamond', serif; font-size: 18px; line-height: 1.9; color: #c8b898; margin-bottom: 28px; }
-    .note-close { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--amber); background: none; border: 1px solid rgba(212,132,42,0.3); padding: 10px 28px; cursor: pointer; transition: all 0.2s; }
-    .note-close:hover { border-color: var(--amber); color: var(--parchment); }
-    .note-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
-    .note-corner.tl { top: 10px; left: 14px; }
-    .note-corner.tr { top: 10px; right: 14px; }
-    .note-corner.bl { bottom: 10px; left: 14px; }
-    .note-corner.br { bottom: 10px; right: 14px; }
+    #parchment-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:99998; display:none; align-items:center; justify-content:center;}
+    #parchment-overlay.show{display:flex;}
+    #parchment-note{background:#1a1408; border:1px solid rgba(201,168,76,0.4); max-width:760px; width:92%; max-height:92vh; overflow-y:auto; padding:44px 52px; position:relative; text-align:center; transform:translateY(40px) rotate(-1deg); opacity:0; transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); scrollbar-width:none;}
+    #parchment-note::-webkit-scrollbar{display:none;}
+    #parchment-overlay.show #parchment-note{transform:translateY(0) rotate(-0.5deg); opacity:1;}
+    #parchment-note::before{content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--gold), transparent);}
+    #parchment-note::after{content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--gold-dim), transparent);}
+    .note-eyebrow{font-family:'Cinzel', serif; font-size:9px; letter-spacing:5px; color:var(--gold-dim); text-transform:uppercase; margin-bottom:24px;}
+    .note-text{font-family:'EB Garamond', serif; font-size:17px; line-height:1.75; color:#c8b898; margin-bottom:28px;}
+    .note-close{font-family:'Cinzel', serif; font-size:11px; letter-spacing:3px; color:var(--amber); background:none; border:1px solid rgba(212,132,42,0.3); padding:10px 28px; cursor:pointer; transition:all 0.2s;}
+    .note-close:hover{border-color:var(--amber); color:var(--parchment);}
+    .note-corner{position:absolute; font-size:14px; color:var(--gold-dim);}
+    .note-corner.tl{top:10px; left:14px;}
+    .note-corner.tr{top:10px; right:14px;}
+    .note-corner.bl{bottom:10px; left:14px;}
+    .note-corner.br{bottom:10px; right:14px;}
 
 
     /*folder button*/
-    #journal-fab {
-      position: fixed; top: 24px; right: 24px;
-      width: 71px; height: 71px;
-      cursor: pointer; z-index: 9000;
-      transition: transform 0.2s;
+    #journal-fab{
+      position:fixed; top:24px; right:24px;
+      width:71px; height:71px;
+      cursor:pointer; z-index:9000;
+      transition:transform 0.2s;
     }
-    #journal-fab::before {
-      content: '';
-      position: absolute; inset: -16px;
-      background: radial-gradient(circle, rgba(201,168,76,0.35), transparent 70%);
-      border-radius: 50%;
-      z-index: -1;
-      animation: fabGlow 3s ease-in-out infinite alternate;
+    #journal-fab::before{
+      content:'';
+      position:absolute; inset:-16px;
+      background:radial-gradient(circle, rgba(201,168,76,0.35), transparent 70%);
+      border-radius:50%;
+      z-index:-1;
+      animation:fabGlow 3s ease-in-out infinite alternate;
     }
-    #journal-fab:hover { transform: scale(1.08); }
-    #journal-fab img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); position: relative; z-index: 1; }
+    #journal-fab:hover{transform:scale(1.08); }
+    #journal-fab img{width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 0 10px rgba(201,168,76,0.4)); position:relative; z-index:1; }
     
-    @keyframes fabGlow {
-      from { opacity: 0.5; transform: scale(0.9); }
-      to   { opacity: 1; transform: scale(1.15); }
+    @keyframes fabGlow{
+      from{opacity:0.5; transform:scale(0.9); }
+      to{opacity:1; transform:scale(1.15);}
     }
     
     /*journal overlay*/
-    #journal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.9);
-      z-index: 9500;
-      display: none; align-items: center; justify-content: center;
+    #journal-overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.9);
+      z-index:9500;
+      display:none; align-items:center; justify-content:center;
     }
-    #journal-overlay.open { display: flex; animation: fadeIn 0.2s ease both; }
+    #journal-overlay.open{display:flex; animation:fadeIn 0.2s ease both;}
     
-    #journal-panel {
-      background: linear-gradient(135deg, rgba(26,20,8,0.98), rgba(15,12,8,0.98));
-      border: 1px solid rgba(201,168,76,0.4);
-      max-width: 620px; width: 90%;
-      padding: 40px;
-      position: relative;
-      box-shadow: 0 0 60px rgba(201,168,76,0.15), 0 20px 60px rgba(0,0,0,0.6);
+    #journal-panel{
+      background:linear-gradient(135deg, rgba(26,20,8,0.98), rgba(15,12,8,0.98));
+      border:1px solid rgba(201,168,76,0.4);
+      max-width:620px; width:90%;
+      padding:40px;
+      position:relative;
+      box-shadow:0 0 60px rgba(201,168,76,0.15), 0 20px 60px rgba(0,0,0,0.6);
     }
-    #journal-panel::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    #journal-panel::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(to right, transparent, var(--gold), transparent);
     }
-    #journal-panel::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
-    }
-    
-    .journal-panel-title {
-      font-family: 'Cinzel', serif;
-      font-size: 12px; letter-spacing: 5px;
-      color: var(--gold); text-transform: uppercase;
-      text-align: center; margin-bottom: 28px;
-    }
-    .journal-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
-    .journal-corner.tl { top: 12px; left: 16px; }
-    .journal-corner.tr { top: 12px; right: 16px; }
-    .journal-corner.bl { bottom: 12px; left: 16px; }
-    .journal-corner.br { bottom: 12px; right: 16px; }
-    
-    .journal-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+    #journal-panel::after{
+      content:'';
+      position:absolute; bottom:0; left:0; right:0; height:1px;
+      background:linear-gradient(to right, transparent, var(--gold-dim), transparent);
     }
     
-    .journal-grid-item {
-      width: 100%; aspect-ratio: 4/5;
-      object-fit: cover;
-      border: 1px solid rgba(201,168,76,0.3);
+    .journal-panel-title{
+      font-family:'Cinzel', serif;
+      font-size:12px; letter-spacing:5px;
+      color:var(--gold); text-transform:uppercase;
+      text-align:center; margin-bottom:28px;
+    }
+    .journal-corner{position:absolute; font-size:14px; color:var(--gold-dim);}
+    .journal-corner.tl{top:12px; left:16px;}
+    .journal-corner.tr{top:12px; right:16px;}
+    .journal-corner.bl{bottom:12px; left:16px;}
+    .journal-corner.br{bottom:12px; right:16px;}
+    
+    .journal-grid{
+      display:grid;
+      grid-template-columns:repeat(5, 1fr);
+      gap:16px;
+    }
+    
+    .journal-grid-item{
+      width:100%; aspect-ratio:4/5;
+      object-fit:cover;
+      border:1px solid rgba(201,168,76,0.3);
       filter: sepia(0.3);
       cursor: pointer;
       transition: all 0.2s;
     }
-    .journal-grid-item:hover { border-color: var(--gold); transform: scale(1.04); }
+    .journal-grid-item:hover{border-color: var(--gold); transform: scale(1.04);}
     
-    .journal-grid-item-wrap {
+    .journal-grid-item-wrap{
         position: relative;
       }
-    .journal-grid-item-wrap::before {
+    .journal-grid-item-wrap::before{
       content: '';
       position: absolute; inset: -8px;
       background: radial-gradient(circle, rgba(201,168,76,0.25), transparent 70%);
       border-radius: 50%;
       z-index: -1;
     }
-    .journal-grid-item-wrap.locked::before {
+    .journal-grid-item-wrap.locked::before{
       background:radial-gradient(circle, rgba(120,120,120,0.2), transparent 70%);
     }
     
-    .journal-grid-item {
+    .journal-grid-item{
       width: 100%; aspect-ratio: 4/5;
       object-fit: cover;
       border: 1px solid rgba(201,168,76,0.3);
@@ -547,18 +569,18 @@
       position: relative; z-index: 1;
       display: block;
     }
-    .journal-grid-item:hover { border-color: var(--gold); transform: scale(1.04); }
+    .journal-grid-item:hover{border-color: var(--gold); transform: scale(1.04);}
     
-    .journal-grid-item.locked {
+    .journal-grid-item.locked{
       cursor: default;
       filter: none;
       object-fit: contain;
       padding: 16px;
       background: rgba(0,0,0,0.3);
     }
-    .journal-grid-item.locked:hover { transform: none; border-color: rgba(120,120,120,0.2); }
+    .journal-grid-item.locked:hover{transform: none; border-color: rgba(120,120,120,0.2);}
     
-    .journal-panel-close {
+    .journal-panel-close{
       display: block; margin: 28px auto 0;
       font-family: 'Cinzel', serif;
       font-size: 11px; letter-spacing: 3px;
@@ -566,8 +588,92 @@
       border: 1px solid rgba(212,132,42,0.3);
       padding: 10px 28px; cursor: pointer; transition: all 0.2s;
     }
-    .journal-panel-close:hover { border-color: var(--amber); color: var(--parchment); }
+    .journal-panel-close:hover{border-color: var(--amber); color: var(--parchment); }
     
+
+    /*signal scan terminal*/
+    .scan-terminal{
+      border: 1px solid rgba(0,212,255,0.35); background: rgba(4,10,12,0.9);
+      padding: 28px 32px; margin-bottom: 32px; position: relative;
+      animation: fadeUp 1.6s ease both, glitchJitter 0.18s infinite, glitchFlicker 2.4s infinite;
+    }
+    .scan-terminal.stabilized{animation: fadeUp 1.6s ease both; border-color: rgba(201,168,76,0.5); }
+    .scan-header{
+      font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 2px;
+      color: var(--cyan); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
+    }
+    .scan-terminal.stabilized .scan-header{color: var(--gold); }
+    .scan-dot{
+      width: 7px; height: 7px; border-radius: 50%; background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan); animation: glitchFlicker 1.2s infinite;
+    }
+    .scan-terminal.stabilized .scan-dot{background: var(--gold); box-shadow: 0 0 8px var(--gold); animation: none; }
+    .scan-label{
+      display: block; font-family: 'Share Tech Mono', monospace; font-size: 11px;
+      letter-spacing: 1px; color: var(--ash); margin-bottom: 14px;
+    }
+    .scan-input-row{display: flex; gap: 12px; justify-content: center; }
+    #scan-input{
+      width: 64px; text-align: center; text-transform: uppercase;
+      font-family: 'Share Tech Mono', monospace; font-size: 28px; letter-spacing: 2px;
+      background: rgba(0,0,0,0.6); color: var(--cyan); border: 1px solid rgba(0,212,255,0.4);
+      padding: 10px 0; outline: none;
+    }
+    .scan-terminal.stabilized #scan-input{color: var(--gold); border-color: rgba(201,168,76,0.5); }
+    #scan-input:focus{border-color: var(--cyan); box-shadow: 0 0 12px rgba(0,212,255,0.3); }
+    .scan-submit{
+      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px;
+      color: var(--cyan); background: none; border: 1px solid rgba(0,212,255,0.4);
+      padding: 10px 24px; cursor: pointer; transition: all 0.2s;
+    }
+    .scan-submit:hover{border-color: var(--cyan); background: rgba(0,212,255,0.1); }
+    .scan-terminal.stabilized .scan-submit{color: var(--gold); border-color: rgba(201,168,76,0.4); }
+    .scan-error{
+      min-height: 18px; margin-top: 12px; font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 1px; color: #e05a5a;
+    }
+
+    /*letter slot reveal*/
+    .letter-reveal{
+      display: none; text-align: center; padding: 40px;
+      border: 1px solid rgba(201,168,76,0.3); background: rgba(10,8,4,0.97);
+      position: relative; margin-bottom: 32px;
+    }
+    .letter-reveal.visible{display: block; animation: revealLayer 1s ease both; }
+    .letter-reveal::before{
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .reveal-label{
+      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 6px;
+      color: var(--gold-dim); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .reveal-letter{
+      font-family: 'Cinzel', serif; font-size: 88px; font-weight: 700;
+      color: var(--gold); line-height: 1; margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(201,168,76,0.6), 0 0 80px rgba(201,168,76,0.2);
+    }
+    .reveal-sub{
+      font-family: 'Share Tech Mono', monospace; font-size: 11px;
+      letter-spacing: 4px; color: var(--gold-dim);
+    }
+
+    /*lever cutscene*/
+    #lever-overlay{position: fixed; inset: 0; background: #000; z-index: 99999; display: none; align-items: center; justify-content: center; }
+    #lever-overlay.show{display: flex; }
+    #lever-video{width: 100%; height: 100%; object-fit: cover; }
+
+    /*proceed button*/
+    #proceed-btn{
+      display: none; position: fixed; bottom: 32px; right: 32px; transform: none;
+      font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 4px;
+      color: var(--gold); background: rgba(10,8,4,0.97);
+      border: 1px solid rgba(201,168,76,0.6); padding: 16px 40px;
+      cursor: pointer; z-index: 9999; transition: all 0.2s;
+      box-shadow: 0 0 30px rgba(201,168,76,0.2);
+      animation: fadeUp 0.5s ease both;
+    }
+    #proceed-btn:hover{background: rgba(201,168,76,0.1); box-shadow: 0 0 40px rgba(201,168,76,0.4); }
   </style>
 </head>
 <body>
@@ -681,9 +787,29 @@
   <!--expand whilw clicking-->
   <div class ="packet-details" id="packet-details"></div>
 
-  <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
-    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER: &nbsp;</span>
-    <a href="https://forms.gle/wT1AwS8aMfRwzqWF8" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/wT1AwS8aMfRwzqWF8</a>
+<div id="lever-overlay">
+  <video id="lever-video" playsinline>
+    <source src="lever.mp4" type="video/mp4">
+  </video>
+</div>
+
+<button id="proceed-btn" onclick="window.location.href=this.dataset.href; new Audio('clicks.mp3').play()"></button>
+
+  <div class="scan-terminal" id="scan-terminal">
+    <div class="scan-header"><span class="scan-dot"></span> SIGNAL_TRACE.exe — connection unstable</div>
+    <label class="scan-label">// enter the traced letter to stabilize the signal //</label>
+    <div class="scan-input-row">
+      <input type="text" id="scan-input" maxlength="1" autocomplete="off" spellcheck="false" placeholder="_"/>
+      <button class="scan-submit" onclick="checkScanLetter()">TRACE</button>
+    </div>
+    <div class="scan-error" id="scan-error"></div>
+  </div>
+
+  <!--letter reveal-->
+  <div class="letter-reveal" id="letter-reveal">
+    <div class="reveal-label">✦ &nbsp; Signal Stabilized &nbsp; ✦</div>
+    <div class="reveal-letter">S</div>
+    <div class="reveal-sub">// KEY_01 // SPARK //</div>
   </div>
 
   <div class="steps">
@@ -728,18 +854,18 @@
   //JOURNAL FOLDER LOGIC
   const CURRENT_LEVEL= 1;
   
-  function openJournalPanel() {
-    const grid = document.getElementById('journal-grid');
-    grid.innerHTML = '';
-    for (let i = 1; i <= 5; i++) {
+  function openJournalPanel(){
+    const grid=document.getElementById('journal-grid');
+    grid.innerHTML='';
+    for (let i = 1; i <= 5; i++){
       const wrap = document.createElement('div');
-      const img = document.createElement('img');
-      if (i <= CURRENT_LEVEL) {
-        img.src = `jc${i}.png`;
-        img.className = 'journal-grid-item';
-        wrap.className = 'journal-grid-item-wrap';
-        img.onclick = () => { new Audio('journal.mp3').play(); document.getElementById('lightbox-img').src = img.src; document.getElementById('lightbox').classList.add('open'); closeJournalPanel(); };
-      } else {
+      const img=document.createElement('img');
+      if (i <= CURRENT_LEVEL){
+        img.src=`jc${i}.png`;
+        img.className='journal-grid-item';
+        wrap.className='journal-grid-item-wrap';
+        img.onclick=() =>{new Audio('journal.mp3').play(); document.getElementById('lightbox-img').src = img.src; document.getElementById('lightbox').classList.add('open'); closeJournalPanel();};
+      } else{
         img.src = 'locked.png';
         img.className = 'journal-grid-item locked';
         wrap.className = 'journal-grid-item-wrap locked';
@@ -750,33 +876,33 @@
     document.getElementById('journal-overlay').classList.add('open');
   }
   
-  function closeJournalPanel() {
+  function closeJournalPanel(){
     document.getElementById('journal-overlay').classList.remove('open');
   }
 
   //ambience stuff
   const ambientSounds = ['walk.mp3', 'door.mp3'];
   let ambientActive = true;
-  function playAmbient() {
+  function playAmbient(){
     if (!ambientActive) return;
-    const a = new Audio(ambientSounds[Math.floor(Math.random() * ambientSounds.length)]);
-    a.volume = 0.18;
+    const a=new Audio(ambientSounds[Math.floor(Math.random() * ambientSounds.length)]);
+    a.volume=0.18;
     a.play().catch(()=>{});
-    setTimeout(playAmbient, 12000 + Math.random() * 20000);
+    setTimeout(playAmbient, 12000+Math.random() * 20000);
   }
-  window.addEventListener('beforeunload', () => { ambientActive = false; });
+  window.addEventListener('beforeunload', () =>{ambientActive=false;});
   
-  //VID + PARCHMENT
-  const entryOverlay = document.getElementById('entry-overlay');
-  const entryVideo   = document.getElementById('entry-video');
+  //VID+PARCHMENT
+  const entryOverlay=document.getElementById('entry-overlay');
+  const entryVideo=document.getElementById('entry-video');
   
-  function showParchment() {
-    entryOverlay.style.display = 'none';
+  function showParchment(){
+    entryOverlay.style.display='none';
     new Audio('bat.mp3').play().catch(()=>{});
     document.getElementById('parchment-overlay').classList.add('show');
   }
   
-  function skipVideo() {
+  function skipVideo(){
     entryVideo.pause();
     showParchment();
   }
@@ -784,51 +910,51 @@
   entryVideo.addEventListener('ended', showParchment);
   entryVideo.addEventListener('error', showParchment);
   
-  function closeNote() {
+  function closeNote(){
     document.getElementById('parchment-overlay').classList.remove('show');
     setTimeout(playAmbient, 4000);
   }
 
   
   /*fireflies*/
-  (function() {
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
+  (function(){
+    const canvas=document.getElementById('particles');
+    const ctx=canvas.getContext('2d');
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    function resize(){
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
     }
     resize();
     window.addEventListener('resize', resize);
 
-    const sparks = Array(110).fill(0).map(() => ({
+    const sparks=Array(156).fill(0).map(() => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      size: Math.random() * 1.5 + 0.3,
-      speed: Math.random() * 0.4 + 0.1,
-      opacity: Math.random() * 0.4 + 0.1,
-      drift: (Math.random() - 0.5) * 0.3
+      size: Math.random() * 1.5+0.3,
+      speed: Math.random() * 0.4+0.1,
+      opacity: Math.random() * 0.4+0.1,
+      drift: (Math.random()-0.5) * 0.3
     }));
 
-    function draw() {
+    function draw(){
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      sparks.forEach(s => {
+      sparks.forEach(s =>{
         s.y -= s.speed;
         s.x += s.drift;
-        s.opacity += (Math.random() - 0.5) * 0.02;
-        s.opacity = Math.max(0.05, Math.min(0.5, s.opacity));
-        if (s.y < -10) {
-          s.y = canvas.height + 10;
-          s.x = Math.random() * canvas.width;
+        s.opacity += (Math.random()-0.5) * 0.02;
+        s.opacity=Math.max(0.05, Math.min(0.5, s.opacity));
+        if (s.y < -10){
+          s.y=canvas.height+10;
+          s.x=Math.random() * canvas.width;
         }
-        ctx.globalAlpha = s.opacity;
-        ctx.fillStyle = '#c9a84c';
+        ctx.globalAlpha=s.opacity;
+        ctx.fillStyle='#c9a84c';
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fill();
       });
-      ctx.globalAlpha = 1;
+      ctx.globalAlpha=1;
       requestAnimationFrame(draw);
     }
     draw();
@@ -836,13 +962,13 @@
 
   /*packet data has 'details'
     types: dns-query, dns-response, dns-query-sus, dns-response-sus, http-target need to update*/
-  const packets = [
-    {
+  const packets=[
+{
       num: 1, time: '0.000000',
       proto: 'DNS', protoClass: 'proto-dns',
       info: 'Standard query A google.com',
       type: 'dns-query',
-      details: {
+      details:{
         src: '192.168.1.5', dst: '10.0.0.53',
         protocol: 'DNS (UDP)',
         port: 'Source: 54821  →  Destination: 53',
@@ -850,12 +976,12 @@
         query: 'google.com', queryType: 'A (Host Address)'
       }
     },
-    {
+{
       num: 2, time: '0.014382',
       proto: 'DNS', protoClass: 'proto-dns',
       info: 'Standard query response A google.com → 142.250.80.46',
       type: 'dns-response',
-      details: {
+      details:{
         src: '10.0.0.53', dst: '192.168.1.5',
         protocol: 'DNS (UDP)',
         port: 'Source: 53  →  Destination: 54821',
@@ -864,30 +990,30 @@
         answer: 'google.com → 142.250.80.46', ttl: '299'
       }
     },
-    {
+{
       num: 3, time: '0.021100',
       proto: 'TCP', protoClass: 'proto-tcp',
       info: '192.168.1.5 → 142.250.80.46 [SYN]',
       type: 'tcp',
-      details: { src: '192.168.1.5', dst: '142.250.80.46', flags: '[SYN]', protocol: 'TCP' }
+      details:{src: '192.168.1.5', dst: '142.250.80.46', flags: '[SYN]', protocol: 'TCP'}
     },
-    {
+{
       num: 4, time: '0.033910',
       proto: 'HTTP', protoClass: 'proto-http',
       info: 'GET /exfil/key=... HTTP/1.1  →  142.250.80.46',
       type: 'http-normal',
-      details: {
+      details:{
         src: '192.168.1.5', dst: '142.250.80.46',
         method: 'GET', path: '/exfil/key=R',
         host: 'google.com', userAgent: 'Mozilla/5.0'
       }
     },
-    {
+{
       num: 5, time: '0.041200',
       proto: 'DNS', protoClass: 'proto-dns',
       info: 'Standard query A youtube.com',
       type: 'dns-query',
-      details: {
+      details:{
         src: '192.168.1.5', dst: '10.0.0.53',
         protocol: 'DNS (UDP)',
         port: 'Source: 61042  →  Destination: 53',
@@ -895,12 +1021,12 @@
         query: 'youtube.com', queryType: 'A (Host Address)'
       }
     },
-    {
+{
       num: 6, time: '0.055803',
       proto: 'DNS', protoClass: 'proto-dns',
       info: 'Standard query response A youtube.com → 216.58.215.110',
       type: 'dns-response',
-      details: {
+      details:{
         src: '10.0.0.53', dst: '192.168.1.5',
         protocol: 'DNS (UDP)',
         port: 'Source: 53  →  Destination: 61042',
@@ -909,13 +1035,13 @@
         answer: 'youtube.com → 216.58.215.110', ttl: '180'
       }
     },
-    {
+{
       /*this is the weird one sketchy domain nobody should be querying*/
       num: 7, time: '0.102441',
       proto: 'DNS', protoClass: 'proto-dns',
       info: 'Standard query A arc.signal-node.net',
       type: 'dns-query-sus',
-      details: {
+      details:{
         src: '192.168.1.5', dst: '10.0.0.53',
         protocol: 'DNS (UDP)',
         port: 'Source: 49301  →  Destination: 53',
@@ -924,20 +1050,20 @@
         suspicious: true
       }
     },
-    {
+{
       num: 8, time: '0.119007',
       proto: 'TCP', protoClass: 'proto-tcp',
       info: '192.168.1.5 → 216.58.215.110 [SYN]',
       type: 'tcp',
-      details: { src: '192.168.1.5', dst: '216.58.215.110', flags: '[SYN]', protocol: 'TCP' }
+      details:{src: '192.168.1.5', dst: '216.58.215.110', flags: '[SYN]', protocol: 'TCP'}
     },
-    {
+{
       /*dns response for the sketchy domain*/
       num: 9, time: '0.134882',
       proto: 'DNS', protoClass: 'proto-dns',
       info: 'Standard query response A arc.signal-node.net → 185.220.101.47',
       type: 'dns-response-sus',
-      details: {
+      details:{
         src: '10.0.0.53', dst: '192.168.1.5',
         protocol: 'DNS (UDP)',
         port: 'Source: 53  →  Destination: 49301',
@@ -947,76 +1073,76 @@
         suspicious: true
       }
     },
-    {
+{
       num: 10, time: '0.148200',
       proto: 'HTTP', protoClass: 'proto-http',
       info: 'GET /exfil/key=... HTTP/1.1  →  216.58.215.110',
       type: 'http-normal',
-      details: {
+      details:{
         src: '192.168.1.5', dst: '216.58.215.110',
         method: 'GET', path: '/exfil/key=K',
         host: 'youtube.com', userAgent: 'Mozilla/5.0'
       }
     },
-    {
+{
       num: 11, time: '0.155620',
       proto: 'HTTP', protoClass: 'proto-http',
       info: 'GET /exfil/key=... HTTP/1.1  →  74.125.200.91',
       type: 'http-normal',
-      details: {
+      details:{
         src: '192.168.1.5', dst: '74.125.200.91',
         method: 'GET', path: '/exfil/key=P',
         host: 'gmail.com', userAgent: 'Mozilla/5.0'
       }
     },
-    {
+{
       /*sameip& got a path*/
       num: 12, time: '0.162993',
       proto: 'HTTP', protoClass: 'proto-http',
       info: 'GET /exfil/key=... HTTP/1.1  →  185.220.101.47',
       type: 'http-target',
-      details: {
+      details:{
         src: '192.168.1.5', dst: '185.220.101.47',
         method: 'GET', path: '/exfil/key=S',
         host: '185.220.101.47', userAgent: 'Mozilla/5.0'
       }
     },
-    {
+{
       num: 13, time: '0.179410',
       proto: 'TCP', protoClass: 'proto-tcp',
       info: '185.220.101.47 → 192.168.1.5 [ACK]',
       type: 'tcp',
-      details: { src: '185.220.101.47', dst: '192.168.1.5', flags: '[ACK]', protocol: 'TCP' }
+      details:{src: '185.220.101.47', dst: '192.168.1.5', flags: '[ACK]', protocol: 'TCP'}
     },
   ];
 
-  const packetList    = document.getElementById('packet-list');
-  const packetDetails = document.getElementById('packet-details');
+  const packetList=document.getElementById('packet-list');
+  const packetDetails=document.getElementById('packet-details');
 
   /*packet rows*/
-  packets.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'packet-item';
-    div.innerHTML = `
+  packets.forEach(p =>{
+    const div=document.createElement('div');
+    div.className='packet-item';
+    div.innerHTML=`
       <span class="packet-time">${p.time}</span>
       <span class="packet-num">#${p.num}</span>
       <span class="packet-proto ${p.protoClass}">${p.proto}</span>
       <span class="packet-info">${p.info}</span>
     `;
-    div.onclick = () => { new Audio('clicks.mp3').play(); showPacket(p, div); };
+    div.onclick=() =>{new Audio('clicks.mp3').play(); showPacket(p, div);};
     packetList.appendChild(div);
   });
 
   /*detail pan switchin*/
-  function showPacket(packet, element) {
+  function showPacket(packet, element){
     document.querySelectorAll('.packet-item').forEach(el => el.classList.remove('selected'));
     element.classList.add('selected');
 
-    const d = packet.details;
-    let html = '';
+    const d=packet.details;
+    let html='';
 
     /*header row*/
-    const headerBlock = `
+    const headerBlock=`
       <div class="detail-section">
         <div class="detail-title">Packet #${packet.num} — ${packet.proto}</div>
         <div class="detail-content">
@@ -1027,9 +1153,9 @@ Protocol: ${d.protocol || packet.proto}
       </div>
     `;
 
-    if (packet.type === 'dns-query' || packet.type === 'dns-query-sus') {
+    if (packet.type === 'dns-query' || packet.type === 'dns-query-sus'){
       /*dns query stuff shows deets*/
-      html = headerBlock + `
+      html=headerBlock+`
         <div class="detail-section">
           <div class="detail-title">DNS Details</div>
           <div class="detail-content">
@@ -1037,14 +1163,14 @@ ${d.port}<br/>
 Questions: ${d.questions} &nbsp;|&nbsp; Answers: ${d.answers}<br/>
 <br/>
 Queries:<br/>
-&nbsp;&nbsp;Name: <span class="${d.suspicious ? 'suspicious' : ''}">${d.query}</span><br/>
+&nbsp;&nbsp;Name: <span class="${d.suspicious ? 'suspicious':''}">${d.query}</span><br/>
 &nbsp;&nbsp;Type: ${d.queryType}
           </div>
         </div>
       `;
-    } else if (packet.type === 'dns-response' || packet.type === 'dns-response-sus') {
+    } else if (packet.type === 'dns-response' ||packet.type==='dns-response-sus'){
       /*dns response*/
-      html = headerBlock + `
+      html=headerBlock+`
         <div class="detail-section">
           <div class="detail-title">DNS Details</div>
           <div class="detail-content">
@@ -1052,7 +1178,7 @@ ${d.port}<br/>
 Questions: ${d.questions} &nbsp;|&nbsp; Answers: ${d.answers}<br/>
 <br/>
 Queries:<br/>
-&nbsp;&nbsp;Name: <span class="${d.suspicious ? 'suspicious' : ''}">${d.query}</span><br/>
+&nbsp;&nbsp;Name: <span class="${d.suspicious ? 'suspicious':''}">${d.query}</span><br/>
 &nbsp;&nbsp;Type: ${d.queryType}<br/>
 <br/>
 Answers:<br/>
@@ -1061,9 +1187,9 @@ Answers:<br/>
           </div>
         </div>
       `;
-    } else if (packet.type === 'http-normal') {
+    } else if (packet.type === 'http-normal'){
       /*normal http nothaang special*/
-      html = headerBlock + `
+      html=headerBlock+`
         <div class="detail-section">
           <div class="detail-title">HTTP Details</div>
           <div class="detail-content">
@@ -1074,9 +1200,9 @@ User-Agent: ${d.userAgent}
           </div>
         </div>
       `;
-    } else if (packet.type === 'http-target') {
+    } else if (packet.type === 'http-target'){
       /*this the one */
-      html = headerBlock + `
+      html=headerBlock+`
         <div class="detail-section">
           <div class="detail-title">HTTP Details</div>
           <div class="detail-content">
@@ -1087,9 +1213,9 @@ User-Agent: ${d.userAgent}
           </div>
         </div>
       `;
-    } else {
+    } else{
       /*tcp handshake packets*/
-      html = headerBlock + `
+      html=headerBlock+`
         <div class="detail-section">
           <div class="detail-title">TCP Flags</div>
           <div class="detail-content">${d.flags}</div>
@@ -1097,13 +1223,54 @@ User-Agent: ${d.userAgent}
       `;
     }
 
-    packetDetails.innerHTML = html;
+    packetDetails.innerHTML=html;
     packetDetails.classList.add('show');
   }
 
-  function openJournal(img) {
+  //SIGNAL TRACE-answer check
+  const SCAN_ANSWER='S';
+  const scanInput=document.getElementById('scan-input');
+  scanInput.addEventListener('keydown', e =>{if (e.key === 'Enter') checkScanLetter();});
+
+  function checkScanLetter(){
+    const val=scanInput.value.trim().toUpperCase();
+    if (val === SCAN_ANSWER){
+      new Audio('clicks.mp3').play();
+      document.getElementById('scan-terminal').classList.add('stabilized');
+      document.querySelector('.scan-header').innerHTML='<span class="scan-dot"></span> SIGNAL_TRACE.exe — signal stable';
+      setTimeout(() =>{
+        const rev=document.getElementById('letter-reveal');
+        rev.classList.add('visible');
+        rev.scrollIntoView({behavior: 'smooth', block: 'center'});
+        const overlay=document.getElementById('lever-overlay');
+        const vid = document.getElementById('lever-video');
+        overlay.classList.add('show');
+        vid.play();
+        const spin = new Audio('spin.mp3');
+        setTimeout(() =>{spin.play().catch(()=>{});}, 3300);
+        vid.addEventListener('ended', () =>{
+          overlay.classList.remove('show');
+          showProceedBtn('Proceed to Chamber 2 →', 'https://mimixp3.github.io/Colab-Chambers/c2-layered-cipher.html');
+        },{once: true });
+      }, 900);
+    } else{
+      const err = document.getElementById('scan-error');
+      err.textContent = "Try again, you aren't leaving until you do";
+      setTimeout(() =>{err.textContent=''; }, 2200);
+      scanInput.value='';
+    }
+  }
+
+  function showProceedBtn(label, href){
+    const btn=document.getElementById('proceed-btn');
+    btn.textContent=label;
+    btn.dataset.href=href;
+    btn.style.display='block';
+  }
+
+  function openJournal(img){
     new Audio('journal.mp3').play();
-    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').src=img.src;
     document.getElementById('lightbox').classList.add('open');
   }
   function closeLightbox(){
