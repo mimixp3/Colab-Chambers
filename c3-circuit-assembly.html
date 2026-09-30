@@ -310,7 +310,7 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     /*MESSAGE*/
     #parchment-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: none; align-items: center; justify-content: center; }
     #parchment-overlay.show { display: flex; }
-    #parchment-note { background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 700px; width: 92%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+    #parchment-note { background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 900px; width: 92%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
     #parchment-overlay.show #parchment-note { transform: translateY(0) rotate(-0.5deg); opacity: 1; }
     #parchment-note::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
     #parchment-note::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
