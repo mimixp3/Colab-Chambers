@@ -691,6 +691,18 @@
     #lever-overlay { position: fixed; inset: 0; background: #000; z-index: 99999; display: none; align-items: center; justify-content: center; }
     #lever-overlay.show { display: flex; }
     #lever-video { width: 100%; height: 100%; object-fit: cover; }
+
+    /*proceed button*/
+    #proceed-btn {
+      display: none; position: fixed; bottom: 32px; right: 32px;
+      font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 4px;
+      color: var(--gold); background: rgba(10,8,4,0.97);
+      border: 1px solid rgba(201,168,76,0.6); padding: 16px 40px;
+      cursor: pointer; z-index: 9999; transition: all 0.2s;
+      box-shadow: 0 0 30px rgba(201,168,76,0.2);
+      animation: fadeUp 0.5s ease both;
+    }
+    #proceed-btn:hover { background: rgba(201,168,76,0.1); box-shadow: 0 0 40px rgba(201,168,76,0.4); }
   </style>
 </head>
 <body>
@@ -742,6 +754,8 @@
       <source src="lever.mp4" type="video/mp4">
     </video>
   </div>
+
+<button id="proceed-btn" onclick="window.location.href=this.dataset.href; new Audio('clicks.mp3').play()"></button>
   
 <canvas id="particles"></canvas>
 
@@ -872,18 +886,17 @@
     <div class="result-box" id="mst-result"></div>
   </div>
 
-  <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
-    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
-    <a href="https://forms.gle/a4pRE9WbHcdGxfBdA" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/a4pRE9WbHcdGxfBdA</a>
-  </div>
-
   <div class="steps">
     <div class="step">
       <span class="step-num">01 //</span>
       <div class="step-content">
         <div class="step-title">Fix the Circuit</div>
         <div class="step-desc">
-          Toggle the levers representing your 0 and 1 and drag gates to build the circuit
+          Toggle the levers A and B which represent your 0 and 1 and grab and drag the gates to build the circuit! Hint: Lever A stays ON.<br>
+          OR gate - outputs 1 if EITHER input is 1.<br>
+          NOT gate - flips the input (1 becomes 0, 0 becomes 1).<br>
+          AND gate - outputs 1 only if BOTH inputs are 1.<br><br>
+          Drag a gate into each of the 3 dashed slots, then test lever combinations until the final AND gate outputs 1.
         </div>
       </div>
     </div>
@@ -892,7 +905,7 @@
       <div class="step-content">
         <div class="step-title">Minimum Spanning Tree</div>
         <div class="step-desc">
-          Ya'll remember this uncle named Kruskal?
+          Find the smallest path that connects all nodes
         </div>
       </div>
     </div>
@@ -1075,9 +1088,19 @@
         vid.play();
         const spin = new Audio('spin.mp3');
         setTimeout(() => { spin.play().catch(()=>{}); }, 3300);
-        vid.addEventListener('ended', () => { overlay.classList.remove('show'); }, { once: true });
+        vid.addEventListener('ended', () => {
+          overlay.classList.remove('show');
+          showProceedBtn('Proceed to Chamber 5 →', 'https://mimixp3.github.io/Colab-Chambers/c5-convergence.html');
+        }, { once: true });
       }
     }, 3000);
+  }
+
+  function showProceedBtn(label, href) {
+    const btn = document.getElementById('proceed-btn');
+    btn.textContent = label;
+    btn.dataset.href = href;
+    btn.style.display = 'block';
   }
 
   function evaluateCircuit() {
