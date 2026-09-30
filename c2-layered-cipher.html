@@ -661,7 +661,7 @@
   </div>
 
   <div class="parchment-card">
-  <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
+  <div class="card-eyebrow">&nbsp; The Archivist's Note</div>
   <div class="card-inner">
     <p class="card-text">
       Not everything was encrypted. The archivist kept personal notes, and they were far less careful with those than with the ciphers..
@@ -824,6 +824,11 @@
     setTimeout(playAmbient, 12000 + Math.random() * 20000);
   }
   window.addEventListener('beforeunload', () =>{ambientActive=false;});
+
+  window.addEventListener('load', () => {
+    new Audio('bat.mp3').play().catch(()=>{});
+    setTimeout(() => document.getElementById('parchment-overlay').classList.add('show'), 400);
+  });
 
   
   function closeNote(){
