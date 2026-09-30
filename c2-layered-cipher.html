@@ -661,7 +661,7 @@
   </div>
 
   <div class="parchment-card">
-  <div class="card-eyebrow">&nbsp; The Archivist's Note</div>
+  <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
   <div class="card-inner">
     <p class="card-text">
       Not everything was encrypted. The archivist kept personal notes, and they were far less careful with those than with the ciphers..
@@ -1096,6 +1096,13 @@ function onSolved(){
       showProceedBtn('Proceed to Chamber 3 →', 'https://mimixp3.github.io/Colab-Chambers/c3-circuit-assembly.html');
     },{once: true });
   }, 3700);
+}
+
+function showProceedBtn(label, href){
+  const btn=document.getElementById('proceed-btn');
+  btn.textContent=label;
+  btn.dataset.href=href;
+  btn.style.display='block';
 }
 
   function openJournal(img){
