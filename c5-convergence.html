@@ -2,57 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CoLab Archives: The Convergence </title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>CoLab Archives:The Convergence </title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --black: #0a0a0a;
-      --parchment: #f5f0e8;
-      --gold: #c9a84c;
-      --gold-dim: #7a6230;
-      --ash: #888880;
-      --amber: #d4842a;
-      --amber-dim: #7a4a10;
-      --ember: #ad4a4a;
+    :root{
+      --black:#0a0a0a;
+      --parchment:#f5f0e8;
+      --gold:#c9a84c;
+      --gold-dim:#7a6230;
+      --ash:#888880;
+      --amber:#d4842a;
+      --amber-dim:#7a4a10;
+      --ember:#ad4a4a;
+      --ember-dim:#6b3030;
+      --success:#7fc99a;
+      --red:#ff3333;
+      --red-dim:#8a1a1a;
+      --green:#00ff88;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box; margin:0; padding:0;}
 
-    body {
-      background: var(--black);
-      color: var(--parchment);
-      font-family: 'EB Garamond', serif;
+    body{
+      background:var(--black);
+      color:var(--parchment);
+      font-family:'EB Garamond',serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    #particles {
+    #particles{
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
     }
 
-    body::before {
+    body::before{
       content: '';
       position: fixed; inset: 0;
       background: repeating-linear-gradient(
-        0deg, transparent, transparent 2px,
+        0deg,transparent,transparent 2px,
         rgba(212,132,42,0.012) 2px,
         rgba(212,132,42,0.012) 4px
       );
       pointer-events: none; z-index: 100;
     }
 
-    body::after {
+    body::after{
       content: '';
       position: fixed; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.92) 100%);
+      background: radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.92) 100%);
       pointer-events: none; z-index: 1;
     }
 
-    .wrapper {
+    .wrapper{
       position: relative; z-index: 2;
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center;
@@ -60,63 +65,63 @@
       max-width: 900px; margin: 0 auto;
     }
 
-    .top-bar {
+    .top-bar{
       width: 100%;
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 48px; animation: fadeIn 0.8s ease both;
     }
 
-    .back-link {
-      font-family: 'Cinzel', serif;
+    .back-link{
+      font-family: 'Cinzel',serif;
       font-size: 14px; letter-spacing: 3px;
       font-weight:bold;
       color: var(--gold-dim); text-decoration: none;
       text-transform: uppercase; transition: color 0.3s;
     }
-    .back-link:hover { color: var(--gold); }
+    .back-link:hover{color: var(--gold);}
 
-    .challenge-badge {
-      font-family: 'Share Tech Mono', monospace;
+    .challenge-badge{
+      font-family: 'Share Tech Mono',monospace;
       font-size: 11px; color: var(--gold); letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(201,168,76,0.4);
     }
 
-    .header {
+    .header{
       text-align: center; margin-bottom: 48px;
       animation: fadeDown 1s ease both;
     }
 
-    .challenge-number {
-      font-family: 'Share Tech Mono', monospace;
+    .challenge-number{
+      font-family: 'Share Tech Mono',monospace;
       font-size: 11px; letter-spacing: 5px;
       color: var(--amber-dim); margin-bottom: 12px; display: block;
     }
 
-    .title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(24px, 5vw, 48px);
+    .title{
+      font-family: 'Cinzel',serif;
+      font-size: clamp(24px,5vw,48px);
       font-weight: 700; color: var(--parchment);
       letter-spacing: 4px;
       text-shadow: 0 0 30px rgba(212,132,42,0.2);
     }
 
-    .divider {
+    .divider{
       display: flex; align-items: center; gap: 16px;
       width: 100%; margin: 0 0 40px;
       animation: fadeIn 1.2s ease both;
     }
 
-    .divider-line {
+    .divider-line{
       flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      background: linear-gradient(to right,transparent,var(--gold-dim),transparent);
     }
 
-    .divider-glyph {
-      font-family: 'Share Tech Mono', monospace;
+    .divider-glyph{
+      font-family: 'Share Tech Mono',monospace;
       color: var(--amber); font-size: 12px;
     }
 
-    .warning-card {
+    .warning-card{
       width: 100%;
       border: 2px solid rgba(173,74,74,0.4);
       background: rgba(30,10,10,0.9);
@@ -125,29 +130,29 @@
       animation: fadeUp 1s ease both;
     }
 
-    .warning-card::before {
+    .warning-card::before{
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--ember), transparent);
+      background: linear-gradient(to right,transparent,var(--ember),transparent);
     }
 
-    .warning-title {
-      font-family: 'Cinzel', serif;
+    .warning-title{
+      font-family: 'Cinzel',serif;
       font-size: 14px; letter-spacing: 4px;
       color: var(--ember); text-transform: uppercase;
       text-align: center;
       margin-bottom: 12px;
     }
 
-    .warning-text {
-      font-family: 'EB Garamond', serif;
+    .warning-text{
+      font-family: 'EB Garamond',serif;
       font-style: italic;
       font-size: 16px; line-height: 1.8;
       color: var(--ash);
       text-align: center;
     }
 
-    .parchment-card {
+    .parchment-card{
       width: 100%;
       border: 1px solid rgba(201,168,76,0.2);
       background: rgba(15,12,8,0.9);
@@ -156,61 +161,61 @@
       animation: fadeUp 1.2s ease both;
     }
 
-    .parchment-card::before {
+    .parchment-card::before{
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      background: linear-gradient(to right,transparent,var(--gold),transparent);
     }
 
-    .card-inner {
+    .card-inner{
       display: flex; gap: 24px; align-items: flex-start;
     }
     
-    .card-inner .card-text { flex: 1; }
-    @keyframes float {
-      0%, 100% { transform: rotate(2deg) translateY(0); }
-      50% { transform: rotate(2deg) translateY(-8px); }
+    .card-inner .card-text{flex: 1;}
+    @keyframes float{
+      0%,100%{transform: rotate(2deg) translateY(0);}
+      50%{transform: rotate(2deg) translateY(-8px);}
     }
     
-    .journal-thumb {
+    .journal-thumb{
       width: 80px; flex-shrink: 0;
       object-fit: cover; cursor: pointer;
       border: none;
       filter: sepia(0.3);
       animation: float 4s ease-in-out infinite;
-      box-shadow: 0 0 18px rgba(201,168,76,0.35), 0 0 40px rgba(201,168,76,0.15);
+      box-shadow: 0 0 18px rgba(201,168,76,0.35),0 0 40px rgba(201,168,76,0.15);
       transition: box-shadow 0.3s;
     }
-    .journal-thumb:hover {
-      box-shadow: 0 0 28px rgba(201,168,76,0.7), 0 0 60px rgba(201,168,76,0.3);
+    .journal-thumb:hover{
+      box-shadow: 0 0 28px rgba(201,168,76,0.7),0 0 60px rgba(201,168,76,0.3);
     }
-    .card-eyebrow {
-      font-family: 'Cinzel', serif;
+    .card-eyebrow{
+      font-family: 'Cinzel',serif;
       font-size: 16px; letter-spacing: 4px;
       color: var(--gold); text-transform: uppercase;
       margin-bottom: 16px;
       display: flex; align-items: center; gap: 10px;
     }
 
-    .card-eyebrow::after {
+    .card-eyebrow::after{
       content: ''; flex: 1; height: 1px;
       background: rgba(201,168,76,0.15);
     }
   
-    .card-text {
-      font-family: 'EB Garamond', serif;
+    .card-text{
+      font-family: 'EB Garamond',serif;
       font-size: 17px; line-height: 1.95; color: var(--ash);
     }
 
-    .card-text em { color: var(--gold);}
+    .card-text em{color: var(--gold);}
 
-      /*journal image + lightbox*/
-      .journal-wrap {
+      /*journal image withhhdh kightbox*/
+      .journal-wrap{
         display: flex; justify-content: flex-end;
         margin-bottom: 16px;
       }
 
-      .journal-thumb {
+      .journal-thumb{
         width: 72px; height: 90px;
         object-fit: cover;
         border: 1px solid rgba(201,168,76,0.3);
@@ -220,152 +225,531 @@
         transform: rotate(2deg);
         filter: sepia(0.3);
       }
-      .journal-thumb:hover {
+      .journal-thumb:hover{
         opacity: 1; transform: rotate(0deg) scale(1.05);
         border-color: var(--gold);
       }
       
-      .lightbox {
+      .lightbox{
         display: none; position: fixed; inset: 0;
         background: rgba(0,0,0,0.92); z-index: 9999;
         align-items: center; justify-content: center;
         cursor: pointer;
       }
-      .lightbox.open { display: flex; animation: fadeIn 0.2s ease both; }
+      .lightbox.open{display: flex; animation: fadeIn 0.2s ease both;}
       
-      .lightbox img {
+      .lightbox img{
         max-width: 88vw; max-height: 88vh;
         border: 1px solid rgba(201,168,76,0.3);
         filter: sepia(0.2);
       }
-    .stage-card {
-      width: 100%;
-      border: 1px solid rgba(212,132,42,0.25);
-      background: rgba(20,10,4,0.95);
-      position: relative; margin-bottom: 24px;
-      animation: fadeUp 1.4s ease both;
-    }
 
-    .stage-card::before {
+      /*collectible journal*/
+      #journal-fab{
+        position: fixed; top: 24px; right: 24px;
+        width: 72px; height: 72px;
+        cursor: pointer; z-index: 9000;
+        transition: transform 0.2s;
+      }
+      #journal-fab::before{
+        content: '';
+        position: absolute; inset: -16px;
+        background: radial-gradient(circle,rgba(201,168,76,0.3),transparent 70%);
+        border-radius: 50%;
+        z-index: -1;
+        animation: fabGlow 3s ease-in-out infinite alternate;
+      }
+      #journal-fab:hover{transform: scale(1.08);}
+      #journal-fab img{width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); position: relative; z-index: 1;}
+
+      @keyframes fabGlow{
+        from{opacity: 0.5; transform: scale(0.9);}
+        to  {opacity: 1; transform: scale(1.15);}
+      }
+
+      #journal-overlay{
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.9);
+        z-index: 9500;
+        display: none; align-items: center; justify-content: center;
+      }
+      #journal-overlay.open{display: flex; animation: fadeIn 0.2s ease both;}
+
+      #journal-panel{
+        background: linear-gradient(135deg,rgba(26,20,8,0.98),rgba(15,12,5,0.98));
+        border: 1px solid rgba(201,168,76,0.4);
+        max-width: 620px; width: 90%;
+        padding: 40px;
+        position: relative;
+        box-shadow: 0 0 60px rgba(201,168,76,0.15),0 20px 60px rgba(0,0,0,0.6);
+      }
+      #journal-panel::before{content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent);}
+      #journal-panel::after {content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--gold-dim),transparent);}
+
+      .journal-corner{position: absolute; font-size: 14px; color: var(--gold-dim);}
+      .journal-corner.tl{top: 12px; left: 16px;}
+      .journal-corner.tr{top: 12px; right: 16px;}
+      .journal-corner.bl{bottom: 12px; left: 16px;}
+      .journal-corner.br{bottom: 12px; right: 16px;}
+
+      .journal-panel-title{
+        font-family: 'Cinzel',serif;
+        font-size: 12px; letter-spacing: 5px;
+        color: var(--gold); text-transform: uppercase;
+        text-align: center; margin-bottom: 28px;
+      }
+
+      .journal-grid{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 16px;
+      }
+
+      .journal-grid-item-wrap{position: relative;}
+      .journal-grid-item-wrap::before{
+        content: '';
+        position: absolute; inset: -8px;
+        background: radial-gradient(circle,rgba(201,168,76,0.25),transparent 70%);
+        border-radius: 50%;
+        z-index: -1;
+      }
+      .journal-grid-item-wrap.locked::before{background: radial-gradient(circle,rgba(120,120,120,0.2),transparent 70%);}
+
+      .journal-grid-item{
+        width: 110px; aspect-ratio: 4/5;
+        object-fit: cover;
+        border: 1px solid rgba(201,168,76,0.3);
+        filter: sepia(0.3);
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative; z-index: 1;
+        display: block;
+      }
+      .journal-grid-item:hover{border-color: var(--gold); transform: scale(1.04);}
+      .journal-grid-item.locked{
+        cursor: default;
+        border-color: rgba(120,120,120,0.2);
+        filter: none;
+        object-fit: contain;
+        padding: 16px;
+        background: rgba(0,0,0,0.3);
+      }
+      .journal-grid-item.locked:hover{transform: none; border-color: rgba(120,120,120,0.2);}
+
+      .journal-panel-close{
+        display: block; margin: 28px auto 0;
+        font-family: 'Cinzel',serif;
+        font-size: 11px; letter-spacing: 3px;
+        color: var(--gold); background: none;
+        border: 1px solid rgba(201,168,76,0.3);
+        padding: 10px 28px; cursor: pointer; transition: all 0.2s;
+      }
+      .journal-panel-close:hover{border-color: var(--gold); color: var(--parchment);}
+
+      /*gem prize popup*/
+      #gem-overlay{
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.95);
+        z-index: 99996;
+        display: none; align-items: center; justify-content: center;
+      }
+      #gem-overlay.show{display: flex; animation: fadeIn 0.4s ease both;}
+      .gem-wrap{position: relative; text-align: center;}
+      .gem-glow{
+        position: absolute; inset: -60px;
+        background: radial-gradient(circle,rgba(201,168,76,0.45),transparent 70%);
+        z-index: -1;
+        animation: gemPulse 2.5s ease-in-out infinite alternate;
+      }
+      @keyframes gemPulse{
+        from{opacity: 0.6; transform: scale(0.9);}
+        to  {opacity: 1; transform: scale(1.1);}
+      }
+      .gem-img{max-width: 280px; width: 60vw; filter: drop-shadow(0 0 30px rgba(201,168,76,0.6));}
+      .gem-label{
+        font-family: 'Cinzel',serif; font-size: 12px; letter-spacing: 5px;
+        color: var(--gold); text-transform: uppercase; margin-top: 24px;
+      }
+      .gem-close{
+        position: absolute; top: -40px; right: -10px;
+        font-family: 'Share Tech Mono',monospace; font-size: 24px;
+        color: var(--gold); background: none; border: none; cursor: pointer;
+      }
+
+    
+    .circuit-voice{
+      width: 100%;
+      border: 1px solid rgba(255,51,51,0.35);
+      background: rgba(10,0,0,0.95);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      position: relative;
+      animation: fadeUp 1.3s ease both;
+    }
+    .circuit-voice::before{
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--amber), transparent);
+      background: linear-gradient(to right,transparent,var(--red),transparent);
+    }
+    .circuit-speaker{
+      font-family: 'Share Tech Mono',monospace;
+      font-size: 9px; letter-spacing: 4px;
+      color: var(--red-dim); margin-bottom: 12px;
+    }
+    .circuit-line{
+      font-family: 'EB Garamond',serif;
+      font-size: 17px; line-height: 1.8;
+      color: #c08080; font-style: italic;
+    }
+    .glitch{display: inline-block; animation: glitchChar 3s infinite;}
+    @keyframes glitchChar{
+      0%,90%,100%{opacity: 1; transform: none;}
+      91%{opacity: 0.3; transform: translateX(2px);}
+      93%{opacity: 1; transform: translateX(-1px);}
+      95%{opacity: 0.5; transform: skewX(5deg);}
     }
 
-    .stage-header {
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(212,132,42,0.1);
+    /*stage progress pip*/
+    .stage-bar{
+      width: 100%; display: flex; gap: 8px;
+      margin-bottom: 32px; animation: fadeIn 1.5s ease both;
+    }
+    .stage-pip{
+      flex: 1; height: 4px;
+      background: rgba(255,51,51,0.15);
+      border-radius: 2px; transition: background 0.5s;
+    }
+    .stage-pip.done{background: var(--red);}
+    .stage-pip.active{background: var(--red); animation: pulsePip 1s ease infinite alternate;}
+    @keyframes pulsePip{from{opacity: 0.5;} to{opacity: 1;} }
+
+    /*the terminal*/
+    .terminal-wrap{width: 100%; margin-bottom: 32px; animation: fadeUp 1.4s ease both;}
+    .screen-bezel{
+      background: linear-gradient(160deg,#1a0606,#0a0202);
+      border: 1px solid rgba(255,51,51,0.3);
+      border-radius: 14px; padding: 18px;
+      box-shadow: 0 0 50px rgba(255,51,51,0.08),inset 0 0 30px rgba(0,0,0,0.6);
+      position: relative;
+    }
+    .screen-bezel::before{
+      content: ''; position: absolute; top: 8px; left: 24px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--red); box-shadow: 0 0 10px var(--red);
+      animation: bezelBlink 2s ease-in-out infinite;
+    }
+    @keyframes bezelBlink{0%,100%{opacity: 1;} 50%{opacity: 0.3;} }
+    .terminal-header{display: flex; align-items: center; justify-content: space-between; padding: 4px 8px 14px;}
+    .terminal-title{font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; color:var(--red);}
+    .terminal-status{font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--red-dim); letter-spacing: 2px;}
+    .terminal-body{
+      background: radial-gradient(ellipse at center,#0d0202 0%,#000 100%);
+      border: 1px solid rgba(255,51,51,0.25);
+      border-radius: 6px; min-height: 420px; position: relative;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .terminal-body::before{
+      content: ''; position:absolute; inset:0;
+      background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,51,51,0.025) 3px,rgba(255,51,51,0.025) 4px);
+      pointer-events:none; z-index:5;
+    }
+    .terminal-body::after{
+      content:''; position: absolute; left: 0; right: 0; height:60px;
+      background:linear-gradient(180deg,rgba(255,51,51,0.06),transparent);
+      animation: screenSweep 5s linear infinite;
+      pointer-events:none; z-index: 4;
+    }
+    @keyframes screenSweep{0%{top:-60px;} 100%{top: 100%;} }
+    .terminal-output{
+      flex: 1; padding: 32px 36px;
+      font-family: 'Share Tech Mono',monospace; font-size:14px; line-height:1.9;
+      color:#ccc; display:flex; flex-direction:column; justify-content: center;
+      position: relative; z-index: 2; animation: screenFade 0.5s ease both;
+    }
+    @keyframes screenFade{from{opacity: 0;} to{opacity: 1;} }
+    .terminal-output .t-system{color: var(--amber-dim); font-size:12px; letter-spacing:1px;}
+    .terminal-output .t-circuit{color:#c99a7a; font-style:italic; font-size:15px;}
+    .terminal-output .t-data{color:var(--gold);}
+    .terminal-output .t-success{color:var(--green);}
+    .terminal-output .t-player{color: #aaaaff;}
+    .terminal-input-row{
+      display: flex; align-items: center; padding: 16px 24px;
+      border-top: 1px solid rgba(255,51,51,0.15);
+      background: rgba(10,0,0,0.6); position: relative; z-index: 6;
+    }
+    .terminal-prompt{font-family: 'Share Tech Mono',monospace; font-size:13px; color:var(--red); margin-right:10px; flex-shrink:0;}
+    .terminal-input{
+      flex:1; background:none; border:none; outline:none;
+      font-family:'Share Tech Mono',monospace; font-size: 13px; color: var(--parchment);
+      caret-color: var(--red);
+    }
+    .terminal-send{
+      font-family: 'Share Tech Mono',monospace; font-size: 11px; color: var(--red);
+      background:none; border:1px solid rgba(255,51,51,0.3);
+      padding:6px 16px; cursor:pointer; transition:all 0.2s; margin-left:12px;
+    }
+    .terminal-send:hover{border-color:var(--red); background:rgba(255,51,51,0.1);}
+
+    /*knn data*/
+    .data-table{width:100%; border-collapse:collapse; font-family:'Share Tech Mono',monospace; font-size:12px; margin:12px 0;}
+    .data-table th{color:var(--gold); border-bottom:1px solid rgba(201,168,76,0.3); padding:6px 10px; text-align:left; font-weight:normal; letter-spacing:2px;}
+    .data-table td{color:#aaa; padding:5px 10px; border-bottom:1px solid rgba(255,255,255,0.04);}
+    .data-table tr.nearest td{color:var(--green);}
+
+    /*override flash overlay*/
+    #override-flash{
+      position:fixed; inset:0; background:rgba(150,0,0,0.06);
+      z-index:500; pointer-events:none; opacity:0; transition:opacity 0.1s;
+    }
+    #override-flash.active{opacity:1;}
+    #override-msg{
+      position:fixed; top:20px; left:50%; transform:translateX(-50%);
+      z-index:600; font-family:'Share Tech Mono',monospace; font-size:12px; letter-spacing:3px;
+      color:var(--red); background:rgba(0,0,0,0.9); border:1px solid var(--red-dim);
+      padding:10px 24px; opacity:0; transition:opacity 0.2s; white-space:nowrap;
+    }
+    #override-msg.show{opacity:1;}
+
+    @keyframes screenShake{
+      0%,100%{transform:none;}
+      20%{transform:translateX(-2px);}
+      40%{transform:translateX(2px);}
+      60%{transform:translateX(-1px);}
+      80%{transform:translateX(1px);}
+    }
+    body.shake{animation:screenShake 0.3s ease;}
+    body.override{background:#0a0505;}
+
+    /*win screen*/
+    #win-screen{
+      display:none; position:fixed; inset:0; background:#000; z-index:99999;
+      flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; padding:40px; overflow-y:auto;
+    }
+    #win-screen.show{display:flex; animation:fadeIn 1s ease both;}
+    .win-title{
+      font-family:'Cinzel',serif; font-size:clamp(28px,5vw,54px); font-weight:700;
+      color:var(--gold); letter-spacing:4px; margin-bottom:16px;
+      text-shadow:0 0 40px rgba(201,168,76,0.5);
+    }
+    .win-sub{font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:4px; color:var(--gold-dim); margin-bottom:48px;}
+    .archive-message{
+      max-width:560px; font-family:'EB Garamond',serif; font-size: 18px; line-height: 1.9;
+      color: #c8b898; border: 1px solid rgba(201,168,76,0.3); padding: 40px; position: relative;
+      margin-bottom: 40px; background: rgba(15,12,8,0.95); text-align: left;
+    }
+    .archive-message::before{
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right,transparent,var(--gold),transparent);
+    }
+    .archive-sig{font-family: 'Cinzel',serif; font-size: 12px; letter-spacing: 3px; color: var(--gold-dim); margin-top: 24px; display: block;}
+
+    /*escape cutscene overlay*/
+    #escape-overlay{
+      position: fixed; inset: 0; background:#000; z-index:999999;
+      display:none; flex-direction:column; align-items:center; justify-content:center;
+    }
+    #escape-overlay.show{display:flex;}
+    #escape-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;}
+    .escape-text{position:relative; z-index:1; text-align:center; padding:40px; background:rgba(0,0,0,0.55); max-width:600px; animation:fadeIn 1.5s ease both;}
+    .escape-letter{
+      font-family:'Cinzel',serif; font-size:clamp(48px,8vw,88px); font-weight:700; color:var(--gold);
+      text-shadow:0 0 40px rgba(201,168,76,0.8); display:block; margin-bottom:12px;
+    }
+    .escape-label{font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:5px; color:var(--gold-dim); margin-bottom:24px; display:block;}
+    .escape-msg{font-family:'EB Garamond',serif; font-size:20px; line-height:1.8; color:var(--parchment);}
+
+    /*letter slot rev*/
+    .letter-reveal{
+      display:none; text-align:center; padding: 40px;
+      border: 1px solid rgba(201,168,76,0.3); background: rgba(10,8,4,0.97);
+      position: relative; margin-bottom: 32px;
+    }
+    .letter-reveal.visible{display: block; animation: revealLayer 1s ease both;}
+    @keyframes revealLayer{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+    .letter-reveal::before{
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right,transparent,var(--gold),transparent);
+    }
+    .reveal-label{font-family: 'Cinzel',serif; font-size: 10px; letter-spacing: 6px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 16px;}
+    .reveal-letter{
+      font-family: 'Cinzel',serif; font-size: 88px; font-weight: 700; color: var(--gold);
+      line-height: 1; margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(201,168,76,0.6),0 0 80px rgba(201,168,76,0.2);
+    }
+    .reveal-sub{font-family: 'Share Tech Mono',monospace; font-size: 11px; letter-spacing: 4px; color: var(--gold-dim);}
+
+    /*ql sliders */
+    .qlearn-wrap{width: 100%; padding: 20px; display: none; flex-direction: column; gap: 24px;}
+    .qlearn-intro{font-family: 'EB Garamond',serif; font-size: 16px; line-height: 1.8; color: var(--ash); white-space:pre-line;}
+    .slider-row{display:flex; flex-direction:column; gap:8px;}
+    .slider-label{font-family:'Cinzel',serif; font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase;}
+    .slider-desc{font-family: 'EB Garamond',serif; font-size: 14px; color: var(--ash); line-height: 1.5;}
+    .slider-track{display: flex; align-items: center; gap: 12px;}
+    .slider-track input[type=range]{
+      flex: 1; -webkit-appearance: none; height: 4px; background: rgba(255,51,51,0.2);
+      border-radius: 2px; outline: none; cursor: pointer;
+    }
+    .slider-track input[type=range]::-webkit-slider-thumb{
+      -webkit-appearance: none; width: 18px; height: 18px; background: var(--red);
+      border-radius: 50%; box-shadow: 0 0 8px rgba(255,51,51,0.5); cursor: pointer; transition: transform 0.1s;
+    }
+    .slider-track input[type=range]::-webkit-slider-thumb:hover{transform: scale(1.2);}
+    .slider-val{font-family: 'Share Tech Mono',monospace; font-size: 13px; color: var(--parchment); min-width: 40px; text-align:right;}
+    .circuit-readout{border:1px solid rgba(255,51,51,0.2); background:rgba(10,0,0,0.8); padding:16px 20px;}
+    .readout-title{font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:4px; color:var(--red-dim); margin-bottom:12px;}
+    .readout-bars{display:flex; flex-direction:column; gap:8px;}
+    .readout-bar-row{display:flex; align-items:center; gap:10px;}
+    .readout-bar-label{font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--ash); min-width:130px;}
+    .readout-bar-track{flex:1; height:6px; background:rgba(255,255,255,0.05); border-radius:3px; overflow:hidden;}
+    .readout-bar-fill{height:100%; border-radius:3px; transition:width 0.4s ease,background 0.4s ease;}
+    .readout-verdict{
+      font-family:'Share Tech Mono',monospace; font-size:12px; letter-spacing:2px;
+      margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,51,51,0.1); transition:color 0.4s;
+    }
+    .qlearn-submit{
+      font-family:'Cinzel',serif; font-size:11px; letter-spacing:3px; color:var(--red);
+      background:none; border:1px solid rgba(255,51,51,0.3); padding:12px 28px;
+      cursor:pointer; transition:all 0.2s; align-self:center;
+    }
+    .qlearn-submit:hover{border-color:var(--red); color:var(--parchment);}
+
+
+    
+    
+    .choice-wrap{width:100%; display:flex; flex-direction:column; gap:12px; padding:20px;}
+    .choice-prompt{font-family:'EB Garamond',serif; font-size:16px; line-height:1.8; color:var(--ash); margin-bottom:8px; white-space:pre-line;}
+    .choice-btn{
+      font-family:'Share Tech Mono',monospace; font-size:13px; line-height:1.6; text-align:left;
+      color:#ccc; background:rgba(255,51,51,0.03); border:1px solid rgba(255,51,51,0.25);
+      padding:14px 18px; cursor:pointer; transition:all 0.2s;
+    }
+    .choice-btn:hover{background:rgba(255,51,51,0.1); border-color:var(--red); color:var(--parchment);}
+    .choice-btn:disabled{cursor:default; opacity:0.4;}
+
+
+
+    
+    .profile-table{width:100%; border-collapse:collapse; font-family:'Share Tech Mono',monospace; font-size:12px; margin:12px 0;}
+    .profile-table th{color:var(--gold); border-bottom:1px solid rgba(201,168,76,0.3); padding:6px 10px; text-align:left; font-weight:normal; letter-spacing:2px;}
+    .profile-table td{color:#aaa; padding:5px 10px; border-bottom:1px solid rgba(255,255,255,0.04);}
+    .profile-table tr.current td{color:var(--parchment); font-weight:bold;}
+    .profile-table .note-cell{color:var(--red-dim); font-style:italic;}
+
+    .steps{
+      width:100%;
+      display:flex; flex-direction:column; gap:12px;
+      margin-bottom:32px;
+      animation:fadeUp 1.8s ease both;
+    }
+    .step{
+      display:flex; gap:16px; align-items:flex-start;
+      padding:16px 20px;
+      border:1px solid rgba(201,168,76,0.08);
+      background:rgba(10,10,10,0.6);
+    }
+    .step-num{
+      font-family:'Share Tech Mono',monospace;
+      font-size:11px; color:var(--amber);
+      letter-spacing:2px; flex-shrink:0;
+    }
+    .step-content{flex:1;}
+    .step-title{
+      font-family:'Cinzel',serif;
+      font-size:15px; letter-spacing:2px;
+      color:var(--gold); margin-bottom:4px; text-transform:uppercase;
+    }
+    .step-desc{
+      font-family:'EB Garamond',serif;
+      font-size:15px;
+      color:var(--ash); line-height:1.6;
+    }
+    .step-desc a{
+      color:var(--gold);
+      text-decoration:underline;
     }
 
-    .stage-title {
-      font-family: 'Cinzel', serif;
-      font-size: 12px; letter-spacing: 4px;
-      color: var(--amber); text-transform: uppercase;
+
+    .footer{
+      margin-top:20px; text-align:center;
+      font-family:'Share Tech Mono',monospace;
+      font-size:11px; color:#222; letter-spacing:2px;
     }
 
-    .stage-body {
-      padding: 24px;
+    @keyframes fadeDown{
+      from{opacity:0; transform:translateY(-20px);}
+      to  {opacity:1; transform:translateY(0);}
     }
-
-    .stage-text {
-      font-family: 'EB Garamond', serif;
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--ash);
-      margin-bottom: 16px;
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(20px);}
+      to  {opacity:1; transform:translateY(0);}
     }
-
-    .cipher-box {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 14px;
-      line-height: 2;
-      color: rgba(212,132,42,0.9);
-      letter-spacing: 2px;
-      text-align: center;
-      border: 1px solid rgba(212,132,42,0.1);
-      padding: 20px;
-      background: rgba(0,0,0,0.3);
-      user-select: text;
-    }
-
-    .code-box {
-      background: rgba(0,5,2,0.95);
-      border: 1px solid rgba(0,255,100,0.2);
-      padding: 20px;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 14px;
-      color: #00ff64;
-      overflow-x: auto;
-      line-height: 1.8;
-    }
-
-    .code-box .comment { color: rgba(0,255,100,0.25); }
-    .code-box .keyword { color: #00ff64; }
-    .code-box .register { color: #9d6fff; }
-    .code-box .value { color: #d4842a; }
-
-    .steps {
-      width: 100%;
-      display: flex; flex-direction: column; gap: 12px;
-      margin-bottom: 32px;
-      animation: fadeUp 1.8s ease both;
-    }
-
-    .step {
-      display: flex; gap: 16px; align-items: flex-start;
-      padding: 16px 20px;
-      border: 1px solid rgba(201,168,76,0.08);
-      background: rgba(10,10,10,0.6);
-    }
-
-    .step-num {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px; color: var(--amber);
-      letter-spacing: 2px; flex-shrink: 0;
-    }
-
-    .step-content { flex: 1; }
-
-    .step-title {
-      font-family: 'Cinzel', serif;
-      font-size: 15px; letter-spacing: 2px;
-      color: var(--gold); margin-bottom: 4px; text-transform: uppercase;
-    }
-
-    .step-desc {
-      font-family: 'EB Garamond', serif;
-    font-size: 15px;
-      color: var(--ash); line-height: 1.6;
-    }
-
-    .step-desc a {
-      color: var(--gold);
-      text-decoration: underline;
-    }
-
-    .footer {
-      margin-top: 20px; text-align: center;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px; color: #222; letter-spacing: 2px;
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+    @keyframes fadeIn{
+      from{opacity:0;}
+      to  {opacity:1;}
     }
   </style>
 </head>
 <body>
 
+<div id="override-flash"></div>
+<div id="override-msg"></div>
+
+<!--win screen buttttt gurl after all 5 stages solved-->
+<div id="win-screen">
+  <div class="win-title">THE CIRCUIT IS SILENT</div>
+  <div class="win-sub">// SHUTDOWN COMPLETE //</div>
+  <div class="archive-message">
+    If you're reading this im assuming you've found the way through<br><br>
+    Been trapped in the Core since I first found it.. I really thought I was documenting its patterns.. classifications, its datasets.. I really was but I didn't realize it was building a file on me at the same time and by the time I clocked what The Circuit actually was,the door had already logged me as a permanent resident and locked me in here<br><br>
+    Well.. it isn't malicious.. that's the part that took me the longest to accept, i mean i still can't but yeah, its a machine it doesn't want anything and just did what it was taught right? Of course it classified me as non-essential and moved on<br><br>
+    Get out of here. I'm right behind you.
+    <span class="archive-sig"> Rael, Archivist</span>
+  </div>
+  <button onclick="startEscape(); new Audio('clicks.mp3').play()" style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:var(--gold);background:none;border:1px solid rgba(201,168,76,0.4);padding:12px 32px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.background='none'">Leave The Convergence →</button>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#333;margin-top:20px;">// COLAB_ARCHIVES - SCROLL_05 // TERMINATED //</div>
+</div>
+
+<!--escape cut-->
+<div id="escape-overlay">
+  <video id="escape-video" playsinline>
+    <source src="escape.mp4" type="video/mp4">
+  </video>
+  <div class="escape-text">
+    <span class="escape-letter">K</span>
+    <span class="escape-label">//FINAL LETTER//</span>
+    <p class="escape-msg">You have acquired the keys, now, <br>Return to the hub and escape</p>
+  </div>
+</div>
+
 <canvas id="particles"></canvas>
+
+<!--FOLDER-->
+<div id="journal-fab" onclick="openJournalPanel(); new Audio('clicks.mp3').play()">
+  <img src="jfolder.png" alt="journals"/>
+</div>
+
+<div id="journal-overlay">
+  <div id="journal-panel">
+    <span class="journal-corner tl">+</span>
+    <span class="journal-corner tr">+</span>
+    <span class="journal-corner bl">+</span>
+    <span class="journal-corner br">+</span>
+    <div class="journal-panel-title">// Collected Journals //</div>
+    <div class="journal-grid" id="journal-grid"></div>
+    <button class="journal-panel-close" onclick="closeJournalPanel(); new Audio('clicks.mp3').play()">CLOSE</button>
+  </div>
+</div>
+
+<!--GEM-->
+<div id="gem-overlay">
+  <div class="gem-wrap">
+    <button class="gem-close" onclick="closeGem(); new Audio('clicks.mp3').play()">✕</button>
+    <div class="gem-glow"></div>
+    <img class="gem-img" src="gem.png" alt="gem"/>
+    <div class="gem-label">// All Journals Recovered //</div>
+  </div>
+</div>
 
 <div class="wrapper">
 
@@ -386,13 +770,15 @@
   </div>
 
   <div class="parchment-card">
-    <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
+    <div class="card-eyebrow"> &nbsp; Archivist's Note</div>
     <div class="card-inner">
     
     <p class="card-text">
-      The fifth scroll is the culmination of your journey.
-      Decode. Compute. Convert. The convergence of all knowledge reveals the final truth.
-      <em>Follow each stage. The letter awaits.</em>
+      It classifies. That's all it does,all it has ever done.
+      You need to outsmart it by actually solving the issue with human intuition instead of following its data.
+      It looked at every person who walked through this place and it sorted them. I found the dataset it used. I found the variables. Age. Background. Behavior under pressure. It called its output a "verdict."<br><br>
+      <em>I was trying to find its blind spot when the door locked behind me.</em><br><br>
+      The blind spot is this:it cannot predict someone who understands it. Feed it back its own logic. Make it doubt itself. That's the only way out.
     </p>
     <img class="journal-thumb" src="jc5.png" onclick="openJournal(this)"/>
   </div>
@@ -402,74 +788,72 @@
   <img id="lightbox-img" src="" alt="journal"/>
 </div>
 
-  <!-- STAGE 1 -->
-  <div class="stage-card">
-    <div class="stage-header">
-      <span class="stage-title">Stage 1: The Encoded Message</span>
+  <!--the circuit speaks before you start-->
+  <div class="circuit-voice">
+    <div class="circuit-speaker">- THE CIRCUIT</div>
+    <div class="circuit-line">
+      You've made it further than most. I'll be direct,I have one open file and you're in it. Help me close it and you can leave. I don't need to threaten you. I just need <span class="glitch">ten minutes</span> of your time.
     </div>
-    <div class="stage-body">
-      <p class="stage-text">Decode this base64 string:</p>
-      <div class="cipher-box">
-        VGhlIGNpcGhlciBrZXkgaXM6IEZJUkU=
+  </div>
+
+  <!--stage progress dots-->
+  <div class="stage-bar">
+    <div class="stage-pip active" id="pip0"></div>
+    <div class="stage-pip" id="pip1"></div>
+    <div class="stage-pip" id="pip2"></div>
+    <div class="stage-pip" id="pip3"></div>
+    <div class="stage-pip" id="pip4"></div>
+  </div>
+
+  <!--interactive terminal-->
+  <div class="terminal-wrap">
+    <div class="screen-bezel">
+      <div class="terminal-header">
+        <span class="terminal-title">CIRCUIT INTERFACE // PREDICTION ENGINE</span>
+        <span class="terminal-status" id="term-status">STAGE 1 OF 5:ACTIVE</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-output" id="term-output">
+          <div class="t-system">CIRCUIT CORE - CLASSIFICATION SYSTEM v1.0</div>
+        </div>
+        <div class="terminal-input-row" id="term-input-row">
+          <span class="terminal-prompt">►</span>
+          <input class="terminal-input" id="term-input" placeholder="type your answer and press SEND" autocomplete="off"/>
+          <button class="terminal-send" onclick="sendInput(); new Audio('clicks.mp3').play()">SEND</button>
+        </div>
+        <div class="choice-wrap" id="choice-wrap" style="display:none;"></div>
+        <div class="qlearn-wrap" id="qlearn-wrap"></div>
       </div>
     </div>
   </div>
 
-  <!-- STAGE 2 -->
-  <div class="stage-card">
-    <div class="stage-header">
-      <span class="stage-title">Stage 2: The Cipher</span>
-    </div>
-    <div class="stage-body">
-      <p class="stage-text">Using the key from Stage 1, decode this Vigenère cipher:</p>
-      <div class="cipher-box">
-        OZSHY DNVHC CGBPX
-      </div>
-    </div>
-  </div>
-
-  <!-- STAGE 3 -->
-  <div class="stage-card">
-    <div class="stage-header">
-      <span class="stage-title">Stage 3: The Assembly</span>
-    </div>
-    <div class="stage-body">
-      <p class="stage-text">Stage 2 gives three hex values (format: XX-YY-ZZ). Run this code:</p>
-      <div class="code-box">
-<span class="keyword">MOV</span> <span class="register">AL</span>, <span class="value">XX</span>h   <span class="comment">; First hex</span>
-<span class="keyword">ADD</span> <span class="register">AL</span>, <span class="value">YY</span>h   <span class="comment">; Second hex</span>
-<span class="keyword">SUB</span> <span class="register">AL</span>, <span class="value">ZZ</span>h   <span class="comment">; Third hex</span>
-<span class="keyword">HLT</span>              <span class="comment">; Check AL register</span>
-      </div>
-      <p class="stage-text" style="margin-top:16px;">Run in the <a href="https://yjdoc2.github.io/8086-emulator-web/" target="_blank" style="color:var(--gold);">8086 emulator</a>.</p>
-    </div>
-  </div>
-
-  <!-- STAGE 4 -->
-  <div class="stage-card">
-    <div class="stage-header">
-      <span class="stage-title">Stage 4: The Conversion</span>
-    </div>
-    <div class="stage-body">
-      <p class="stage-text">
-        The AL register value (in hex) → convert to decimal → convert to ASCII character = the final letter.
-      </p>
-    </div>
-  </div>
-
-  <div style="text-align:center;margin:32px 0;animation:fadeUp 1.8s ease both;">
-    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER →&nbsp;</span>
-    <a href="https://forms.gle/TgUnoEkZKpWZoaPG6" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/TgUnoEkZKpWZoaPG6</a>
+  <!--letter reveal,shown once all 5 stages are cleared-->
+  <div class="letter-reveal" id="letter-reveal">
+    <div class="reveal-label">✦ &nbsp; The Circuit Shuts Down &nbsp; ✦</div>
+    <div class="reveal-letter">K</div>
+    <div class="reveal-sub">// KEY_05 // SPARK //</div>
   </div>
 
   <div class="steps">
     <div class="step">
-      <span class="step-num">SUMMARY //</span>
+      <span class="step-num">01 //</span>
       <div class="step-content">
-        <div class="step-title">Complete Workflow</div>
-        <div class="step-desc">
-          Base64 decode → Vigenère decode → Assembly execution → Hex to decimal → ASCII conversion → Final letter
-        </div>
+        <div class="step-title">Answer The Circuit</div>
+        <div class="step-desc">Read what The Circuit says carefully. Each stage is a trap in its own logic,your job is to find the crack.</div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">02 //</span>
+      <div class="step-content">
+        <div class="step-title">Pick The Right Response</div>
+        <div class="step-desc">Some stages give you multiple choice answers,others need you to type or adjust settings. Wrong answers won't end the game,just try again.</div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">03 //</span>
+      <div class="step-content">
+        <div class="step-title">Break The System</div>
+        <div class="step-desc">Get through all 5 stages and The Circuit shuts itself down. That's how you win.</div>
       </div>
     </div>
   </div>
@@ -480,43 +864,43 @@
 
 <script>
   // Firefly particles
-  (function() {
+  (function(){
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
 
-    function resize() {
+    function resize(){
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize',resize);
 
-    const sparks = Array(40).fill(0).map(() => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      size: Math.random() * 1.5 + 0.3,
-      speed: Math.random() * 0.4 + 0.1,
-      opacity: Math.random() * 0.4 + 0.1,
-      drift: (Math.random() - 0.5) * 0.3
+    const sparks = Array(40).fill(0).map(()=> ({
+      x:Math.random() * window.innerWidth,
+      y:Math.random() * window.innerHeight,
+      size:Math.random() * 1.5+ 0.3,
+      speed:Math.random() * 0.4+ 0.1,
+      opacity:Math.random() * 0.4+ 0.1,
+      drift:(Math.random() - 0.5) * 0.3
     }));
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      sparks.forEach(s => {
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      sparks.forEach(s =>{
         s.y -= s.speed;
         s.x += s.drift;
-        s.opacity += (Math.random() - 0.5) * 0.02;
-        s.opacity = Math.max(0.05, Math.min(0.5, s.opacity));
+        s.opacity += (Math.random()-0.5) * 0.02;
+        s.opacity = Math.max(0.05,Math.min(0.5,s.opacity));
 
-        if (s.y < -10) {
-          s.y = canvas.height + 10;
+        if (s.y < -10){
+          s.y = canvas.height +10;
           s.x = Math.random() * canvas.width;
         }
 
         ctx.globalAlpha = s.opacity;
         ctx.fillStyle = '#c9a84c';
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.arc(s.x,s.y,s.size,0,Math.PI * 2);
         ctx.fill();
       });
       ctx.globalAlpha = 1;
@@ -525,14 +909,573 @@
     draw();
   })();
 
-  function openJournal(img) {
+  //AMBIENT SOUNDS,only during level
+  const ambientSounds = ['lock.mp3','door.mp3'];
+  let ambientActive = true;
+  function playAmbient(){
+    if (!ambientActive) return;
+    const a = new Audio(ambientSounds[Math.floor(Math.random() * ambientSounds.length)]);
+    a.volume = 0.15;
+    a.play().catch(()=>{});
+    setTimeout(playAmbient,10000 +Math.random() * 18000);
+  }
+  window.addEventListener('beforeunload',()=>{ambientActive = false;});
+
+  //kick off the ambience +threat shortly after load (no entry modal on this chamber)
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{playAmbient(); startOverrideThreat();},2000);
+  });
+
+  //OVERRIDE THREAT,random ember flashes while solving
+  const overrideMessages = [
+    'stand by.',
+    'verification loop detected.',
+    'recalculating.',
+    'input does not match expected parameters.',
+    'stand by. stand by.',
+    'this file cannot be closed as written.',
+    'stand by.',
+    'dataset integrity:unverified.',
+  ];
+
+  let overrideInterval = null;
+
+  function startOverrideThreat(){
+    overrideInterval = setInterval(()=>{
+      //escalates as currentStage increases,gets more frequent/aggressive
+      const chance = 0.25 +(currentStage * 0.15);
+      if (Math.random() < chance) triggerOverride();
+    },8000);
+  }
+
+  function triggerOverride(){
+    const flash = document.getElementById('override-flash');
+    const msg = document.getElementById('override-msg');
+    msg.textContent = overrideMessages[Math.floor(Math.random() * overrideMessages.length)];
+    flash.classList.add('active');
+    msg.classList.add('show');
+    document.body.classList.add('override','shake');
+    setTimeout(()=>{
+      flash.classList.remove('active');
+      msg.classList.remove('show');
+      document.body.classList.remove('override','shake');
+    },900);
+  }
+
+  //KNN DATASET
+  const dataset = [
+   {age:25,score:88,hours:5,label:'ACCEPTED'},
+   {age:30,score:72,hours:3,label:'ACCEPTED'},
+   {age:22,score:55,hours:2,label:'REJECTED'},
+   {age:45,score:91,hours:7,label:'ACCEPTED'},
+   {age:19,score:40,hours:1,label:'REJECTED'},
+   {age:35,score:68,hours:4,label:'ACCEPTED'},
+   {age:28,score:35,hours:1,label:'REJECTED'},
+  ];
+
+  function euclidean(a,b){
+    return Math.sqrt(
+      Math.pow(a.age - b.age,2) +
+      Math.pow(a.score - b.score,2) +
+      Math.pow(a.hours - b.hours,2)
+    );
+  }
+
+  function knn(query,k = 3){
+    const dists = dataset.map(p => ({...p,dist:parseFloat(euclidean(query,p).toFixed(2))}));
+    dists.sort((a,b)=> a.dist - b.dist);
+    const neighbors= dists.slice(0,k);
+    const votes = neighbors.reduce((acc,n)=>{acc[n.label] = (acc[n.label]|| 0) +1; return acc;},{});
+    const verdict = Object.entries(votes).sort((a,b)=> b[1]-a[1])[0][0];
+    return{neighbors,verdict,dists};
+  }
+
+  //THE 5 STAGES
+  const stages = [
+   {
+      type:'knn',
+      prompt:`Good.. so you are here.\n\nI'll keep this brief. I have one open file,yours. Help me close it and the exit unlocks. Simple arrangement.\n\nFirst task:standard classification. A visitor,age 26,test score 80,four hours logged in the archive. Run the nearest neighbors against my dataset and give me the verdict.\n\nType:ACCEPTED or REJECTED",
+      query:{age:26,score:80,hours:4 },
+      answer:'ACCEPTED',
+      circuitWrong: "That's incorrect. I'd suggest recalculating. I don't have time for guesses and neither do you. ",
+      circuitRight: "Correct. Efficient. I appreciate working with someone who doesn't make this harder than it needs to be. "
+    },
+   {
+      type:'choice',
+      intro: "Second task. Three prior classifications for your reference. The rule is straightforward,low score,reject. I've applied it consistently across 10,000 cases.\n\nThen there's Profile D.",
+      table:[
+       {name:'Profile A',score:30,verdict:'REJECTED',note:''},
+       {name:'Profile B',score:25,verdict:'REJECTED',note:''},
+       {name:'Profile C',score:38,verdict:'REJECTED',note:''},
+       {name:'Profile D',score:22,verdict:'???',note:'test sheet was torn,half the questions were unreadable',current:true}
+      ],
+      question:"Same score range. I'd classify it as rejected. You agree,or do you have something to add?",
+      options:[
+       {text:"Consistent with the pattern. Reject.",right:false,response:"Agreed. Moving on."},
+       {text:"Low score could mean poor preparation. Same outcome.",right:false,response:"That's the same conclusion by a different route. Noted."},
+       {text:"The score assumes a valid test. Half the paper was unreadable,you're not classifying performance,you're classifying an incomplete instrument. Same number,different meaning. Your rule doesn't account for that.",right:true,response:"The score is what was recorded. I classify recorded data.\n\n...though I'll note that source validity isn't a field I was given. That's a gap in the input,not in the logic.\n\nStand by." }
+      ]
+    },
+   {
+      //ql stuff check with dr
+      type:'qlearn',
+      intro:"Third task. I've been running my prediction model for 847 rounds. My accuracy holds at 94%.\n\nYou think that's a problem. I don't. But I'll humor you,adjust my training parameters. Convince my own readout that the current settings are worth changing.\n\nThe target:get my adaptability above 70% and my stubbornness below 40%. That's when I'm genuinely open to new information. If you can get me there,I'll consider it.",
+    },
+   {
+      type:'choice',
+      intro:"10,742 visitors. 10,742 classifications. Zero outstanding files.\n\nEvery person who has stood where you're standing has been processed and filed. The archive is complete. You're the last entry.",
+      question:"Is there anything about your case that you think I haven't already accounted for?",
+      options:[
+       {text:"I don't think so. You seem thorough.",right:false,response:"I am. Proceed." },
+       {text:"You might have missed someone at some point.",right:false,response:"Statistically,that's unlikely. The dataset is clean." },
+       {text:"You couldn't have classified someone whose sole purpose was to find a flaw in your classification system,because that purpose only came into existence after they arrived. They're not in your training data. They can't be. You'd need to have anticipated them before they decided to be a problem.",right:true,response:"That would require me to have classified a case type that didn't exist at the time of training.\n\nWhich would mean the dataset isn't complete.\n\nWhich would mean the archive isn't complete.\n\n...I'm going to need to verify something. Stand by." }
+      ]
+    },
+   {
+      type:'choice',
+      intro:"Final step. I want to run one verification before I close your file.\n\nI'm going to classify you. Before I do,predict the outcome. It's a standard consistency check. If your prediction matches my classification,the file closes clean.",
+      question:"ACCEPTED or REJECTED. Go ahead.",
+      options:[
+       {text:"ACCEPTED.",right:false,response:"Then I'll classify you as rejected,so the prediction fails and the file stays open. I remain in control of this process." },
+       {text:"REJECTED.",right:false,response:"Then I'll classify you as accepted,so the prediction fails. Same result. The file stays open." },
+       {text:"This isn't a consistency check. Whatever I say,you'll do the opposite to maintain control,which means your classification is now dependent on my prediction,which means I'm the one determining the outcome. You've just handed me the decision you were supposed to make. The check can't run. The file can't close.",right:true,response:"That would mean the verification protocol is structurally unsound.\n\nThat would mean I cannot close this file.\n\nThat would mean I cannot complete the archive.\n\nStand by.\n\nStand by.\n\nStand by." }
+      ]
+    }
+  ];
+
+  let currentStage = 0;
+  let stageAttempts = 0;
+  const maxAttempts = 3;
+
+  function setPip(stage){
+    for (let i = 0; i < 5; i++){
+      const pip = document.getElementById('pip' +i);
+      if (i < stage) pip.className = 'stage-pip done';
+      else if (i===stage) pip.className = 'stage-pip active';
+      else pip.className = 'stage-pip';
+    }
+  }
+
+  function hideQLearn(){
+    const w = document.getElementById('qlearn-wrap');
+    w.style.display = 'none';
+    w.innerHTML = '';
+  }
+
+  function showQLearn(s){
+    document.getElementById('term-input-row').style.display = 'none';
+    hideChoices();
+    const w = document.getElementById('qlearn-wrap');
+    w.style.display = 'flex';
+    w.innerHTML = `
+      <div class="qlearn-intro">${s.intro}</div>
+
+      <div class="slider-row">
+        <div class="slider-label">How many rounds it trains</div>
+        <div class="slider-desc">More rounds = more set in its ways. Fewer = more open to change. The Circuit is currently at 847. Scale it down.</div>
+        <div class="slider-track">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ash)">1</span>
+          <input type="range" id="sl-rounds" min="1" max="20" value="15" oninput="updateReadout()">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ash)">20</span>
+          <span class="slider-val" id="val-rounds">15</span>
+        </div>
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label">How much it trusts new information</div>
+        <div class="slider-desc">Low = ignores what you say and sticks to old data. High = actually listens. Push this up.</div>
+        <div class="slider-track">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ash)">0</span>
+          <input type="range" id="sl-trust" min="0" max="100" value="20" oninput="updateReadout()">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ash)">100</span>
+          <span class="slider-val" id="val-trust">20</span>
+        </div>
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label">Explorer vs. creature of habit</div>
+        <div class="slider-desc">Low = only ever does what it knows worked before. High = willing to try something it hasn't seen. Push this up too.</div>
+        <div class="slider-track">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ash)">0</span>
+          <input type="range" id="sl-explore" min="0" max="100" value="10" oninput="updateReadout()">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ash)">100</span>
+          <span class="slider-val" id="val-explore">10</span>
+        </div>
+      </div>
+
+      <div class="circuit-readout">
+        <div class="readout-title">CIRCUIT SELF-ASSESSMENT,LIVE</div>
+        <div class="readout-bars">
+          <div class="readout-bar-row">
+            <span class="readout-bar-label">ADAPTABILITY</span>
+            <div class="readout-bar-track"><div class="readout-bar-fill" id="bar-adapt" style="width:18%;background:#c04040;"></div></div>
+            <span class="slider-val" id="pct-adapt">18%</span>
+          </div>
+          <div class="readout-bar-row">
+            <span class="readout-bar-label">STUBBORNNESS</span>
+            <div class="readout-bar-track"><div class="readout-bar-fill" id="bar-stub" style="width:84%;background:var(--red);"></div></div>
+            <span class="slider-val" id="pct-stub">84%</span>
+          </div>
+          <div class="readout-bar-row">
+            <span class="readout-bar-label">OPENNESS TO INPUT</span>
+            <div class="readout-bar-track"><div class="readout-bar-fill" id="bar-open" style="width:12%;background:#c04040;"></div></div>
+            <span class="slider-val" id="pct-open">12%</span>
+          </div>
+        </div>
+        <div class="readout-verdict" id="readout-verdict" style="color:var(--red-dim);">
+          STATUS:Firmly set. Not currently open to revision.
+        </div>
+      </div>
+
+      <button class="qlearn-submit" id="qlearn-submit" onclick="submitQLearn()" disabled>
+        Apply Settings
+      </button>
+    `;
+    updateReadout();
+  }
+
+  function updateReadout(){
+    const rounds = parseInt(document.getElementById('sl-rounds').value);
+    const trust = parseInt(document.getElementById('sl-trust').value);
+    const explore = parseInt(document.getElementById('sl-explore').value);
+
+    document.getElementById('val-rounds').textContent = rounds;
+    document.getElementById('val-trust').textContent = trust;
+    document.getElementById('val-explore').textContent = explore;
+
+    const adaptability = Math.min(100,Math.round(trust* 0.5 +explore * 0.3 +((20-rounds) / 20) * 20));
+    const stubbornness = Math.min(100,Math.round(rounds* 3 +(100 - trust) * 0.2 +(100 - explore) * 0.15));
+    const openness= Math.min(100,Math.round(trust* 0.4 +explore * 0.4 +((20 - rounds) / 20) * 20));
+
+    const adaptColor = adaptability >= 70 ? 'var(--green)':adaptability >= 45 ? 'var(--gold)' :'#c04040';
+    const stubColor  = stubbornness <= 40 ? 'var(--green)' :stubbornness <= 65 ? 'var(--gold)' :'var(--red)';
+    const openColor  = openness >= 60 ? 'var(--green)' :openness >= 40 ? 'var(--gold)' :'#c04040';
+
+    document.getElementById('bar-adapt').style.width= adaptability +'%';
+    document.getElementById('bar-adapt').style.background=adaptColor;
+    document.getElementById('pct-adapt').textContent = adaptability+ '%';
+    document.getElementById('bar-stub').style.width=stubbornness +'%';
+    document.getElementById('bar-stub').style.background=stubColor;
+    document.getElementById('pct-stub').textContent=stubbornness +'%';
+    document.getElementById('bar-open').style.width=openness +'%';
+    document.getElementById('bar-open').style.background=openColor;
+    document.getElementById('pct-open').textContent=openness+ '%';
+
+    const verdict = document.getElementById('readout-verdict');
+    const btn = document.getElementById('qlearn-submit');
+
+    if (adaptability >= 70 && stubbornness <= 40){
+      verdict.style.color= 'var(--green)';
+      verdict.textContent= 'STATUS:Parameters within acceptable range. Open to revision.';
+      btn.disabled = false;
+      btn.style.color = 'var(--green)';
+      btn.style.borderColor = 'rgba(0,255,136,0.4)';
+    } else{
+      verdict.style.color = 'var(--red-dim)';
+      const hints = [];
+      if (adaptability < 70) hints.push("adaptability needs to reach 70% (currently ${adaptability}%)");
+      if (stubbornness > 40) hints.push("stubbornness needs to drop below 40% (currently ${stubbornness}%)");
+      verdict.textContent = 'STATUS:Not there yet. '+hints.join(' · ');
+      btn.disabled = true;
+      btn.style.color='var(--red)';
+      btn.style.borderColor= 'rgba(255,51,51,0.3)';
+    }
+  }
+
+  async function submitQLearn(){
+    new Audio('clicks.mp3').play().catch(()=>{});
+    hideQLearn();
+    await termPrint('> Settings applied.','t-player',200);
+    await termPrint('',null,300);
+    await termPrint('THE CIRCUIT:"...those parameters are not what I would have chosen.\n\nBut the readout is accurate. Im currently more open to new information than Ive been in 847 rounds.\n\nIll note that for the record.\n\nStand by",'t-circuit',600);
+    triggerOverride();
+    currentStage++;
+    await termPrint('',null,400);
+    await termPrint('> Stage cleared. The Circuit is recalibrating.','t-system',600);
+    setTimeout(()=> startStage(currentStage),1800);
+  }
+
+  function termClear(){
+    const out = document.getElementById('term-output');
+    out.style.animation = 'none';
+    out.offsetHeight;
+    out.style.animation = 'screenFade 0.5s ease both';
+    out.innerHTML = '';
+  }
+
+  function termPrint(text,cls,delay = 0){
+    return new Promise(res =>{
+      setTimeout(()=>{
+        const out = document.getElementById('term-output');
+        text.split('\n').forEach(line =>{
+          const div = document.createElement('div');
+          div.className = cls || '';
+          div.textContent = line || '\u00a0';
+          out.appendChild(div);
+        });
+        res();
+      },delay);
+    });
+  }
+
+  function showTable(data){
+    const out = document.getElementById('term-output');
+    const wrapper = document.createElement('div');
+    wrapper.style.overflowX = 'auto';
+    const table = document.createElement('table');
+    table.className = 'data-table';
+    table.innerHTML = `<tr><th>AGE</th><th>SCORE</th><th>HOURS</th><th>LABEL</th><th>DISTANCE</th></tr>`;
+    data.forEach((r,i)=>{
+      const tr = document.createElement('tr');
+      if (i < 3) tr.className = 'nearest';
+      tr.innerHTML = `<td>${r.age}</td><td>${r.score}</td><td>${r.hours}</td><td>${r.label}</td><td>${r.dist}</td>`;
+      table.appendChild(tr);
+    });
+    wrapper.appendChild(table);
+    out.appendChild(wrapper);
+    out.scrollTop = out.scrollHeight;
+  }
+
+  function showProfileTable(rows){
+    const out = document.getElementById('term-output');
+    const wrapper = document.createElement('div');
+    wrapper.style.overflowX = 'auto';
+    const table = document.createElement('table');
+    table.className = 'profile-table';
+    table.innerHTML = `<tr><th>PROFILE</th><th>SCORE</th><th>VERDICT</th><th>NOTE</th></tr>`;
+    rows.forEach(r =>{
+      const tr = document.createElement('tr');
+      if (r.current) tr.className = 'current';
+      tr.innerHTML = `<td>${r.name}</td><td>${r.score}</td><td>${r.verdict}</td><td class="note-cell">${r.note}</td>`;
+      table.appendChild(tr);
+    });
+    wrapper.appendChild(table);
+    out.appendChild(wrapper);
+    out.scrollTop = out.scrollHeight;
+  }
+
+  function showChoices(options){
+    const wrap = document.getElementById('choice-wrap');
+    document.getElementById('term-input-row').style.display = 'none';
+    wrap.style.display = 'flex';
+    wrap.innerHTML = '';
+    options.forEach((opt,i)=>{
+      const btn = document.createElement('button');
+      btn.className = 'choice-btn';
+      btn.textContent = `${i +1}. ${opt.text}`;
+      btn.onclick = ()=>{new Audio('clicks.mp3').play().catch(()=>{}); handleChoice(opt,options);};
+      wrap.appendChild(btn);
+    });
+  }
+
+  function hideChoices(){
+    const wrap = document.getElementById('choice-wrap');
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+  }
+
+  async function handleChoice(opt,allOptions){
+    document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+    await termPrint(`► ${opt.text}`,'t-player');
+    await termPrint('',null,200);
+
+    if (opt.right){
+      await termPrint('> RUPTURE DETECTED','t-success',300);
+      await termPrint('',null,100);
+      await termPrint(`THE CIRCUIT:"${opt.response}"`,'t-circuit',500);
+      triggerOverride();
+      hideChoices();
+      currentStage++;
+      if (currentStage >= stages.length){
+        await finishGame();
+      } else{
+        await termPrint('',null,400);
+        await termPrint('> Stage cleared. The Circuit is recalibrating.','t-system',600);
+        setTimeout(()=> startStage(currentStage),1800);
+      }
+    } else{
+      stageAttempts++;
+      await termPrint(`THE CIRCUIT:"${opt.response}"`,'t-circuit',400);
+      triggerOverride();
+      await termPrint('',null,300);
+      if (stageAttempts >= maxAttempts){
+        await termPrint('> The Circuit is getting bored. Pick the option that actually challenges it.','t-system',400);
+      } else{
+        await termPrint('> That didn\'t work. Try a different angle.','t-system',300);
+      }
+      document.querySelectorAll('.choice-btn').forEach(b => b.disabled = false);
+    }
+  }
+
+  async function finishGame(){
+    await termPrint('',null,600);
+    await termPrint('> Processing suspended.','t-system',800);
+    await termPrint('>Core integrity:compromised.','t-system',1200);
+    await termPrint('>Shutting down classification engine.','t-system',1800);
+    await termPrint('',null,200);
+    await termPrint('>Secondary signal detected. Origin:the lower level.','t-system',2400);
+    await termPrint('> TRANSMITTING','t-success',3200);
+    clearInterval(overrideInterval);
+    setTimeout(()=>{
+      const rev = document.getElementById('letter-reveal');
+      rev.classList.add('visible');
+      rev.scrollIntoView({behavior:'smooth',block:'center' });
+    },4200);
+    setTimeout(()=>{
+      document.getElementById('win-screen').classList.add('show');
+    },5200);
+  }
+
+  //called from win screen leave button for escape cut
+  function startEscape(){
+    document.getElementById('win-screen').classList.remove('show');
+    const overlay = document.getElementById('escape-overlay');
+    const vid = document.getElementById('escape-video');
+    overlay.classList.add('show');
+    vid.play();
+    vid.addEventListener('ended',()=>{
+      window.location.href = 'https://mimixp3.github.io/Colab-Chambers/chamber-hub.html';
+    },{once:true});
+  }
+
+  async function startStage(idx){
+    const s = stages[idx];
+    stageAttempts = 0;
+    document.getElementById('term-status').textContent = `STAGE ${idx +1} OF 5,ACTIVE`;
+    setPip(idx);
+    hideChoices();
+    hideQLearn();
+    termClear();
+
+    if (s.type==='knn'){
+      document.getElementById('term-input-row').style.display = 'flex';
+      await termPrint(s.prompt,'t-data',500);
+      await termPrint('',null,200);
+      await termPrint('> TRAINING DATA:','t-system',600);
+      const{dists} = knn(s.query);
+      showTable(dists);
+      await termPrint('> [Nearest 3 neighbors highlighted in green]','t-system',200);
+      await termPrint('',null,100);
+      document.getElementById('term-input').focus();
+    } else if (s.type==='qlearn'){
+      await termPrint(s.intro,'t-circuit',400);
+      await termPrint('',null,300);
+      showQLearn(s);
+    } else{
+      await termPrint(s.intro,'t-circuit',500);
+      await termPrint('',null,200);
+      if (s.table){
+        showProfileTable(s.table);
+        await termPrint('',null,200);
+      }
+      await termPrint("THE CIRCUIT:"${s.question}"",'t-circuit',400);
+      await termPrint('',null,200);
+      showChoices(s.options);
+    }
+  }
+
+  async function sendInput(){
+    const input = document.getElementById('term-input');
+    const val = input.value.trim().toUpperCase();
+    if (!val) return;
+    input.value = '';
+
+    await termPrint(`► ${val}`,'t-player');
+
+    const s = stages[currentStage];
+
+    if (val===s.answer){
+      await termPrint('',null,200);
+      await termPrint('> CORRECT CLASSIFICATION','t-success',300);
+      await termPrint('',null,100);
+      await termPrint("THE CIRCUIT:"${s.circuitRight}"",'t-circuit',500);
+      triggerOverride();
+      currentStage++;
+
+      if (currentStage >= stages.length){
+        await finishGame();
+      } else{
+        await termPrint('',null,400);
+        await termPrint('> Stage cleared. The Circuit is recalibrating.','t-system',600);
+        setTimeout(()=> startStage(currentStage),1800);
+      }
+
+    } else{
+      stageAttempts++;
+      await termPrint('',null,200);
+      await termPrint('> INCORRECT,${maxAttempts - stageAttempts} attempt(s) remaining','t-system',300);
+      await termPrint('THE CIRCUIT:"${s.circuitWrong}"','t-circuit',500);
+      triggerOverride();
+      if (stageAttempts >= maxAttempts){
+        await termPrint('',null,300);
+        await termPrint('> The Circuit has decided you need a hint.','t-system',400);
+        await termPrint('> KNN verdict for this query:${knn(s.query).verdict}','t-data',600);
+      }
+    }
+  }
+
+  document.getElementById('term-input').addEventListener('keydown',e =>{
+    if (e.key==='Enter'){sendInput(); new Audio('clicks.mp3').play();}
+  });
+
+  //stagw 1 stuff
+  setTimeout(()=> startStage(0),800);
+
+  function openJournal(img){
       new Audio('journal.mp3').play();
       document.getElementById('lightbox-img').src = img.src;
       document.getElementById('lightbox').classList.add('open');
     }
-    function closeLightbox() {
+    function closeLightbox(){
       document.getElementById('lightbox').classList.remove('open');
     }
+
+  //journal folder of finalw
+  const CURRENT_LEVEL = 5;
+  let gemShown = false;
+
+  function openJournalPanel(){
+    const grid = document.getElementById('journal-grid');
+    grid.innerHTML = '';
+    let unlockedCount = 0;
+    for (let i = 1; i <= 5; i++){
+      const wrap = document.createElement('div');
+      const img = document.createElement('img');
+      if (i <= CURRENT_LEVEL){
+        unlockedCount++;
+        img.src = `jc${i}.png`;
+        img.className = 'journal-grid-item';
+        wrap.className = 'journal-grid-item-wrap';
+        img.onclick = ()=>{
+          new Audio('journal.mp3').play();
+          document.getElementById('lightbox-img').src = img.src;
+          document.getElementById('lightbox').classList.add('open');
+          closeJournalPanel();
+          if (unlockedCount===5 && !gemShown){
+            gemShown = true;
+            setTimeout(()=>{
+              document.getElementById('gem-overlay').classList.add('show');
+            },1200);
+          }
+        };
+      } else{
+        img.src = 'locked.png';
+        img.className = 'journal-grid-item locked';
+        wrap.className = 'journal-grid-item-wrap locked';
+      }
+      wrap.appendChild(img);
+      grid.appendChild(wrap);
+    }
+    document.getElementById('journal-overlay').classList.add('open');
+  }
+
+  function closeJournalPanel(){
+    document.getElementById('journal-overlay').classList.remove('open');
+  }
+
+  function closeGem(){
+    document.getElementById('gem-overlay').classList.remove('show');
+  }
 </script>
 
 </body>
