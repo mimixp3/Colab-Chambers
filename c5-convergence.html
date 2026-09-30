@@ -994,7 +994,7 @@
   const stages = [
    {
       type:'knn',
-      prompt:`Good.. so you are here.\n\nI'll keep this brief. I have one open file,yours. Help me close it and the exit unlocks. Simple arrangement.\n\nFirst task:standard classification. A visitor,age 26,test score 80,four hours logged in the archive. Run the nearest neighbors against my dataset and give me the verdict.\n\nType:ACCEPTED or REJECTED",
+      prompt:'Good.. so you are here.\n\nIll keep this brief. I have one open file,yours. Help me close it and the exit unlocks. Simple arrangement.\n\nFirst task:standard classification. A visitor,age 26,test score 80,four hours logged in the archive. Run the nearest neighbors against my dataset and give me the verdict.\n\nType:ACCEPTED or REJECTED',
       query:{age:26,score:80,hours:4 },
       answer:'ACCEPTED',
       circuitWrong: "That's incorrect. I'd suggest recalculating. I don't have time for guesses and neither do you. ",
@@ -1011,8 +1011,8 @@
       ],
       question:"Same score range. I'd classify it as rejected. You agree,or do you have something to add?",
       options:[
-       {text:"Consistent with the pattern. Reject.",right:false,response:"Agreed. Moving on."},
-       {text:"Low score could mean poor preparation. Same outcome.",right:false,response:"That's the same conclusion by a different route. Noted."},
+       {text:"Consistent with the pattern. Reject.",right:false,response:"Agreed. Moving on"},
+       {text:"Low score could mean poor preparation. Same outcome.",right:false,response:"That's the same conclusion by a different route. Noted"},
        {text:"The score assumes a valid test. Half the paper was unreadable,you're not classifying performance,you're classifying an incomplete instrument. Same number,different meaning. Your rule doesn't account for that.",right:true,response:"The score is what was recorded. I classify recorded data.\n\n...though I'll note that source validity isn't a field I was given. That's a gap in the input,not in the logic.\n\nStand by." }
       ]
     },
