@@ -939,7 +939,7 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     placedMap[slotIndex] = componentId;
     const comp = COMPONENTS.find(c => c.id === componentId);
     if (comp.polarized){
-      slotPolarity[slotIndex] = Math.random() < 0.5 ? 'forward' : 'reversed';
+      slotPolarity[slotIndex] = 'reversed';
     } else{
       delete slotPolarity[slotIndex];
     }
@@ -948,7 +948,7 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
   }
 
   function renderSlotContent(slotIndex){
-    const comp = COMPONENTS.find(c => c.id === placedMap[slotIndex]);
+    const comp = COMPONENTS.find(c => c.id===placedMap[slotIndex]);
     const slot = document.querySelector(`.circuit-slot[data-slot="${slotIndex}"]`);
     slot.classList.add('filled');
     slot.classList.remove('correct', 'wrong');
