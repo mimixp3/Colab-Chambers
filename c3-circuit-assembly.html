@@ -714,7 +714,7 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
   </div>
 
   <div class="letter-reveal" id="letter-reveal">
-    <div class="reveal-label">✦ &nbsp; The Letter Is Revealed &nbsp; ✦</div>
+    <div class="reveal-label">+ &nbsp; The Letter Is Revealed &nbsp; +</div>
     <div class="reveal-letter">A</div>
     <div class="reveal-sub">// KEY_03 // ______ //</div>
   </div>
@@ -1050,7 +1050,10 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
 
     result.textContent = 'Circuit complete, power is flowing';
     result.classList.remove('wrong-msg');
+    new Audio('solved.mp3').play().catch(()=>{});
+
     onCircuitSolved();
+    
   }
 
   function onCircuitSolved(){
