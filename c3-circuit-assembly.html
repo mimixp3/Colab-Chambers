@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CoLab Archives: The Circuit Assembly</title>
+  <title>CoLab Archives: Live Wires</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
-    :root {
+    :root{
       --black: #0a0a0a;
       --parchment: #f5f0e8;
       --gold: #c9a84c;
@@ -15,8 +15,8 @@
       --amber:#d4842a;
       --amber-dim:#7a4a10;
     }
-    *, *::before, *::after {box-sizing: border-box; margin: 0; padding: 0; }
-    body {
+    *, *::before, *::after{box-sizing: border-box; margin: 0; padding: 0;}
+    body{
       background: var(--black);
       color: var(--parchment);
       font-family: 'EB Garamond', serif;
@@ -24,14 +24,14 @@
       overflow-x: hidden;
     }
 
-    #particles {
+    #particles{
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
     }
 
-    body::before {
+    body::before{
       content: '';
       position: fixed; inset: 0;
       background: repeating-linear-gradient(
@@ -42,14 +42,14 @@
       pointer-events: none; z-index: 100;
     }
 
-    body::after {
+    body::after{
       content: '';
       position: fixed; inset: 0;
       background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.92) 100%);
       pointer-events: none; z-index: 1;
     }
 
-    .wrapper {
+    .wrapper{
       position: relative; z-index: 2;
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center;
@@ -57,38 +57,38 @@
       max-width: 780px; margin: 0 auto;
     }
 
-    .top-bar {
+    .top-bar{
       width: 100%;
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 48px; animation: fadeIn 0.8s ease both;
     }
 
-    .back-link {
+    .back-link{
       font-family: 'Cinzel', serif;
       font-size: 14px; letter-spacing: 3px; font-weight:bold;
       
       color: var(--gold-dim); text-decoration: none;
       text-transform: uppercase; transition: color 0.3s;
     }
-    .back-link:hover { color: var(--gold); }
-    .challenge-badge {
+    .back-link:hover{color: var(--gold);}
+    .challenge-badge{
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; color: var(--gold); letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(201,168,76,0.4);
     }
 
-    .header {
+    .header{
       text-align: center; margin-bottom: 48px;
       animation: fadeDown 1s ease both;
     }
 
-    .challenge-number {
+    .challenge-number{
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; letter-spacing: 5px;
       color: var(--amber-dim); margin-bottom: 12px; display: block;
     }
 
-    .title {
+    .title{
       font-family: 'Cinzel', serif;
       font-size: clamp(24px, 5vw, 48px);
       font-weight: 700; color: var(--parchment);
@@ -96,23 +96,23 @@
       text-shadow: 0 0 30px rgba(212,132,42,0.2);
     }
 
-    .divider {
+    .divider{
       display: flex; align-items: center; gap: 16px;
       width: 100%; margin: 0 0 40px;
       animation: fadeIn 1.2s ease both;
     }
 
-    .divider-line {
+    .divider-line{
       flex: 1; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
     }
 
-    .divider-glyph {
+    .divider-glyph{
       font-family: 'Share Tech Mono', monospace;
       color: var(--amber); font-size: 12px;
     }
 
-    .parchment-card {
+    .parchment-card{
       width: 100%;
       border: 1px solid rgba(201,168,76,0.2);
       background: rgba(15,12,8,0.9);
@@ -122,31 +122,31 @@
     }
 
     
-    .parchment-card::before {
+    .parchment-card::before{
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
 
-    .card-inner {
+    .card-inner{
       display:flex; gap: 24px; align-items: flex-start;
     }
-    .card-inner .card-text{ flex: 1;}
+    .card-inner .card-text{flex: 1;}
     @keyframes float{
-      0%, 100% {transform: rotate(2deg) translateY(0);}
-      50% {transform: rotate(2deg) translateY(-8px);}
+      0%, 100%{transform: rotate(2deg) translateY(0);}
+      50%{transform: rotate(2deg) translateY(-8px);}
     }
   
-    .journal-thumb {
+    .journal-thumb{
       width: 80px; flex-shrink: 0;object-fit: cover; cursor: pointer;border: 1px solid rgba(201,168,76,0.4);
 filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px rgba(201,168,76,0.35), 0 0 40px rgba(201,168,76,0.15);
       transition: box-shadow 0.3s;
     }
     
-  .journal-thumb:hover {
+  .journal-thumb:hover{
     box-shadow: 0 0 28px rgba(201,168,76,0.7), 0 0 60px rgba(201,168,76,0.3);
   }
-    .card-eyebrow {
+    .card-eyebrow{
       font-family: 'Cinzel', serif;
       font-size: 16px; letter-spacing: 4px;
       color: var(--gold); text-transform: uppercase;
@@ -154,126 +154,83 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
       display: flex; align-items: center; gap: 10px;
     }
 
-    .card-eyebrow::after {
+    .card-eyebrow::after{
       content: ''; flex: 1; height: 1px;
       background: rgba(201,168,76,0.15);
     }
 
-    .card-text {
+    .card-text{
       font-family: 'EB Garamond', serif;
       font-size: 17px; line-height: 1.95; color: var(--ash);
     }
 
-    .card-text em {color: var(--gold);}
+    .card-text em{color: var(--gold);}
 
 
     /*journal and lightbox*/
-    .journal-wrap {
+    .journal-wrap{
       display: flex; justify-content:flex-end; margin-bottom:15.4px;
     }
     
-    .journal-thumb {
+    .journal-thumb{
       width: 72px; height: 90px; object-fit: cover; border: 1px solid rgba(201,168,76,0.3);
       cursor:pointer;opacity: 0.85;
       transition: all 0.2s;
       transform: rotate(2deg);
       filter: sepia(0.3);
     }
-    .journal-thumb:hover {
+    .journal-thumb:hover{
       opacity: 1; transform: rotate(0deg) scale(1.05);
       border-color: var(--gold);
     }
     
-    .lightbox {
+    .lightbox{
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.92); z-index: 9999;
       align-items: center; justify-content: center;
       cursor: pointer;
     }
-    .lightbox.open { display: flex; animation: fadeIn 0.2s ease both; }
+    .lightbox.open{display: flex; animation: fadeIn 0.2s ease both;}
     
-    .lightbox img {
+    .lightbox img{
       max-width: 88vw; max-height: 88vh;
       filter: sepia(0.2);
     }
-    .code-scroll {
-      width: 100%;
-      border: 1px solid rgba(212,132,42,0.25);
-      background: rgba(20,10,4,0.95);
-      position: relative; margin-bottom: 32px;
-      animation: fadeUp 1.4s ease both;
-    }
-    .code-scroll::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--amber), transparent);
-    }
 
-    .code-header {
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(212,132,42,0.1);
-    }
-
-    .code-header-title {
-      font-family: 'Cinzel', serif;
-      font-size: 10px; letter-spacing: 4px;
-      color: var(--amber); text-transform: uppercase;
-    }
-
-    .code-body {
-      padding: 24px;
-    }
-
-    .code-box {
-      background: #000;
-      border: 1px solid rgba(107,75,161,0.3);
-      padding: 20px;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 13px;
-      color: #00ff00;
-      overflow-x: auto;
-      line-height: 1.8;
-    }
-
-    .code-box .comment { color: #888; }
-    .code-box .keyword { color: #569cd6; }
-    .code-box .register { color: #c9a84c; }
-    .code-box .value { color: #ff79c6; }
-
-    .steps {
+    .steps{
       width: 100%;
       display: flex; flex-direction: column; gap: 12px;
       margin-bottom: 32px;
       animation: fadeUp 1.6s ease both;
     }
 
-    .step {
+    .step{
       display: flex; gap: 16px; align-items: flex-start;
       padding: 16px 20px;
       border: 1px solid rgba(201,168,76,0.08);
       background: rgba(10,10,10,0.6);
     }
 
-    .step-num {
+    .step-num{
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; color: var(--amber);
       letter-spacing: 2px; flex-shrink: 0;
     }
 
-    .step-content { flex: 1; }
+    .step-content{flex: 1;}
 
-    .step-title {
+    .step-title{
       font-family: 'Cinzel', serif;
       font-size: 15px; letter-spacing: 2px;
       color: var(--gold); margin-bottom: 4px; text-transform: uppercase;
     }
 
-    .step-desc {
+    .step-desc{
       font-family: 'EB Garamond', serif; font-size: 15px;
       color: var(--ash); line-height: 1.6;
     }
 
-    .step-desc code {
+    .step-desc code{
       font-family: 'Share Tech Mono', monospace;
       font-style: normal; font-size: 15px;
       color: var(--amber);
@@ -282,57 +239,57 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
       border: 1px solid rgba(212,132,42,0.15);
     }
 
-    .step-desc a {
+    .step-desc a{
       color: var(--gold);
       text-decoration: underline;
     }
 
-    .footer {
+    .footer{
       margin-top: 20px; text-align: center;
       font-family: 'Share Tech Mono', monospace;
       font-size: 11px; color: #222; letter-spacing: 2px;
     }
 
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes fadeDown{
+      from{opacity: 0; transform: translateY(-20px);}
+      to{opacity: 1; transform: translateY(0);}
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp{
+      from{opacity: 0; transform: translateY(20px);}
+      to{opacity: 1; transform: translateY(0);}
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+    @keyframes fadeIn{
+      from{opacity: 0;}
+      to{opacity: 1;}
     }
 
 
-    /*MESSAGE*/
-    #parchment-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: none; align-items: center; justify-content: center; }
-    #parchment-overlay.show { display: flex; }
-    #parchment-note { background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 900px; width: 92%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
-    #parchment-overlay.show #parchment-note { transform: translateY(0) rotate(-0.5deg); opacity: 1; }
-    #parchment-note::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
-    #parchment-note::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
-    .note-eyebrow { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 5px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 24px; }
-    .note-text { font-family: 'EB Garamond', serif; font-size: 18px; line-height: 1.9; color: #c8b898; margin-bottom: 28px; }
-    .note-close { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--amber); background: none; border: 1px solid rgba(212,132,42,0.3); padding: 10px 28px; cursor: pointer; transition: all 0.2s; }
-    .note-close:hover { border-color: var(--amber); color: var(--parchment); }
-    .note-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
-    .note-corner.tl { top: 10px; left: 14px; }
-    .note-corner.tr { top: 10px; right: 14px; }
-    .note-corner.bl { bottom: 10px; left: 14px; }
-    .note-corner.br { bottom: 10px; right: 14px; }
+
+    #parchment-overlay{position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: none; align-items: center; justify-content: center;}
+    #parchment-overlay.show{display: flex;}
+    #parchment-note{background: #1a1408; border: 1px solid rgba(201,168,76,0.4); max-width: 600px; width: 90%; padding: 48px 44px; position: relative; text-align: center; transform: translateY(40px) rotate(-1deg); opacity: 0; transition: all 0.6s cubic-bezier(0.16,1,0.3,1);}
+    #parchment-overlay.show #parchment-note{transform: translateY(0) rotate(-0.5deg); opacity: 1;}
+    #parchment-note::before{content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);}
+    #parchment-note::after{content: '';position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent);}
+    .note-eyebrow{font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 5px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 24px;}
+    .note-text{font-family:'EB Garamond', serif; font-size: 18px; line-height: 1.9; color: #c8b898; margin-bottom: 28px;}
+    .note-close{font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--amber); background: none; border: 1px solid rgba(212,132,42,0.3); padding: 10px 28px; cursor: pointer; transition: all 0.2s;}
+    .note-close:hover{border-color: var(--amber); color: var(--parchment);}
+    .note-corner{position: absolute; font-size: 14px; color: var(--gold-dim);}
+    .note-corner.tl{top: 10px; left: 14px;}
+    .note-corner.tr{top: 10px; right: 14px;}
+    .note-corner.bl{bottom: 10px; left: 14px;}
+    .note-corner.br{bottom: 10px; right: 14px;}
 
 
     /*folder stuff*/
-    #journal-fab {
+    #journal-fab{
       position: fixed; top: 24px; right: 24px;
       width: 72px; height: 72px;
       cursor: pointer; z-index: 9000;
       transition: transform 0.2s;
     }
-    #journal-fab::before {
+    #journal-fab::before{
       content: '';
       position: absolute; inset: -16px;
       background: radial-gradient(circle, rgba(201,168,76,0.35), transparent 70%);
@@ -340,24 +297,25 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
       z-index: -1;
       animation: fabGlow 3s ease-in-out infinite alternate;
     }
-    #journal-fab:hover { transform: scale(1.08); }
-    #journal-fab img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); position: relative; z-index: 1; }
+    #journal-fab:hover{transform: scale(1.08);}
+    #journal-fab img{width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); position: relative; z-index: 1;}
     
-    @keyframes fabGlow {
-      from { opacity: 0.5; transform: scale(0.9); }
-      to   { opacity: 1; transform: scale(1.15); }
+    @keyframes fabGlow{
+      from{opacity: 0.5; transform: scale(0.9);}
+      to{opacity: 1; transform: scale(1.15);}
     }
     
-    /* JOURNAL PANEL OVERLAY */
-    #journal-overlay {
+
+    
+    #journal-overlay{
       position: fixed; inset: 0;
       background: rgba(0,0,0,0.9);
       z-index: 9500;
       display: none; align-items: center; justify-content: center;
     }
-    #journal-overlay.open { display: flex; animation: fadeIn 0.2s ease both; }
+    #journal-overlay.open{display: flex; animation: fadeIn 0.2s ease both;}
     
-    #journal-panel {
+    #journal-panel{
       background: linear-gradient(135deg, rgba(26,20,8,0.98), rgba(15,12,8,0.98));
       border: 1px solid rgba(201,168,76,0.4);
       max-width: 620px; width: 90%;
@@ -365,51 +323,51 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
       position: relative;
       box-shadow: 0 0 60px rgba(201,168,76,0.15), 0 20px 60px rgba(0,0,0,0.6);
     }
-    #journal-panel::before {
+    #journal-panel::before{
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
     }
-    #journal-panel::after {
+    #journal-panel::after{
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
     }
     
-    .journal-corner { position: absolute; font-size: 14px; color: var(--gold-dim); }
-    .journal-corner.tl { top: 12px; left: 16px; }
-    .journal-corner.tr { top: 12px; right: 16px; }
-    .journal-corner.bl { bottom: 12px; left: 16px; }
-    .journal-corner.br { bottom: 12px; right: 16px; }
+    .journal-corner{position: absolute; font-size: 14px; color: var(--gold-dim);}
+    .journal-corner.tl{top: 12px; left: 16px;}
+    .journal-corner.tr{top: 12px; right: 16px;}
+    .journal-corner.bl{bottom: 12px; left: 16px;}
+    .journal-corner.br{bottom: 12px; right: 16px;}
     
-    .journal-panel-title {
+    .journal-panel-title{
       font-family: 'Cinzel', serif;
       font-size: 12px; letter-spacing: 5px;
       color: var(--gold); text-transform: uppercase;
       text-align: center; margin-bottom: 28px;
     }
     
-    .journal-grid {
+    .journal-grid{
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 16px;
     }
     
-    .journal-grid-item-wrap {
+    .journal-grid-item-wrap{
       position: relative;
     }
-    .journal-grid-item-wrap::before {
+    .journal-grid-item-wrap::before{
       content: '';
       position: absolute; inset: -8px;
       background: radial-gradient(circle, rgba(201,168,76,0.25), transparent 70%);
       border-radius: 50%;
       z-index: -1;
     }
-    .journal-grid-item-wrap.locked::before {
+    .journal-grid-item-wrap.locked::before{
       background: radial-gradient(circle, rgba(120,120,120,0.2), transparent 70%);
     }
     
-    .journal-grid-item {
+    .journal-grid-item{
       width: 100%; aspect-ratio: 4/5;
       object-fit: cover;
       border: 1px solid rgba(201,168,76,0.3);
@@ -419,18 +377,18 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
       position: relative; z-index: 1;
       display: block;
     }
-    .journal-grid-item:hover { border-color: var(--gold); transform: scale(1.04); }
+    .journal-grid-item:hover{border-color: var(--gold); transform: scale(1.04);}
     
-    .journal-grid-item.locked {
+    .journal-grid-item.locked{
       cursor: default;
       filter: none;
       object-fit: contain;
       padding: 16px;
       background: rgba(0,0,0,0.3);
     }
-    .journal-grid-item.locked:hover { transform: none; border-color: rgba(120,120,120,0.2); }
+    .journal-grid-item.locked:hover{transform: none; border-color: rgba(120,120,120,0.2);}
     
-    .journal-panel-close {
+    .journal-panel-close{
       display: block; margin: 28px auto 0;
       font-family: 'Cinzel', serif;
       font-size: 11px; letter-spacing: 3px;
@@ -438,8 +396,211 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
       border: 1px solid rgba(212,132,42,0.3);
       padding: 10px 28px; cursor: pointer; transition: all 0.2s;
     }
-    .journal-panel-close:hover { border-color: var(--amber); color: var(--parchment); }
-  
+    .journal-panel-close:hover{border-color: var(--amber); color: var(--parchment);}
+
+    /*circuit build puzzle*/
+    .circuit-build-panel{
+      width: 100%;
+      border: 1px solid rgba(212,132,42,0.25);
+      background: rgba(20,10,4,0.95);
+      position: relative; margin-bottom: 32px;
+      animation: fadeUp 1.5s ease both;
+    }
+    .circuit-build-panel::before{
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--amber), transparent);
+    }
+    .circuit-build-header{padding: 12px 20px; border-bottom: 1px solid rgba(212,132,42,0.1);}
+    .circuit-build-title{
+      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px;
+      color: var(--amber); text-transform: uppercase;
+    }
+    .circuit-build-body{padding: 24px;}
+    .circuit-build-hint{
+      text-align: center; font-family: 'Share Tech Mono', monospace;
+      font-size: 12px; color: var(--ash); margin-bottom: 20px; line-height: 1.6;
+    }
+    .component-palette{display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px;}
+    .component-item{
+      width: 96px; min-height: 96px;
+      border: 2px solid rgba(201,168,76,0.4);
+      background: rgba(0,0,0,0.5);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 6px; padding: 10px 6px;
+      cursor: grab; position: relative;
+      transition: all 0.2s;
+    }
+    .component-item:hover{border-color: var(--gold); background: rgba(201,168,76,0.08);}
+    .component-item.placed{opacity: 0.35; cursor: default;}
+    .component-icon{font-size: 26px;}
+    .component-label{
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; color: var(--parchment); text-align: center; letter-spacing: 1px;
+    }
+    .component-info-btn{
+      position: absolute; top: 4px; right: 4px;
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.5);
+      background: rgba(0,0,0,0.6); color: var(--gold);
+      font-family: 'Share Tech Mono', monospace; font-size: 11px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .component-info-btn:hover{background: var(--gold); color: #000;}
+    .breadboard{
+      display: flex; gap: 6px; justify-content: center; align-items: center; flex-wrap: wrap;
+      padding: 32px 16px; background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(212,132,42,0.15);
+    }
+    .circuit-node{
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 2px solid rgba(201,168,76,0.5);
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+      position: relative;
+    }
+    .wire-segment{
+      width: 36px; height: 3px; flex-shrink: 0;
+      background: repeating-linear-gradient(90deg, rgba(201,168,76,0.35) 0 6px, transparent 6px 11px);
+      cursor: pointer; position: relative;
+      transition: all 0.2s;
+    }
+    .wire-segment:hover{background: repeating-linear-gradient(90deg, var(--amber) 0 6px, transparent 6px 11px);}
+    .wire-segment.connected{
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(201,168,76,0.7);
+    }
+    .circuit-slot{
+      width: 100px; min-height: 100px;
+      border: 2px dashed rgba(201,168,76,0.4);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; padding: 10px 6px; text-align: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .circuit-slot.filled{border-style: solid;}
+    .circuit-slot.correct{
+      border-color: var(--gold); background: rgba(201,168,76,0.1);
+      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    }
+    .circuit-slot.wrong{border-color: #ff4444; background: rgba(255,68,68,0.08);}
+    .circuit-slot::before, .circuit-node::before{
+      content: '+';
+      position: absolute; top: 3px; left: 7px;
+      font-family: 'Share Tech Mono', monospace; font-size: 11px;
+      color: #ff6b6b; opacity: 0.65; pointer-events: none;
+    }
+    .circuit-slot::after, .circuit-node::after{
+      content: '−';
+      position: absolute; top: 3px; right: 7px;
+      font-family: 'Share Tech Mono', monospace; font-size: 11px;
+      color: #6ba8ff; opacity: 0.65; pointer-events: none;
+    }
+    .slot-tag{
+      font-family: 'Share Tech Mono', monospace; font-size: 9px;
+      color: var(--amber-dim); letter-spacing: 2px;
+    }
+    .slot-filled-icon{font-size: 24px;}
+    .slot-filled-label{font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 1px;}
+    .polarity-toggle{
+      font-family: 'Share Tech Mono', monospace; font-size: 11px;
+      color: var(--amber); background: rgba(212,132,42,0.1);
+      border: 1px solid rgba(212,132,42,0.4); border-radius: 4px;
+      padding: 2px 8px; cursor: pointer; margin-top: 2px; transition: all 0.2s;
+    }
+    .polarity-toggle:hover{background: rgba(212,132,42,0.25); color: var(--parchment);}
+    .circuit-build-actions{text-align: center; margin-top: 20px;}
+    .circuit-build-actions .check-btn{
+      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px;
+      text-transform: uppercase; padding: 10px 26px;
+      background: rgba(212,132,42,0.1); border: 1px solid rgba(212,132,42,0.4);
+      color: var(--amber); cursor: pointer; transition: all 0.2s; margin: 0 6px;
+    }
+    .circuit-build-actions .check-btn:hover{background: rgba(212,132,42,0.2); color: var(--parchment);}
+    .circuit-result{
+      text-align: center; margin-top: 16px;
+      font-family: 'Share Tech Mono', monospace; font-size: 12px;
+      color: var(--gold); min-height: 18px;
+    }
+    .circuit-result.wrong-msg{color: #ff6b6b;}
+
+
+    
+    #info-overlay{
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); z-index: 9998;
+      align-items: center; justify-content: center;
+    }
+    #info-overlay.open{display: flex; animation: fadeIn 0.2s ease both;}
+    #info-panel{
+      background: #1a1408; border: 1px solid rgba(201,168,76,0.4);
+      max-width: 380px; width: 88%; padding: 32px 28px;
+      position: relative; text-align: center;
+    }
+    #info-panel::before{
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .info-icon{font-size: 36px; margin-bottom: 14px;}
+    .info-title{
+      font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 3px;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .info-desc{
+      font-family: 'EB Garamond', serif; font-size: 16px; line-height: 1.7;
+      color: var(--ash); margin-bottom: 24px;
+    }
+    .info-close{
+      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px;
+      color: var(--amber); background: none; border: 1px solid rgba(212,132,42,0.3);
+      padding: 8px 24px; cursor: pointer; transition: all 0.2s;
+    }
+    .info-close:hover{border-color: var(--amber); color: var(--parchment);}
+
+    /*lever cutscene*/
+    #lever-overlay{position: fixed; inset: 0; background: #000; z-index: 99999; display: none; align-items: center; justify-content: center;}
+    #lever-overlay.show{display: flex;}
+    #lever-video{width: 100%; height: 100%; object-fit: cover;}
+
+    /*letter reveal*/
+    .letter-reveal{
+      display: none; text-align: center; padding: 40px;
+      border: 1px solid rgba(201,168,76,0.3); background: rgba(10,8,4,0.97);
+      position: relative; margin-bottom: 32px;
+    }
+    .letter-reveal.visible{display: block; animation: fadeUp 1s ease both;}
+    .letter-reveal::before{
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .reveal-label{
+      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 6px;
+      color: var(--gold-dim); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .reveal-letter{
+      font-family: 'Cinzel', serif; font-size: 88px; font-weight: 700;
+      color: var(--gold); line-height: 1; margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(201,168,76,0.6), 0 0 80px rgba(201,168,76,0.2);
+    }
+    .reveal-sub{
+      font-family: 'Share Tech Mono', monospace; font-size: 11px;
+      letter-spacing: 4px; color: var(--gold-dim);
+    }
+
+    /*proceed button*/
+    #proceed-btn{
+      display: none; position: fixed; bottom: 32px; right: 32px;
+      font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 4px;
+      color: var(--gold); background: rgba(10,8,4,0.97);
+      border: 1px solid rgba(201,168,76,0.6); padding: 16px 40px;
+      cursor: pointer; z-index: 9999; transition: all 0.2s;
+      box-shadow: 0 0 30px rgba(201,168,76,0.2);
+      animation: fadeUp 0.5s ease both;
+    }
+    #proceed-btn:hover{background: rgba(201,168,76,0.1); box-shadow: 0 0 40px rgba(201,168,76,0.4);}
   </style>
 </head>
 <body>
@@ -447,22 +608,15 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
 
   <div id="parchment-overlay">
   <div id="parchment-note">
-    <span class="note-corner tl">✦</span>
-    <span class="note-corner tr">✦</span>
-    <span class="note-corner bl">✦</span>
-    <span class="note-corner br">✦</span>
-    <div class="note-eyebrow">// Chamber II · The Cipher Hall //</div>
+    <span class="note-corner tl">+</span>
+    <span class="note-corner tr">✦+</span>
+    <span class="note-corner bl">+</span>
+    <span class="note-corner br">+</span>
+    <div class="note-eyebrow">// Chamber III -  //</div>
     <p class="note-text">
-      The room looks like someone threw up wired spaghetti.<br><br>
-      None of these machines match. Different designs, different parts, different decades. It's like someone raided an electronics dumpster and decided to build a computer.<br><br>
-      And somehow... it works.<br>
-      Aside from the room vibrating like it's one power strip away from becoming a historical event, it's good.<br>
-      Whoever built this clearly knew what they were doing. Which is honestly the most terrifying part.<br>
-      Because this isn't the work of a clueless idiot. <br>
-      This is the work of a professional idiot.<br>
-      A highly trained, extremely motivated professional idiot<br>
-
-      Since you're already here, you might as well figure out what the genius was cooking before it cooks you instead.
+      What a mess.. couldn't even hire a janitor?<br><br>
+      Whoever assembled this does not give a rip about cleaning.. there's a pile of leftover components that clearly don't belong in the final build and from the look of it, at least one piece got slammed into place backwards by someone who'd run out of time or patience or both <br>
+      It's a mess made to derail outsiders; get to work. Fixing the circuit means one step closer to escaping
     </p>
     <button class="note-close" onclick="closeNote(); new Audio('clicks.mp3').play()">LOOK DEEPER</button>
   </div>
@@ -482,32 +636,50 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     </div>
   </div>
 
+  <!--component info popup-->
+  <div id="info-overlay" onclick="if(event.target===this) closeInfo();">
+    <div id="info-panel">
+      <div class="info-icon" id="info-icon"></div>
+      <div class="info-title" id="info-title"></div>
+      <div class="info-desc" id="info-desc"></div>
+      <button class="info-close" onclick="closeInfo(); new Audio('clicks.mp3').play()">GOT IT</button>
+    </div>
+  </div>
+
+  <!--lever cutscene& proceed button-->
+  <div id="lever-overlay">
+    <video id="lever-video" playsinline>
+      <source src="lever.mp4" type="video/mp4">
+    </video>
+  </div>
+  <button id="proceed-btn" onclick="window.location.href=this.dataset.href; new Audio('clicks.mp3').play()"></button>
+
   
 <canvas id="particles"></canvas>
 <div class="wrapper">
 
   <div class="top-bar">
-    <a href="https://mimixp3.github.io/Colab-Chambers/chamber-hub.html" class="back-link">← Archives</a>
+    <a href="https://mimixp3.github.io/Colab-Chambers/chamber-hub.html" class="back-link">< Archives</a>
     <span class="challenge-badge">SCROLL_03 // UNSEALED</span>
   </div>
 
   <div class="header">
     <span class="challenge-number">// CHALLENGE_03 //</span>
-    <h1 class="title">THE CIRCUIT ASSEMBLY</h1>
+    <h1 class="title">LIVE WIRES</h1>
   </div>
 
   <div class="divider">
     <div class="divider-line"></div>
-    <span class="divider-glyph">[HEX]</span>
+    <span class="divider-glyph">[CKT]</span>
     <div class="divider-line"></div>
   </div>
 
   <div class="parchment-card">
-    <div class="card-eyebrow">📜 &nbsp; The Archivist's Note</div>
+    <div class="card-eyebrow">&nbsp; The Archivist's Note</div>
     <div class="card-inner">
     <p class="card-text">
-      The code will reveal specifications and the hardware brings truth to light. <br>
-      <em>Decode the assembly and build the circuit</em> </br>
+      The machines are dead, but the parts are still good. Whoever built this left everything scattered in a tray so figure what goes where <br>
+      <em>Wire it yourself to move to the next chamber</em> </br>
     </p>
     <img class="journal-thumb" src="jc3.png" onclick="openJournal(this)"/>
   </div>
@@ -518,46 +690,60 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     <img id="lightbox-img" src="" alt="journal"/>
   </div>
 
-  <div class="code-scroll">
-    <div class="code-header">
-      <span class="code-header-title">8086 Assembly Code</span>
+  <div class="circuit-build-panel">
+    <div class="circuit-build-header">
+      <span class="circuit-build-title">Build The Circuit</span>
     </div>
-    <div class="code-body">
-      <div class="code-box">
-      <span class="comment">; Run in 8086 Emulator</span>
-      <span class="comment">; Outputs reveal circuit specs</span>
-      
-      <span class="keyword">MOV</span> <span class="register">AX</span>, <span class="value">DC</span>h    <span class="comment">; Resistor value</span>
-      <span class="keyword">MOV</span> <span class="register">BX</span>, <span class="value">0D</span>h    <span class="comment">; LED pin number</span>
-      <span class="keyword">MOV</span> <span class="register">CX</span>, <span class="value">05</span>h    <span class="comment">; Voltage</span>
-      <span class="keyword">HLT</span>                  <span class="comment">; Halt execution</span>
-            </div>
-          </div>
-        </div>
+    <div class="circuit-build-body">
+      <div class="circuit-build-hint">
+        Click <strong>?</strong> on each part to learn what it does. Figure out the order current should flow through them,
+        drag them into place, flip any part that's facing the wrong way, then click each wire to connect the circuit
+      </div>
 
-  <div style="text-align:center;margin-bottom:32px;animation:fadeUp 1.6s ease both;">
-    <span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber-dim);">SUBMIT YOUR ANSWER: &nbsp;</span>
-    <a href="https://forms.gle/J2QLxyN42MKoN9QL7" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-decoration:underline;">forms.gle/J2QLxyN42MKoN9QL7</a>
+      <div class="component-palette" id="component-palette"></div>
+
+      <div class="breadboard" id="breadboard"></div>
+
+      <div class="circuit-build-actions">
+        <button class="check-btn" onclick="checkCircuit(); new Audio('clicks.mp3').play()">Check Circuit</button>
+        <button class="check-btn" onclick="resetCircuitBuild(); new Audio('clicks.mp3').play()">Reset</button>
+      </div>
+
+      <div class="circuit-result" id="circuit-result"></div>
+    </div>
+  </div>
+
+  <div class="letter-reveal" id="letter-reveal">
+    <div class="reveal-label">✦ &nbsp; The Letter Is Revealed &nbsp; ✦</div>
+    <div class="reveal-letter">A</div>
+    <div class="reveal-sub">// KEY_03 // ______ //</div>
   </div>
 
   <div class="steps">
     <div class="step">
       <span class="step-num">01 //</span>
       <div class="step-content">
-        <div class="step-title">Run Assembly Code</div>
+        <div class="step-title">Learn Each Part</div>
         <div class="step-desc">
-          Execute in the <a href="https://yjdoc2.github.io/8086-emulator-web/" target="_blank">8086 emulator</a>.
-          Read register values: AX, BX, CX. Convert hex to decimal.
+          Tap the <code>?</code> badge on every component in the tray, including the ones you're not sure you need.
         </div>
       </div>
     </div>
     <div class="step">
       <span class="step-num">02 //</span>
       <div class="step-content">
-        <div class="step-title">Build Circuit</div>
+        <div class="step-title">Work Out The Order</div>
         <div class="step-desc">
-          Use specs from registers in <a href="https://www.tinkercad.com/circuits" target="_blank">TinkerCAD</a>.
-          Arduino + LED + Resistor + LCD. The LCD displays the letter when built correctly.
+          Based on what each part does, figure out the order current needs to pass through them, left to right, then drag the right four into the four slots.
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">03 //</span>
+      <div class="step-content">
+        <div class="step-title">Wire It Up</div>
+        <div class="step-desc">
+          A circuit isn't complete just sitting there. Flip any part that's facing backwards, click each dashed wire segment to connect it end to end, then hit <code>Check Circuit</code>.
         </div>
       </div>
     </div>
@@ -571,21 +757,19 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
 
 
 
-  //JOURNAL FOLDER LOGIC
   const CURRENT_LEVEL= 3;
-  
-  function openJournalPanel() {
+  function openJournalPanel(){
     const grid = document.getElementById('journal-grid');
     grid.innerHTML = '';
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 5; i++){
       const wrap = document.createElement('div');
       const img = document.createElement('img');
-      if (i <= CURRENT_LEVEL) {
-        img.src = `jc${i}.png`;
+      if (i <= CURRENT_LEVEL){
+        img.src =`jc${i}.png`;
         img.className = 'journal-grid-item';
         wrap.className = 'journal-grid-item-wrap';
-        img.onclick = () => { new Audio('journal.mp3').play(); document.getElementById('lightbox-img').src = img.src; document.getElementById('lightbox').classList.add('open'); closeJournalPanel(); };
-      } else {
+        img.onclick = () =>{new Audio('journal.mp3').play(); document.getElementById('lightbox-img').src = img.src; document.getElementById('lightbox').classList.add('open'); closeJournalPanel();};
+      } else{
         img.src = 'locked.png';
         img.className = 'journal-grid-item locked';
         wrap.className = 'journal-grid-item-wrap locked';
@@ -596,7 +780,7 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     document.getElementById('journal-overlay').classList.add('open');
   }
   
-  function closeJournalPanel() {
+  function closeJournalPanel(){
     document.getElementById('journal-overlay').classList.remove('open');
   }
 
@@ -604,31 +788,31 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
   const ambientSounds = ['walk.mp3', 'door.mp3'];
   
   let ambientActive = true;
-  function playAmbient() {
+  function playAmbient(){
     if (!ambientActive) return;
     const a = new Audio(ambientSounds[Math.floor(Math.random() * ambientSounds.length)]);
     a.volume = 0.18;
     a.play().catch(()=>{});
     setTimeout(playAmbient, 12000 + Math.random() * 20000);
   }
-  window.addEventListener('beforeunload', () => { ambientActive = false; });
+  window.addEventListener('beforeunload', () =>{ambientActive = false;});
   
-  window.addEventListener('load', () => {
+  window.addEventListener('load', () =>{
     new Audio('bat.mp3').play().catch(()=>{});
     setTimeout(() => document.getElementById('parchment-overlay').classList.add('show'), 400);
   });
   
-  function closeNote() {
+  function closeNote(){
     document.getElementById('parchment-overlay').classList.remove('show');
     setTimeout(playAmbient, 4000);
   }
   
     
   //firefly
-  (function() {
+  (function(){
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
-    function resize() {
+    function resize(){
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
@@ -638,21 +822,21 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     const sparks = Array(110).fill(0).map(() => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      size: Math.random() * 1.5 + 0.3,
-      speed: Math.random() * 0.4 + 0.1,
-      opacity: Math.random() * 0.4 + 0.1,
-      drift: (Math.random() - 0.5) * 0.3
+      size: Math.random() * 1.5+0.3,
+      speed: Math.random() * 0.4+0.1,
+      opacity: Math.random() * 0.4+0.1,
+      drift: (Math.random()-0.5) * 0.3
     }));
-    function draw() {
+    function draw(){
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      sparks.forEach(s => {
+      sparks.forEach(s =>{
         s.y -= s.speed;
         s.x += s.drift;
-        s.opacity += (Math.random() - 0.5) * 0.02;
+        s.opacity += (Math.random()-0.5) * 0.02;
         s.opacity = Math.max(0.05, Math.min(0.5, s.opacity));
 
-        if (s.y < -10) {
-          s.y = canvas.height + 10;
+        if (s.y < -10){
+          s.y = canvas.height+10;
           s.x = Math.random() * canvas.width;
         }
 
@@ -668,13 +852,242 @@ filter: sepia(0.3);animation: float 4s ease-in-out infinite;box-shadow: 0 0 18px
     draw();
   })();
 
-  function openJournal(img) {
+
+  const COMPONENTS = [
+{id:'arduino',label:'Arduino', icon:'🧠', polarized:false, info:'The "brain" of the circuit: a mini computer that runs the instructions and tells every other part what to do' },
+{id:'resistor', label:'Resistor', icon:'⅏', polarized:false, info:"Limits flow of electricity so components dont get fried up like onion rings; no polarity here" },
+{id:'led',label:'LED',icon:'💡', polarized:true, correctPolarity:'forward', info:'A small light that only lets current flow through from NEGATIVE to POSITIVE' },
+{id:'lcd',label:'LCD Display',icon:'📟', polarized:false, info:'A tiny screen to display stuff' },
+{id:'capacitor', label:'Capacitor',icon:'🔋', polarized:true, correctPolarity:'forward', info:'Stores a small charge to smooth out power spikes, useful in audio gear and power supplies' }
+  ];
+
+  const SLOT_ANSWERS = ['arduino', 'resistor', 'led', 'lcd'];
+  const WIRE_COUNT = SLOT_ANSWERS.length+1;
+
+  let placedMap ={};
+  let slotPolarity ={};
+  let connectedWires ={};
+  let draggedComponent = null;
+
+  function renderPalette(){
+    const palette = document.getElementById('component-palette');
+    palette.innerHTML = '';
+    COMPONENTS.forEach(c =>{
+      const tile = document.createElement('div');
+      tile.className = 'component-item';
+      tile.draggable = true;
+      tile.dataset.id = c.id;
+      tile.innerHTML = `
+        <button class="component-info-btn" onclick="event.stopPropagation(); showInfo('${c.id}')">?</button>
+        <span class="component-icon">${c.icon}</span>
+        <span class="component-label">${c.label}</span>
+      `;
+      tile.addEventListener('dragstart', () =>{draggedComponent = c.id;});
+      palette.appendChild(tile);
+    });
+  }
+
+  function renderSlots(){
+    const board = document.getElementById('breadboard');
+    board.innerHTML = '';
+
+    const power = document.createElement('div');
+    power.className = 'circuit-node';
+    power.textContent = '🔌';
+    board.appendChild(power);
+
+    SLOT_ANSWERS.forEach((_, i) =>{
+      board.appendChild(makeWire(i));
+
+      const slot = document.createElement('div');
+      slot.className = 'circuit-slot';
+      slot.dataset.slot = i;
+      slot.innerHTML = `<div class="slot-tag">SLOT ${i+1}</div>`;
+      slot.addEventListener('dragover', e => e.preventDefault());
+      slot.addEventListener('drop', e =>{
+        e.preventDefault();
+        if (!draggedComponent) return;
+        placeComponent(i, draggedComponent);
+        draggedComponent = null;
+      });
+      board.appendChild(slot);
+    });
+
+    board.appendChild(makeWire(SLOT_ANSWERS.length));
+
+    const output = document.createElement('div');
+    output.className = 'circuit-node';
+    output.textContent = '⚡';
+    board.appendChild(output);
+  }
+
+  function makeWire(index){
+    const wire = document.createElement('div');
+    wire.className = 'wire-segment';
+    wire.dataset.wire = index;
+    wire.onclick = () => toggleWire(index, wire);
+    return wire;
+  }
+
+  function toggleWire(index, el){
+    connectedWires[index] = !connectedWires[index];
+    el.classList.toggle('connected', connectedWires[index]);
+    new Audio('clicks.mp3').play().catch(()=>{});
+  }
+
+  function placeComponent(slotIndex, componentId){
+    placedMap[slotIndex] = componentId;
+    const comp = COMPONENTS.find(c => c.id === componentId);
+    if (comp.polarized){
+      slotPolarity[slotIndex] = Math.random() < 0.5 ? 'forward' : 'reversed';
+    } else{
+      delete slotPolarity[slotIndex];
+    }
+    renderSlotContent(slotIndex);
+    new Audio('clicks.mp3').play().catch(()=>{});
+  }
+
+  function renderSlotContent(slotIndex){
+    const comp = COMPONENTS.find(c => c.id === placedMap[slotIndex]);
+    const slot = document.querySelector(`.circuit-slot[data-slot="${slotIndex}"]`);
+    slot.classList.add('filled');
+    slot.classList.remove('correct', 'wrong');
+    let polarityHtml = '';
+    if (comp.polarized){
+      const arrow = slotPolarity[slotIndex]==='forward' ? '⇒' : '⇐';
+      polarityHtml = `<button class="polarity-toggle" onclick="event.stopPropagation(); flipPolarity(${slotIndex})">${arrow} flip</button>`;
+    }
+    slot.innerHTML = `
+      <span class="slot-filled-icon">${comp.icon}</span>
+      <span class="slot-filled-label">${comp.label}</span>
+      ${polarityHtml}
+    `;
+  }
+
+  function flipPolarity(slotIndex){
+    slotPolarity[slotIndex] = slotPolarity[slotIndex] === 'forward' ? 'reversed' : 'forward';
+    renderSlotContent(slotIndex);
+    new Audio('clicks.mp3').play().catch(()=>{});
+  }
+
+  function showInfo(componentId){
+    const comp = COMPONENTS.find(c => c.id === componentId);
+    document.getElementById('info-icon').textContent = comp.icon;
+    document.getElementById('info-title').textContent = comp.label;
+    document.getElementById('info-desc').textContent = comp.info;
+    document.getElementById('info-overlay').classList.add('open');
+  }
+  function closeInfo(){
+    document.getElementById('info-overlay').classList.remove('open');
+  }
+
+  function resetCircuitBuild(){
+    placedMap ={};
+    slotPolarity ={};
+    connectedWires ={};
+    renderPalette();
+    renderSlots();
+    const result = document.getElementById('circuit-result');
+    result.textContent = '';
+    result.classList.remove('wrong-msg');
+  }
+
+  function checkCircuit(){
+    const result = document.getElementById('circuit-result');
+
+    if (Object.keys(placedMap).length < SLOT_ANSWERS.length){
+      result.textContent = 'Do you wanna blow this place up? Fill the slots';
+      result.classList.add('wrong-msg');
+      return;
+    }
+
+    let allCorrect = true;
+    SLOT_ANSWERS.forEach((answer, i) =>{
+      const slot = document.querySelector(`.circuit-slot[data-slot="${i}"]`);
+      if (placedMap[i] === answer){
+        slot.classList.add('correct');
+        slot.classList.remove('wrong');
+      } else{
+        slot.classList.add('wrong');
+        slot.classList.remove('correct');
+        allCorrect = false;
+      }
+    });
+
+    if (!allCorrect){
+      result.textContent = '✗ Something is in the wrong place, or shouldn\'t be here at all.';
+      result.classList.add('wrong-msg');
+      return;
+    }
+
+    let polarityOk = true;
+    SLOT_ANSWERS.forEach((answer, i) =>{
+      const comp = COMPONENTS.find(c => c.id === answer);
+      if (comp.polarized && slotPolarity[i] !== comp.correctPolarity){
+        polarityOk = false;
+        const slot = document.querySelector(`.circuit-slot[data-slot="${i}"]`);
+        slot.classList.add('wrong');
+        slot.classList.remove('correct');
+      }
+    });
+
+    if (!polarityOk){
+      result.textContent = 'Parts are right but something\'s weird. Try again';
+      result.classList.add('wrong-msg');
+      return;
+    }
+
+    let wiresDone = true;
+    for (let i = 0; i < WIRE_COUNT; i++){
+      if (!connectedWires[i]){wiresDone = false; break;}
+    }
+
+    if (!wiresDone){
+      result.textContent = 'Components are right, but the circuit isn\'t wired.. connect every segment';
+      result.classList.add('wrong-msg');
+      return;
+    }
+
+    result.textContent = 'Circuit complete, power is flowing';
+    result.classList.remove('wrong-msg');
+    onCircuitSolved();
+  }
+
+  function onCircuitSolved(){
+    setTimeout(() =>{
+      const rev = document.getElementById('letter-reveal');
+      rev.classList.add('visible');
+      rev.scrollIntoView({behavior: 'smooth', block: 'center' });
+      const overlay = document.getElementById('lever-overlay');
+      const vid = document.getElementById('lever-video');
+      overlay.classList.add('show');
+      vid.play();
+      const spin = new Audio('spin.mp3');
+      setTimeout(() =>{spin.play().catch(()=>{});}, 3300);
+      vid.addEventListener('ended', () =>{
+        overlay.classList.remove('show');
+        showProceedBtn('Proceed to Chamber 4 →', 'https://mimixp3.github.io/Colab-Chambers/c4-logic-puzzle.html');
+      },{once: true });
+    }, 900);
+  }
+
+  function showProceedBtn(label, href){
+    const btn = document.getElementById('proceed-btn');
+    btn.textContent = label;
+    btn.dataset.href = href;
+    btn.style.display = 'block';
+  }
+
+  renderPalette();
+  renderSlots();
+
+  function openJournal(img){
         new Audio('journal.mp3').play();
     
-      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').src=img.src;
       document.getElementById('lightbox').classList.add('open');
   }
-  function closeLightbox() {
+  function closeLightbox(){
       document.getElementById('lightbox').classList.remove('open');
   }
 </script>
